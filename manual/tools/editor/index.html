@@ -1,0 +1,4208 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free, open-source C# 3D engine made for crunching numbers.">
+      
+      
+      
+        <link rel="canonical" href="https://weftengine.github.io/docs/manual/tools/editor/">
+      
+      
+        <link rel="prev" href="../devtools/">
+      
+      
+        <link rel="next" href="../export/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Editor - Weft Engine</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-editor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Weft Engine" class="md-header__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Weft Engine
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Editor
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../about/introduction/" class="md-tabs__link">
+          
+  
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/building/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../core/core/" class="md-tabs__link">
+          
+  
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../api/" class="md-tabs__link">
+          
+  
+  
+  API reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Weft Engine" class="md-nav__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Weft Engine
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Samples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Samples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manual
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manual
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/crashes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logs and crash reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math and the world
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/ecs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiling and SIMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Native code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/bindings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native bindings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/native-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platform
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/input/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graphics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/graphics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/rendering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/tone-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exposure and tone mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/physics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/vehicles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vehicles and hitches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/steam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tasks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tasks and game time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tweens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tweens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime and Luau tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Content
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/defs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions and schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages and mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/game-manifest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game manifest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset import
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/scenes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/prefabs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prefabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/hot-reload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hot reload
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devtools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-panels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The panels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-inspector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The inspector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The inspector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asset-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asset fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-inspectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom inspectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engine-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engine objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group transforms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copy-and-paste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copy and paste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shortcuts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preferences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preferences
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenes-and-undo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenes and undo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-dialogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File dialogs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-start-screen-and-opening-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The start screen and opening a project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bringing-files-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bringing files in
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#play" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Play
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-not-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not here
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting a game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C#
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    C#
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Luau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enums
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/help-wanted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help wanted
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/continuous-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuous integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/writing-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-panels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The panels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-inspector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The inspector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The inspector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asset-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asset fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-inspectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom inspectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engine-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engine objects
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group transforms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copy-and-paste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copy and paste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shortcuts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preferences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preferences
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenes-and-undo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenes and undo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-dialogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File dialogs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-start-screen-and-opening-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The start screen and opening a project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bringing-files-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bringing files in
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#play" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Play
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-not-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not here
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/weftengine/weft/edit/main/Docs/manual/tools/editor.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="the-editor">The editor<a class="headerlink" href="#the-editor" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Very bare-bones for now</p>
+<p>The editor is very bare-bones for now: files are brought in by <a href="#bringing-files-in">dragging them from the system</a> (there is no import dialog or import settings editor), and it has no materials, no animations and no Export dialog (a game is <a href="../export/">exported from the command line</a>). See <a href="#what-is-not-here">What is not here</a>.</p>
+</div>
+<p><code>Source/Weft.Editor</code> is an ImGui editor for a game folder. It is a CoreCLR program (a tool, never published with NativeAOT) built on <a href="../devtools/">Dear ImGui with docking</a>, <a href="../devtools/#implot-imguizmo-and-imnodes">ImGuizmo, ImPlot and imnodes</a>,
+<a href="../../scripting/runtime/#wefthost-what-runs-a-game"><code>Weft.Host</code></a> and the <a href="../../core/ecs/#editing-hierarchy-copies-snapshots-and-scenes">scene format</a>.</p>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>run<span class="w"> </span>--project<span class="w"> </span>Source/Weft.Editor<span class="w"> </span>--<span class="w"> </span><span class="o">[</span>game<span class="w"> </span>folder<span class="o">]</span><span class="w"> </span><span class="o">[</span>--user<span class="w"> </span>&lt;folder&gt;<span class="o">]</span>
+</code></pre></div>
+<p>With no game folder the editor shows its <a href="#the-start-screen-and-opening-a-project">start screen</a>.</p>
+<p>The layout (a dock space: hierarchy on the left, inspector on the right, the viewport in the middle, tabs of assets, console, profiler and render graph below) is saved to <code>imgui.ini</code> in
+<code>~/.local/share/Weft/Editor</code> (the platform's local application data folder); the first run, with no file, builds the default one. Quitting with unsaved changes asks first.</p>
+<h2 id="the-panels">The panels<a class="headerlink" href="#the-panels" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Viewport.</strong> The world drawn into an image that ImGui shows as a texture (<code>RenderTarget.Texture</code>; one image per frame in flight, so the GPU never samples what the frame is writing). The editor's camera is not an
+  entity: right mouse button looks around and, with W A S D Q E (Shift is faster), flies; middle button pans; the wheel zooms; F frames the active entity. A click that does not drag picks the entity under the pointer:
+  a ray against the models' bounds (measured from the file, so no GPU is needed), and a small sphere for entities that have no model (lights, cameras, empty entities). Ctrl-click toggles the entity in the
+  <a href="#selection">selection</a>, Shift-click adds it, and a click on nothing clears the selection (unless Ctrl or Shift is held). <strong>Dragging from empty space</strong> (not on an entity, not on the gizmo) draws a selection box;
+  letting go selects every entity whose bounds touch it (its model's bounds, projected; an entity without a model counts by its origin) and that is in front of the camera: with Ctrl the box toggles them, with Shift
+  it adds them, otherwise it replaces the selection. Escape clears the selection (while a box is being dragged it cancels the box instead). <strong>ImGuizmo</strong> moves, rotates and scales the whole selection
+  (W, E and R choose; local or world axes; optional snapping; the <em>Pivot</em> box chooses where a group turns, see <a href="#group-transforms">Group transforms</a>); a drag is one undo step. The view cube in the corner turns the camera. The helpers drawn as debug lines (a ground grid, the bounds of every selected entity,
+  the active one brighter, a mark for each light and camera) can be turned off. Dropping a <code>.glb</code> or <code>.gltf</code> from the assets panel makes an entity at the point of the ground under the pointer; dropping model files <strong>from the system</strong> copies them into the game, imports them and does the same (see <a href="#bringing-files-in">Bringing files in</a>).</li>
+<li><strong>Hierarchy.</strong> The scene as a tree: click to select, <strong>Ctrl-click to toggle, Shift-click to select a range</strong> (in the order the tree shows, so entities inside a collapsed branch are skipped), <strong>drag on the empty space to
+  select with a box</strong>, Ctrl+A for all and Escape for none. Double click or F2 renames the active entity, Ctrl+X, Ctrl+C, Ctrl+V and Ctrl+D cut, copy, paste and duplicate the selection (see <a href="#copy-and-paste">Copy and paste</a>), <strong>Delete removes every selected entity as one undo step</strong> ("Delete 3 entities"), right click
+  opens the menu, and <strong>dragging a node drags the whole selection</strong> (or only that node when it is not selected) <strong>onto another to make them children</strong> (onto the empty space below to make them roots), as one step.
+  An entity keeps its place in the world when it changes parent, and a name a sibling already has is made unique, also between the entities that move together.</li>
+<li><strong>Inspector.</strong> The components of the selected entities, drawn from the registry's descriptions: see <a href="#the-inspector">The inspector</a>. With several entities selected it shows the active entity's components
+  that all of them have, and an edit changes every one.</li>
+<li><strong>Assets.</strong> The virtual file system: <code>res://</code> and, when listed, the packages' <code>mod://id/</code> folders; each importable file shows whether it is imported, out of date, or not imported yet (<code>AssetImporter.StatusOf</code>),
+  and <em>Re-import</em> imports one file again (<code>Reimport</code>). Double click a <code>.wscn</code> to open it; drag a model into the viewport, or any file onto an asset field of the inspector (see <a href="#asset-fields">Asset fields</a>); drop files from the system on the panel to add them to the folder it shows (see <a href="#bringing-files-in">Bringing files in</a>).</li>
+<li><strong>Console.</strong> The log, filtered by level; while files are being imported its header shows the progress and a <em>Cancel import</em> button.</li>
+<li><strong>Profiler.</strong> The dev overlay's ImPlot plots: frame times, and the GPU time of every pass stacked over the last 240 frames, with the table.</li>
+<li><strong>Engine objects</strong> (<em>Debug &gt; Engine objects</em>). A floating window that inspects the session's engine objects (the world, the UI, physics, audio, assets, models, input actions, network, Steam and the settings) through their registered properties: see <a href="#engine-objects">Engine objects</a>.</li>
+<li><strong>Render graph.</strong> The last viewport frame's render graph as a read-only imnodes view: a node for each pass that ran, its inputs and outputs, and a link from the pass that last wrote a resource to the passes that read it.</li>
+</ul>
+<h2 id="selection">Selection<a class="headerlink" href="#selection" title="Permanent link">&para;</a></h2>
+<p>The selection is a list of entities in the order they were picked, and one of them is the <strong>active</strong> entity: the last one picked, the one the inspector shows and the gizmo sits on (when the active one is deleted,
+the last of the others takes over). Several entities can be selected in the hierarchy and in the viewport (see the panels above). What a delete, a drag in the hierarchy, a group transform (and, later, a copy) acts
+on (and a copy, a cut and a duplicate) is the selection's <strong>top level</strong>: the selected entities that have no selected ancestor, because a branch is carried by its top and its selected descendants would be handled twice.</p>
+<p>The selection is not an undo step. It is kept as entity ids: an entity that was destroyed drops out of it, and comes back into it when an undo brings the entity back under the same id; creating an entity selects it,
+deleting entities takes them out of the selection (undoing the delete does not select them again), and the selection survives Play and Stop like the history does. While the game plays, selecting works and every edit
+stays disabled. The code is <code>Source/Weft.Editor/Editing/Selection.cs</code> (plain classes over a world, with no ImGui, so it is tested without a window); the hierarchy panel only translates the requests of ImGui's
+multi-select (a click, a range, the box, Escape) into <code>SelectionRequest</code>s, which <code>SelectionRequests.Apply</code> applies against the list of visible nodes.</p>
+<h2 id="the-inspector">The inspector<a class="headerlink" href="#the-inspector" title="Permanent link">&para;</a></h2>
+<p>A field is drawn by a <strong>drawer</strong>, picked from a table in this order: a drawer registered for the whole component, one for the field, one for the field's asset type, then the defaults, which look at what the registry says about the field
+(an enum, a colour) and then at its kind (an asset field with a type gets the picker whatever its type). The defaults are:</p>
+<ul>
+<li><strong>Numbers.</strong> A checkbox, a drag field (a slider when <code>[Property]</code> gives a <code>Min</code> and a <code>Max</code>), three drag fields for a vector or a double position, three angles for a rotation. An asset handle with no asset type has no picker to name a file, so it is a plain number too.</li>
+<li><strong>Asset reference.</strong> Every field that holds an asset (<code>[Property(Asset = "model")]</code>, as <code>ModelRenderer.Model</code> does) is edited by the file it names: see <a href="#asset-fields">Asset fields</a>.</li>
+<li><strong>Entity reference.</strong> The entity's name on a button that takes a dropped entity, and <em>Clear</em>.</li>
+<li><strong>Enum.</strong> A field the registry says holds an enum (<code>[Property(Enum = typeof(LightKind))]</code>, or a field of an enum type) is a combo of the enum's members; a flags enum is a node with a checkbox for each member that has a bit.
+  A value that is no member shows as its number and stays until another is picked, and the bits of a flags value that no member names are kept when a checkbox changes.</li>
+<li><strong>Colour.</strong> A <code>Vector3</code> marked <code>Color = true</code> is a colour picker (<code>ColorEdit3</code>, HDR and float): a light can be brighter than white, so values outside 0 to 1 are shown and kept.</li>
+</ul>
+<p>Fields are grouped under their <code>Category</code>, <code>Hidden</code> ones are left out, <code>ReadOnly</code> ones greyed, and a field's <code>///</code> summary is its tooltip.</p>
+<p><strong>Defaults.</strong> <em>Add component</em> starts a component from <code>ComponentDefaults</code> (in <code>Weft.Host.Editing</code>): a table from the component's name to its bytes, seeded by <code>RegisterEngine()</code> with the identity <code>Transform</code>, <code>CameraComponent.Default</code> and a white
+point <code>Light</code>. A component nobody registered, such as one a script defines, starts as zeros. Right click a component's heading and choose <em>Reset to default</em> to put the whole value back, or right click a field for <em>Reset to default</em> on that field alone.
+Each is one undo step. A game or an editor extension adds its own with <code>ComponentDefaults.Register(name, bytes)</code>.</p>
+<p><strong>Several entities.</strong> With several selected, the inspector shows the active entity's components that <strong>all</strong> of them have, with the active entity's values. A field whose bytes differ among them shows ImGui's mixed value (<code>---</code>, a dash
+in a checkbox, "---" in a combo). An edit writes the bytes of <strong>that field only</strong> on every selected entity, so each keeps its own values for the others, and one drag, pick or click is <strong>one undo step</strong> (a composite of one change for each
+entity, which merges with the next change to the same entities until the widget is let go of). <em>Add component</em> adds a component to every selected entity that lacks it, <em>Remove component</em> removes it from all, and <em>Reset to default</em> resets all.
+Changing the name still renames the active entity only.</p>
+<h3 id="asset-fields">Asset fields<a class="headerlink" href="#asset-fields" title="Permanent link">&para;</a></h3>
+<p>An asset field is a number in memory (a handle that only means something in this run) and a path with a UID in the scene (<code>res://models/car.glb|uid://…</code>, see <a href="../../content/assets/">Asset identity</a>). The inspector shows the second:</p>
+<ul>
+<li><strong>The button</strong> shows the file's name; hover it for the full path and the <code>uid://</code> (a file that has not been imported yet has none, and the tooltip says so: it gets one at its first import). An empty field says <em>None</em>, and several selected
+  entities that differ say <code>---</code>. Click it to open the picker.</li>
+<li><strong>The picker</strong> is a popup with a filter box (focused when it opens) and the game's files of that kind: a model field lists <code>.glb</code> and <code>.gltf</code>, a texture field images, a scene field <code>.wscn</code>. The filter matches the file name first and then the rest of the path, whatever the case.
+  The list is drawn a screen at a time, so a project with fifty thousand files opens as fast as one with fifty. Files of <code>res://</code> come first, then those of each package (<code>mod://id/…</code>), each in path order. The list leaves out the import cache (<code>imported/</code>), names
+  that start with a dot and <code>.wimp</code> files; a package that sits under <code>res://packages/</code> and is also mounted as <code>mod://id/</code> is listed once, as <code>mod://</code>. The listing is made on another thread (the popup says so for the very first one), is repeated at most every two
+  seconds while a picker is in use and at once when the hot reloader reports changed files, and stops at 200,000 files, 100,000 folders or 24 levels (the popup says the list is cut short).</li>
+<li><strong>Drop a file</strong> from the Assets panel on the button. A file of another kind (a texture on a model field) is refused with a message under the field.</li>
+<li><strong>Clear</strong> (the small button) empties the field. <strong>Show in assets</strong> (right click the button) switches to the Assets panel, opens the file's folder and marks the file.</li>
+</ul>
+<p>A choice is turned into a handle through the world's converter (<code>World.AssetHandleOf</code>), which loads the file when the type needs it, so the field holds what a scene would load; it is written like any edit, as <strong>one undo step</strong> for all the selected entities, and undo puts the old
+handle back. A file that is picked and gives <strong>no handle</strong> (it vanished from the disk since the list was made, or does not load) is <strong>not written</strong> (0 would pass for <em>Clear</em>): the field stays as it was, and a red message under it says which file and why to look at the console.
+A file that is <strong>not imported yet</strong> can be picked: models and images load from their sources until they are imported.</p>
+<p>A <strong>broken reference</strong> is drawn in red. That is a field whose file is gone (the scene or a script named it, and nothing has that path or uid any more), a handle that names no file at all (made in code: a scene cannot save it), and a field that is 0 because the scene named a file that
+did not load: the button then shows the text the scene held, which a save writes back as it was, so that the reference works again when the file is back. Choosing a file or <em>Clear</em> replaces that text (in the same undo step: undo brings it back), so clearing a broken field survives a save. A file that moved
+is found through its UID and drawn normally; its tooltip says where it was and that saving writes the new path.</p>
+<h3 id="custom-inspectors">Custom inspectors<a class="headerlink" href="#custom-inspectors" title="Permanent link">&para;</a></h3>
+<p>An editor extension (C# only: the editor is the one place a drawer can live; games define components in scripts and get the defaults) registers drawers on <code>InspectorDrawers</code> before the inspector first draws:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// One field: a drawer gets the field, its bytes (write the new value back into them and return true), whether the selected entities disagree, and the widgets.</span>
+<span class="n">InspectorDrawers</span><span class="p">.</span><span class="n">RegisterField</span><span class="p">(</span><span class="s">"Health"</span><span class="p">,</span><span class="w"> </span><span class="s">"Current"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="n">FieldEdit</span><span class="w"> </span><span class="n">edit</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryMarshal</span><span class="p">.</span><span class="n">Read</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">edit</span><span class="p">.</span><span class="n">Bytes</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">edit</span><span class="p">.</span><span class="n">Ui</span><span class="p">.</span><span class="n">Drag</span><span class="p">(</span><span class="n">edit</span><span class="p">.</span><span class="n">Label</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s">"%.0f"</span><span class="p">,</span><span class="w"> </span><span class="n">edit</span><span class="p">.</span><span class="n">Mixed</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">value</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">    </span><span class="n">MemoryMarshal</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">edit</span><span class="p">.</span><span class="n">Bytes</span><span class="p">,</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">next</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="n">InspectorDrawers</span><span class="p">.</span><span class="n">RegisterAssetType</span><span class="p">(</span><span class="s">"texture"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="n">FieldEdit</span><span class="w"> </span><span class="n">edit</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">BuiltInDrawers</span><span class="p">.</span><span class="n">AssetReference</span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="n">edit</span><span class="p">));</span><span class="w">   </span><span class="c1">// every AssetRef field of that asset type</span>
+<span class="n">InspectorDrawers</span><span class="p">.</span><span class="n">RegisterComponent</span><span class="p">(</span><span class="s">"Health"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="n">ComponentEdit</span><span class="w"> </span><span class="n">edit</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">);</span><span class="w">                          </span><span class="c1">// the whole component, in place of its fields</span>
+</code></pre></div>
+<p><code>FieldEdit.Ui</code> is an <code>IInspectorUi</code>: the widgets (drag fields, checkbox, combo, colour, entity reference, asset reference) with the mixed flag, which <code>ImGuiInspectorUi</code> draws with ImGui and the tests answer with a fake, so a drawer is tested with no window. The built-in drawers
+(<code>BuiltInDrawers.Numbers</code>, <code>EntityReference</code>, <code>AssetReference</code>, <code>Enum</code>, <code>Color</code>) are public, to call for part of a field. <code>FieldEdit.Entity</code> is the active entity, for a drawer that looks something up in the world. A package or an extension that adds a kind of asset registers it with <code>AssetKinds.Register("prefab", [".wprf"], "Prefab")</code> (in <code>Weft.Host.Editing</code>): its files are then listed
+for every field of that asset type, which gets the picker unless a drawer is registered for it. A component drawer gets the whole value and a mixed flag for each field; only the fields whose bytes it changed are written to the selected entities.</p>
+<p>A class of objects (see <a href="#engine-objects">Engine objects</a>) has its own hook, <code>RegisterClass</code>. The drawer gets the object, its class, the widgets and the inspector that is drawing it; <code>edit.DrawProperties()</code> draws the default look, so a
+drawer can add its own widgets before or after it, or draw something else altogether. A drawer registered for a class also draws its subclasses, unless they have one of their own:</p>
+<div class="highlight"><pre><span></span><code><span class="n">InspectorDrawers</span><span class="p">.</span><span class="n">RegisterClass</span><span class="p">(</span><span class="s">"PhysicsWorld"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="n">ObjectEdit</span><span class="w"> </span><span class="n">edit</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">edit</span><span class="p">.</span><span class="n">Ui</span><span class="p">.</span><span class="n">Text</span><span class="p">(</span><span class="s">"Bodies in this world: see the Physics shapes in the Debug menu."</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">edit</span><span class="p">.</span><span class="n">DrawProperties</span><span class="p">();</span><span class="w">                                              </span><span class="c1">// the usual list of properties after it</span>
+<span class="p">});</span>
+
+<span class="n">InspectorDrawers</span><span class="p">.</span><span class="n">RegisterMultiline</span><span class="p">(</span><span class="s">"Note"</span><span class="p">,</span><span class="w"> </span><span class="s">"text"</span><span class="p">);</span><span class="w">                             </span><span class="c1">// the string property `text` of the class `Note` gets a box of several lines</span>
+</code></pre></div>
+<p>A write that a custom drawer makes goes through <code>edit.Inspector.SetProperty(target, property, before, after, path)</code>, which makes it one undo step of the window's history and reports a setter that refuses.</p>
+<h2 id="engine-objects">Engine objects<a class="headerlink" href="#engine-objects" title="Permanent link">&para;</a></h2>
+<p><em>Debug &gt; Engine objects</em> opens a window with a combo of the session's objects and, under it, the properties of the one that is chosen. It is built on the same registry as scripts: every <code>[Property]</code> of a <code>[WeftClass]</code> (the
+base classes' first) is read and written through the property's own getter and setter, so nothing reflects, and what the class says about it is respected (<code>Min</code>, <code>Max</code>, <code>Step</code>, <code>Category</code>, <code>Hidden</code>, <code>ReadOnly</code>, <code>Color</code>).</p>
+<ul>
+<li><strong>What is drawn.</strong> A bool is a check box; an integer or a number a drag field (a range gives it its limits); a string a text field (one line, or a box when the property was registered with <code>RegisterMultiline</code>, or the text already has
+  several lines or is long; text beyond 16384 characters is shown cut and not edited here); a <code>Vector3</code> three numbers, or a colour picker with <code>Color</code>; a rotation three angles in degrees; an enum a combo of the registered members, or for a
+  <code>[Flags]</code> enum a node of check boxes; an entity its name, a button that takes an entity dragged from the hierarchy, and <em>Clear</em>; an asset reference (<code>AssetRef</code>) is text in the form scripts use, <code>res://models/car.glb|uid://…</code>; a function or a table is only named.</li>
+<li><strong>Objects</strong> are a node that opens to the properties of the object inside. It goes four levels down; below that the object is named and not opened. An object that is already open above it (a cycle) is named and
+  not opened again, and one that has been destroyed says so.</li>
+<li><strong>Lists</strong> show their count in the node and the items a page at a time (200 on a page, with <em>Previous page</em> and <em>Next page</em>). When the property can be set, each item has <em>Up</em>, <em>Down</em> and <em>Remove</em>, and <em>Add</em> appends the zero of
+  the item type (an empty text, 0, the first member of an enum). A list of objects has no <em>Add</em>: objects are not made here. A list of more than 5000 items is shown and not edited.</li>
+<li><strong>Properties that cannot be edited</strong> (no setter, or <code>ReadOnly</code>) are greyed out. A property the getter of which throws shows the message in its place and the rest is drawn. A <strong>setter that refuses a value</strong> (it throws, as a script would see)
+  leaves the property as it was and the message appears under it, until the property is written successfully; nothing is added to the history. A value that is <code>nil</code> is said (<code>none</code>); a nullable number or text gets a <em>Set</em> button.</li>
+<li><strong>Live objects.</strong> What the window shows is read every frame, so a value that the engine changes by itself keeps changing on screen without the window writing it back.</li>
+</ul>
+<p>The edits are <strong>live</strong>: they go straight to the object, they are <strong>not part of the scene</strong> (nothing is saved, the scene is not marked modified, Ctrl+Z does not undo them), and they work while the game plays. The window has its own
+<em>Undo</em> and <em>Redo</em> buttons for them: one step for each property (the frames of one drag are one step; so is one click on <em>Add</em>, <em>Remove</em> or <em>Up</em>). The window says all of this at its top. When the shown object is another one,
+which is what Play and Stop do (they replace the session), its history is dropped: the objects it changed are gone. Which object is shown is remembered by name.</p>
+<h2 id="group-transforms">Group transforms<a class="headerlink" href="#group-transforms" title="Permanent link">&para;</a></h2>
+<p>The gizmo acts on the selection's top level (the selected entities that have a <code>Transform</code> and no selected ancestor: a selected child rides on its selected parent and is never moved twice). A drag is one undo step
+("Move 3 entities", "Rotate Cube"), however many frames it takes. <strong>Pivot</strong> in the viewport's toolbar chooses what a rotation or a scale turns around:</p>
+<ul>
+<li><strong>Center</strong>: the centre of the selection. It is the middle of the box that contains every member's model bounds when all of them have a model; when one does not (a light, a camera, an empty entity) it is the mean of
+  the origins. Only a member's own model counts, not those of its descendants, so a group of empty parents is centred on the mean of their origins. One selected entity always uses its own origin.</li>
+<li><strong>Active</strong>: the origin of the active entity (the last one picked); when the active entity is a child of a selected entity, the origin of that selected parent, which is the one that moves.</li>
+<li><strong>Individual</strong>: the gizmo sits at the centre, but every entity turns and scales about its own origin, so a group of crates each spin in place (about the gizmo's axes: with <em>World</em> off those are the active entity's, not each crate's own). A move carries every entity by the same amount in all three modes.</li>
+</ul>
+<p>The gizmo's axes are the world's, or, with <em>World</em> off (and always when scaling), those of the active entity. Snapping applies to the gizmo, that is to the pivot, so the group moves by whole steps and the
+members keep their offsets from each other.</p>
+<p>What happens to a member, in world space: its offset from the pivot is stretched by the scale ratio (along the gizmo's axes) and then swung by the rotation of the drag, the pivot's translation is added, and its
+own rotation is turned by the same rotation. The result is taken into its parent's space, so a member under a rotated or scaled parent still moves the way the gizmo does. Positions are <code>double</code> and only
+differences (a delta, an offset) are ever floats. A move adds the gizmo's float difference to the double position, so it is exact in double for entities at the root of the scene, however far out (ten million metres
+from the origin still moves to the millimetre), and a move never turns or scales anything; a rotation or a scale reads only the rotation or the scale back from the gizmo. Offsets between members are floats, so a rotation
+or scale about a pivot a kilometre away is good to about a tenth of a millimetre. An entity under a parent has a <em>local</em> position that the engine stores relative to the parent and handles as a float: far from its
+parent's origin (everything under a root at the origin while the group is ten million metres out) it is only as exact as that float, which is how every transform in the engine works. A scale ratio below 0.001 is
+raised to 0.001 (the gizmo never goes lower), so a group is flattened but never mirrored or collapsed to zero. A drag that is cut short (Play, a failed Play, Escape or a click that changes the selection) ends where it
+is as its own undo step, and a new drag cannot begin until the mouse button has been let go.</p>
+<p><strong>Scaling a group is exact only in some cases.</strong> A transform here has a per-axis scale and no shear. Stretching a member along axes that are not its own would shear it, which cannot be stored. Each of a member's axes
+takes the length ratio that the stretch gives its direction, so a member whose axes line up with the gizmo's (or are turned a quarter turn) gets exactly the ratio you dragged, but a member turned 45 degrees under a
+non-uniform stretch is only approximated (its axes stay perpendicular and only their lengths follow the stretch). A uniform scale is always exact. Scaling about <em>Individual</em> or <em>Active</em> has the same rule. The maths is in
+<code>Source/Weft.Editor/Editing/GroupTransform.cs</code>, <code>TransformGesture.cs</code> and <code>GizmoDrag.cs</code> (plain functions over placements, with no ImGui, tested without a window); the undo step is <code>SetTransformsCommand</code> in <code>Weft.Host</code>.</p>
+<h2 id="copy-and-paste">Copy and paste<a class="headerlink" href="#copy-and-paste" title="Permanent link">&para;</a></h2>
+<p><strong>Ctrl+C</strong> copies the selection (its top level, each entity with everything below it) to the system clipboard as <strong>scene text</strong>: the same XML a scene file holds (<a href="../../content/scenes/">scenes</a>), written by
+<code>World.SaveSceneDocument</code>, with no <code>uid</code>, because a copy is not a file. Several selected entities are one document. <strong>Ctrl+V</strong> reads the text back with <code>World.LoadScene</code>, so it works between scenes, between projects
+and between editor instances, and the text can be edited or written by hand. <strong>Ctrl+X</strong> is a copy followed by a delete (one step). <strong>Ctrl+D</strong> duplicates without touching the clipboard. The same commands are in
+the <em>Edit</em> menu and the hierarchy's context menu, which also has <em>Paste as child</em> (Ctrl+Shift+V).</p>
+<ul>
+<li><strong>Where it goes.</strong> A paste lands next to the active entity (under the same parent; at the root when nothing is selected); <em>Paste as child</em> puts it under the active entity. The new entities are selected, and the paste
+  is one undo step ("Paste Cube", "Paste 3 entities"); undoing removes them, redoing brings them back under the same ids. A pasted entity keeps its local transform, so under another parent it moves with that parent.</li>
+<li><strong>Names.</strong> The pasted top-level entities get names no sibling has ("Cube", then "Cube 2"), also among themselves when they come from different parents; the loader decides, among the real siblings, so a pasted "Empty" stays "Empty" when no sibling has that name. Names below them are kept.</li>
+<li><strong>References.</strong> An <code>Entity</code> field that points to an entity inside the copied set is written as that entity's number in the document, and a paste points it at the new copy, so a copied branch stays wired to itself
+  (and several selected entities to each other). A field that points outside the copied set is left empty: the scene format cannot name an entity that is not in the document. Asset fields travel as
+  <code>path|uid</code> (the model's path, and its UID once it is imported) and are found again by the pasting project; one that cannot be found is left empty and logged. Components that a script defined travel in the
+  document's <code>&lt;Components&gt;</code> header. A prefab instance is copied as one element that names its prefab and what it changes, and pasted as an instance (a <a href="../../content/prefabs/#how-overrides-are-stored">selected member</a> of one, without its root, as plain entities).</li>
+<li><strong>Duplicate</strong> is not a paste: it clones each top-level entity with <code>World.Clone</code> under the same parent ("Cube (copy)") as one step, and a clone keeps the references of its components as they are, so one that
+  pointed at another entity still points at the original (including inside the duplicated branch).</li>
+<li><strong>Playing.</strong> Copy works while the game plays (it copies the running state); Cut, Paste and Duplicate are off, like every edit.</li>
+<li><strong>Bad text.</strong> Whatever is on the clipboard is untrusted. Text that is not a scene (not XML, another root element, a DTD, nesting that is too deep, more than 16 MB), a scene of a newer version, or one with no
+  entities changes nothing: the console says why. <em>Paste</em> is greyed in the menus when the text cannot be a scene.</li>
+</ul>
+<p>The code is <code>Source/Weft.Editor/Editing/ClipboardScene.cs</code> (the <code>IClipboard</code> interface, <code>SdlClipboard</code> over SDL's clipboard, <code>MemoryClipboard</code> for tests, and the checks of the text), the project's <code>Copy</code>, <code>Cut</code>,
+<code>Paste</code> and <code>Duplicate</code>, and <code>CreateEntitiesCommand</code> in <code>Weft.Host</code> (the undo step that makes several branches).</p>
+<h2 id="shortcuts">Shortcuts<a class="headerlink" href="#shortcuts" title="Permanent link">&para;</a></h2>
+<p>Every shortcut is a row of one table, the keymap (<code>Source/Weft.Editor/Input/Keymap.cs</code>): an action id (<code>edit.undo</code>), the chord or chords that fire it, and the <strong>context</strong> it applies in. The menus show the
+shortcut text from the same table, so a label never disagrees with the key. On macOS the primary modifier is Cmd, shown as <code>Cmd+Z</code>; everywhere else it is Ctrl.</p>
+<!-- keymap:begin (checked against Keymap.Defaults by KeymapTests) -->
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Shortcut</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Undo</td>
+<td>Ctrl+Z</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Redo</td>
+<td>Ctrl+Y or Ctrl+Shift+Z</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Save</td>
+<td>Ctrl+S</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Save as</td>
+<td>Ctrl+Shift+S</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Play or stop</td>
+<td>F5</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Cut</td>
+<td>Ctrl+X</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Copy</td>
+<td>Ctrl+C</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Paste</td>
+<td>Ctrl+V</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Paste as child</td>
+<td>Ctrl+Shift+V</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Duplicate</td>
+<td>Ctrl+D</td>
+<td>Anywhere</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Delete</td>
+<td>Hierarchy focused</td>
+</tr>
+<tr>
+<td>Rename</td>
+<td>F2</td>
+<td>Hierarchy focused</td>
+</tr>
+<tr>
+<td>Clear the selection</td>
+<td>Escape</td>
+<td>Viewport focused</td>
+</tr>
+<tr>
+<td>Frame the selection</td>
+<td>F</td>
+<td>Viewport focused</td>
+</tr>
+<tr>
+<td>Move tool</td>
+<td>W</td>
+<td>Viewport focused</td>
+</tr>
+<tr>
+<td>Rotate tool</td>
+<td>E</td>
+<td>Viewport focused</td>
+</tr>
+<tr>
+<td>Scale tool</td>
+<td>R</td>
+<td>Viewport focused</td>
+</tr>
+<tr>
+<td>Fly forward</td>
+<td>W</td>
+<td>Viewport, right mouse button held</td>
+</tr>
+<tr>
+<td>Fly back</td>
+<td>S</td>
+<td>Viewport, right mouse button held</td>
+</tr>
+<tr>
+<td>Fly left</td>
+<td>A</td>
+<td>Viewport, right mouse button held</td>
+</tr>
+<tr>
+<td>Fly right</td>
+<td>D</td>
+<td>Viewport, right mouse button held</td>
+</tr>
+<tr>
+<td>Fly up</td>
+<td>E</td>
+<td>Viewport, right mouse button held</td>
+</tr>
+<tr>
+<td>Fly down</td>
+<td>Q</td>
+<td>Viewport, right mouse button held</td>
+</tr>
+</tbody>
+</table>
+<!-- keymap:end -->
+
+<ul>
+<li><strong>Contexts.</strong> <em>Anywhere</em> shortcuts work whichever panel has the keyboard; the others only while that panel is focused. While the right mouse button is held in the viewport the camera flies: the
+  fly keys are held rather than pressed (extra modifiers, such as Shift to go faster, do not stop them), and the viewport's own keys (W, E, R, F, Escape) are off so that W flies instead of choosing the Move tool.</li>
+<li><strong>Exact modifiers.</strong> A chord fires only with exactly its modifiers: Ctrl+Shift+V pastes as a child and does not also paste, Shift+Z is not Z.</li>
+<li><strong>Typing.</strong> While a text field (or any widget that uses the keyboard) is active, no shortcut fires, so typing a name never deletes entities or switches the tool.</li>
+<li><strong>Conflicts.</strong> <code>Keymap.Conflicts()</code> reports two actions that share a chord where both could be active: in the same context, or when one of them is <em>Anywhere</em>. The defaults have none (a test checks it); a
+  rebinding that collides is reported, not refused. <a href="#preferences">Preferences</a> rebinds, saves and resets the table.</li>
+<li><strong>ImGui's own keys.</strong> Ctrl+A (select all), Shift-click ranges, Ctrl-click and Escape in the hierarchy are ImGui's multi-select, not keymap rows.</li>
+</ul>
+<p>The matching is <code>Keymap.Pressed</code> and <code>Keymap.IsHeld</code> over <code>IKeyState</code> (ImGui's keyboard in the editor, a fake in the tests), so it is tested without a window. The manual's table above is checked against the real one by a test.</p>
+<h2 id="preferences">Preferences<a class="headerlink" href="#preferences" title="Permanent link">&para;</a></h2>
+<p>The editor remembers its preferences, the recent projects and the key bindings in <strong><code>preferences.xml</code> in the editor's own folder</strong> (the platform's local application data folder: <code>~/.local/share/Weft/Editor</code> on Linux and macOS, <code>%LOCALAPPDATA%\Weft\Editor</code> on Windows; next to <code>imgui.ini</code> and the logs). It is never written into a game folder, and it is not the game's <code>user://settings.xml</code>: that file belongs to one game and its
+mods, is replaced when Play starts, and every mod can read it. The file is the engine's <a href="../../platform/settings/">settings store</a> over a file system of the editor's folder alone, so it has the same shape (<code>&lt;settings version="1"&gt;</code> with
+<code>&lt;value key="..."&gt;</code> lines), only what differs from the default is written, writes are atomic (a temporary file moved over the old one), and a key this editor does not know is kept. The dock layout stays in <code>imgui.ini</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;settings</span><span class="w"> </span><span class="na">version=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">key=</span><span class="s">"editor.camera.speed"</span><span class="nt">&gt;</span>12<span class="nt">&lt;/value&gt;</span>
+<span class="w">  </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">key=</span><span class="s">"keys.edit.undo"</span><span class="nt">&gt;</span>Ctrl+Alt+U<span class="nt">&lt;/value&gt;</span>
+<span class="w">  </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">key=</span><span class="s">"recent.0"</span><span class="nt">&gt;</span>/home/me/games/farm<span class="nt">&lt;/value&gt;</span>
+<span class="w">  </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">key=</span><span class="s">"project.5b0c7e1d2a9f4c38.wscn"</span><span class="nt">&gt;</span>res://scenes/barn.wscn<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>Holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>editor.camera.speed</code></td>
+<td>the fly speed of the camera in metres per second (6; Shift is three times as fast)</td>
+</tr>
+<tr>
+<td><code>editor.gizmo.mode</code>, <code>.world</code>, <code>.pivot</code>, <code>.snap</code></td>
+<td>the tool (<code>move</code>, <code>rotate</code>, <code>scale</code>), world or local space, the pivot of a group (<code>center</code>, <code>active</code>, <code>individual</code>) and whether it snaps</td>
+</tr>
+<tr>
+<td><code>editor.gizmo.snap_move</code>, <code>.snap_rotate</code>, <code>.snap_scale</code></td>
+<td>the snap steps (0.5 m, 15 degrees, 0.1)</td>
+</tr>
+<tr>
+<td><code>editor.helpers</code>, <code>editor.game_camera</code></td>
+<td>the viewport's helpers, and the game camera while playing</td>
+</tr>
+<tr>
+<td><code>editor.ui.scale</code></td>
+<td>the interface scale (1; 0.5 to 3)</td>
+</tr>
+<tr>
+<td><code>recent.0</code> to <code>recent.9</code></td>
+<td>the recent projects as full paths, the latest first</td>
+</tr>
+<tr>
+<td><code>project.&lt;16 hex digits&gt;.wscn</code></td>
+<td>the scene that was open last in a project (the first 16 hex digits of the SHA-256 of the project's full path), reopened the next time the project opens if it is still there</td>
+</tr>
+<tr>
+<td><code>keys.&lt;action id&gt;</code></td>
+<td>a key binding that differs from the default</td>
+</tr>
+</tbody>
+</table>
+<p>The gizmo's state is kept as you work (the toolbar and the window edit the same values), the scene is noted when it changes, and the file is written within a second of a change and when the editor quits (a slider that is
+dragged writes once a second, not once a frame).</p>
+<p><strong>Edit &gt; Preferences...</strong> (also on the start screen) opens a window with two tabs. <em>General</em> edits the values above (<em>Reset to defaults</em> puts them back; it does not touch the recent projects or the keys). <em>Keys</em> lists every
+action with its shortcut and where it applies. <em>Rebind</em> waits for the next key you press and binds the action to it with the modifiers held (Ctrl+Shift+K); Escape alone gives up (to bind Escape itself, hold a modifier,
+or use <em>Reset</em> on an action whose default it is); a modifier alone is not a chord. <em>Clear</em> unbinds the action, <em>Reset</em> puts its defaults back (it is greyed when it is on them), <em>Reset all</em> does it for every action. While a key is
+awaited no shortcut fires, so the key you choose does not also do what it is bound to. A chord that another action already has (where both could be active) is <strong>accepted and shown in red</strong> with the name of the other
+action: both fire, and the window says so. The menus and the toolbar show the new chords at once.</p>
+<p><strong>Key bindings are a difference from the defaults.</strong> An action on its default chords has no key in the file, so a later editor with another default reaches everyone who never changed it. <code>keys.edit.redo</code> holds the chords
+joined with <code>|</code> (<code>Ctrl+Y | Ctrl+Shift+Z</code>), <code>none</code> for an unbound action. The primary modifier is always written <code>Ctrl</code> and shown as <code>Cmd</code> on macOS, so a file reads the same on every platform. Bindings for actions this editor does not have
+stay in the file untouched. When the file is read, a chord that does not parse is reported and the action keeps its default, and collisions the saved bindings cause are reported (nothing is refused).</p>
+<p><strong>Recent projects.</strong> <em>File &gt; Open recent</em> and the start screen list the last ten game folders, the latest first, without duplicates (the same folder spelled differently counts once). A folder that is gone from the disk is dropped
+when the file is read, and when you choose one that turned out to be gone (or is no game folder any more) the editor says so and removes it; <em>Clear recent</em> empties the list. Opening a project adds it, the same way as the dialog.</p>
+<p><strong>A file that does not read never crashes the editor and is never lost.</strong> A file that is not XML (or has another root element) is kept as <code>preferences.bad.xml</code> next to it; one written by a newer editor (a <code>version</code> above 1) is
+kept as <code>preferences.v&lt;N&gt;.xml</code>; in both cases the defaults are used, a message at the start says so, and the next change writes a new <code>preferences.xml</code>. A file that cannot be read at all (locked, no permission) is left
+exactly as it is and nothing is saved in that run. A value of the wrong type or outside its range falls back to its default (numbers are clamped). The window shows where the file is and whether it is being saved.</p>
+<p>The code is <code>Source/Weft.Editor/EditorPreferences.cs</code> (the typed keys, the recent list, the keymap diff), <code>Source/Weft.Editor/Input/KeyBindingEditor.cs</code> (the rows and the capture of a chord over <code>IKeyState</code>, with no ImGui) and
+<code>Source/Weft.Editor/Panels/PreferencesWindow.cs</code> (only draws them). The folder is a parameter of <code>EditorPreferences.Open</code>, so tests use a temporary one.</p>
+<h2 id="scenes-and-undo">Scenes and undo<a class="headerlink" href="#scenes-and-undo" title="Permanent link">&para;</a></h2>
+<p><em>File</em> creates, opens and saves scenes (<code>.wscn</code> XML, see <a href="../../content/scenes/">scenes</a>); <em>Open scene...</em> and <em>Save as...</em> use the system's <a href="#file-dialogs">file dialogs</a>. Every edit is a command on an <code>EditHistory</code>
+(Ctrl+Z, Ctrl+Y or Ctrl+Shift+Z): component values (a drag is one step), adding and removing components, creating, duplicating and deleting entities (a deleted branch comes back under the same ids; deleting or
+moving several at once is one step), renaming and reparenting. Opening or creating a scene clears the history.</p>
+<p>The history remembers the state the scene was saved in (its <strong>save point</strong>): the scene is <em>modified</em> (the <code>*</code> after its name, and the question when quitting) only when it differs from the file. Undo back to the saved
+state and the mark goes away; undo past it, or make a new edit after undoing from it, and it comes back. A drag that is still going (its steps merge) is not the saved state either. With more than 500 steps (the
+history's <code>Limit</code>) the oldest are forgotten, and if the saved state was among them the scene stays modified until it is saved again.</p>
+<h2 id="file-dialogs">File dialogs<a class="headerlink" href="#file-dialogs" title="Permanent link">&para;</a></h2>
+<p><em>Open scene...</em>, <em>Save as...</em> (Ctrl+Shift+S, and <em>Save</em> on a scene that has no file yet) and <em>Open project...</em> show the operating system's own dialog: the open dialog starts in the game's <code>scenes</code> folder (or the game folder) and filters
+on <code>.wscn</code>; the save dialog adds <code>.wscn</code> when the name has none. The dialogs come from SDL (<a href="../../platform/platform/#file-dialogs"><code>FileDialog</code></a>); they are asynchronous, so the editor goes on running while one is open, and the
+<em>New scene</em>, <em>Open scene</em>, <em>Save as</em> and <em>Open project</em> entries are greyed until it closes (a second dialog is never opened; a shortcut pressed meanwhile opens the editor's own entry instead). A dialog that is cancelled changes
+nothing. A dialog that never answers (a desktop portal that crashed) is given up on after ten minutes: the editor is free again, and an answer that arrives later is ignored.</p>
+<p>A scene belongs to the game, so only a file <strong>inside the game folder</strong> can be opened or saved: the dialog gives an operating system path, and the editor turns it into the game's virtual path (<code>&lt;game folder&gt;/scenes/level.wscn</code>
+becomes <code>res://scenes/level.wscn</code>). A path outside the folder (a game folder that is a symbolic link, or sits at the root of a drive, is understood), a file that is not a <code>.wscn</code>, a name the game cannot use, a place in a read-only part of the game, or a file that
+a pack of the game already answers for is refused with a message that says why, and nothing is written. If the project was switched while a dialog was open, its late result is dropped; a result that arrives while the game is running
+is applied like the menu entry would: Open scene and Save as end the run first (the scene saved is the edited one, not the run's).</p>
+<p>A scene that cannot be opened (it does not parse, it is from a newer engine) or saved (a read-only file, a full disk) is reported in a message and changes nothing: the open scene stays as it was, with its path, its undo history,
+its selection and its modified mark, so the next <em>Save</em> cannot write an empty scene over it. <em>Save and quit</em> and <em>Save and open</em> do not go on when the save failed. Known limits: Windows 8.3 short names and macOS file names
+written in another Unicode form than the folder's are reported as outside the game folder.</p>
+<p>On Linux SDL asks the desktop's file chooser through <code>xdg-desktop-portal</code>, or runs <code>zenity</code>. A machine with neither has no system dialog: the editor then falls back to its own entries (a list of the game's scenes for <em>Open
+scene</em>, a path field for <em>Save as</em> and for <em>Open project</em>), so everything stays reachable.</p>
+<h2 id="the-start-screen-and-opening-a-project">The start screen and opening a project<a class="headerlink" href="#the-start-screen-and-opening-a-project" title="Permanent link">&para;</a></h2>
+<p>Started without a game folder, the editor opens its window on a start screen with an <em>Open project...</em> button (and <em>File &gt; Open project...</em>) and the list of <a href="#preferences">recent projects</a>: choose a game folder in the system's folder
+dialog, or click a recent one. Only a folder that has a <code>game.wgam</code> or a <code>packages</code> folder is taken for a game (a mistaken pick, such as the home folder, is refused with a message and nothing closes); choosing the folder that is already open does nothing. The same entry in the <em>File</em> menu of an open project <strong>switches projects inside the same process</strong>: if the scene has unsaved changes the editor asks first (<em>Save and open</em>, <em>Open without saving</em>, <em>Cancel</em>); then the
+old project is closed (the GPU is waited for, the viewport and the session are disposed, since one session exists at a time) and the new folder is opened at the start of the next frame, with a fresh camera, panels and undo history. The window title
+and the crash reports' <em>Edited game</em> line follow the project. <code>--user &lt;folder&gt;</code> belongs to the game folder given on the command line: a project opened later from the dialog gets its own user folder (what its <code>game.wgam</code> says), so two games never share <code>user://</code>. If the folder cannot be opened (a <code>game.wgam</code> that is wrong, say) the editor says why and opens the previous project again. A folder that does not exist is refused
+without closing anything.</p>
+<h2 id="bringing-files-in">Bringing files in<a class="headerlink" href="#bringing-files-in" title="Permanent link">&para;</a></h2>
+<p>Drag files or folders from the system's file manager onto the editor's window. The editor accepts the drop only when it can do something sensible with it, and says why when it cannot (a message, and the console lists every file it left out):
+no project is open, the game is playing, a dialog is open, an import is already running, a question about names is waiting, or the files landed on a panel that takes none (the hierarchy, the inspector).</p>
+<p><strong>Where they go.</strong> The panel under the pointer decides, using what it showed when you let go:</p>
+<ul>
+<li><strong>On the Assets panel</strong>: into the folder it shows (a dropped folder is recreated under it). The files are copied and imported; nothing is added to the scene.</li>
+<li><strong>On the Viewport</strong>: model files (<code>.glb</code>, <code>.gltf</code>) go to the asset browser's folder when it is inside <code>res://</code> below the top, otherwise to <code>res://models</code>; once they are imported, one entity per model is made, as <strong>one undo step</strong>, at the point of the ground under the pointer where you let go
+  (five metres along the view when the pointer was above the horizon; several models are put side by side, two metres apart). The files are not undone by the undo, only the entities. Other files in the drop are added too. A model that fails to import makes no entity.</li>
+<li><strong>No position</strong>: some systems (Wayland compositors without the protocol) do not say where the drop happened. The editor never guesses a point: such a drop goes to the Assets panel's folder.</li>
+</ul>
+<p>Only folders of the game itself take files: <code>res://</code>, which must be writable. A folder of a package (<code>mod://</code>) or of a pack is read-only, and the drop is refused.</p>
+<p><strong>What is taken.</strong> Files the game can use: what an importer takes (<code>.glb</code> and <code>.gltf</code>, <code>.png</code>, <code>.jpg</code> and <code>.jpeg</code>, <code>.slang</code> shaders), scenes and prefabs (<code>.wscn</code>, <code>.wprf</code>), and scripts, definitions, sounds, fonts and UI documents
+(<code>.luau</code>, <code>.xml</code>, <code>.wav</code>, <code>.ogg</code>, <code>.flac</code>, <code>.mp3</code>, <code>.ttf</code>, <code>.otf</code>, <code>.rml</code>, <code>.rcss</code>). Anything else is refused by name with the list of what is taken. Also refused, each with its reason:
+a name the game cannot use on every system (a colon, a trailing dot or space, a Windows device name such as <code>con</code>), a hidden file or folder (a name that starts with a dot; hidden entries inside a dropped folder are skipped without a word), the <strong>game folder itself or a folder that holds it</strong> (it would copy the game into itself), anything into <strong><code>res://imported</code></strong> (the importer's own folder: its index and UID list; a dropped folder of that name too), an empty file, a file over 512 MB or a drop over 2 GB in all, and
+<strong>links</strong>: a symbolic link or a junction (dropped or inside a dropped folder) is never followed, because its target can be anywhere. A dropped folder is read to at most 10,000 files, 10,000 folders and 64 levels (this walk, and the reading of a <code>.gltf</code>, run on the main thread when the files are dropped: they are capped for that reason). The paths the files get are built only from names that passed these checks, so a name cannot climb out of the folder.</p>
+<p><strong>Models with files of their own.</strong> A <code>.gltf</code> brings the buffers and images its <code>uri</code>s name (beside it or below it, <code>%20</code> and other escapes read as the glTF standard has them, so <code>a.bin</code> and <code>a%2Ebin</code> are one file; a file or a folder on the way that is a link is refused; data URIs need nothing). A model that names a file that is missing, an absolute path, a drive, or a path that climbs
+(<code>..</code>) is refused whole, with the reason. The companions are copied with it and imported <em>as part of the model</em>, not as assets of their own. A file's <code>.wimp</code> beside it comes along; a dropped <code>.wimp</code> without its asset is refused.
+A sidecar that arrives with a UID that another asset of the project has (you copied an asset together with its settings) gets a new UID, so two assets never share one; the console says which.</p>
+<p><strong>Names the project has.</strong> A dropped file is never written over a file the project has unless you choose it. When some names clash, a question lists them: <em>Keep both</em> (the default: the new file gets a free name, <code>car 2.glb</code>; a model with files of its own goes into a new folder, since the names inside it cannot change),
+<em>Skip them</em>, <em>Replace</em> (overwrites; <strong>this cannot be undone</strong>; the asset keeps its own <code>.wimp</code>, so its UID and settings stay; a link in the project is never written through, that file is kept and the new one gets a free name instead) or <em>Cancel</em>. A name that appears between the plan and the copy (another program wrote it) is left alone and reported.
+Two dropped files with the same name both arrive (the second is numbered).</p>
+<p><strong>The copy and the import run on a worker thread</strong>, so a large model or a texture compression does not stop the editor. The menu bar and the console header show the progress (<em>Importing 2/5: res://models/car.glb</em>), and the console lists each step. <em>Cancel import</em> stops at the next file;
+what was copied stays (nothing is rolled back), and the files not yet imported can be imported with <em>Re-import</em> in the Assets panel. A file that fails to import (a damaged model) stays copied, and the console says why. Files are written through the game's file system, whole or not at all (a crash leaves the old file).
+A file is read whole before it is written, which is why a single file is limited to 512 MB, and a file that is being read cannot be cancelled until it has been read.
+Files are read again just before they are copied and must be exactly what the plan saw (the same size, not a link, not swapped for a pipe), so a file that changed meanwhile fails on its own and cannot hold the worker. Play is disabled while a job runs (and until its report has been taken), and a drop or a <em>Re-import</em> is refused. Closing the project, or the editor, during a job stops it at the next file (or the next megabyte of a big one) and waits up to 20 seconds for the worker; a texture compression cannot be interrupted, so a longer one ends by itself in the background, while the <strong>gate of that game folder stays held</strong> (there is one gate per game folder for the whole process, not one per open project), so opening the same folder again does not start a second importer.</p>
+<p><strong>The hot reloader and the importer.</strong> The editor's session normally imports changed files itself, on the main thread, every frame (<code>HotReloader</code>). Two importers must never write <code>imported/index.xml</code> at the same time, so the editor holds one <strong>import gate</strong>:
+a job takes it for its whole run, the reloader's poll and the <em>Re-import</em> menu entry take it for theirs, and whoever finds it taken does nothing that frame (the main thread never waits). While a job runs the reloader is therefore not polled; what it
+missed is kept, and when the job ends it notices the new files, finds their artifacts current (the job imported them), and reloads the models that changed without importing anything a second time.
+<strong>A project that was never imported</strong> has no <code>imported/index.xml</code>, and its models and textures are loaded from their sources. Importing one dropped file would make an index, and from the next frame the reloader would import the whole project on the main thread (every model, every texture compression). So a drop on such a project <strong>only copies</strong>: the console says "the project has not been imported", models dropped on the viewport still become entities (they load from their source), and nothing is imported until the project is: with <code>Weft.Runtime --import</code>, or <em>Re-import</em> on a file in the Assets panel (which starts the index; the reloader then imports the rest of the project's out-of-date assets as well, on the main thread).</p>
+<p>Dropped files arrive as one event for the whole drag-and-drop (see <a href="../../platform/platform/#files-dropped-on-a-window">Platform</a>). On <strong>X11 and Windows</strong> the position is reliable; on <strong>macOS</strong> it is in points like the rest of the window; on <strong>Wayland</strong> it depends on the compositor and SDL's version.
+Dropping from a file manager into a sandboxed editor (Flatpak or Snap) may give the editor a path that is not the real one: add files by copying them into the game folder instead.</p>
+<h2 id="play">Play<a class="headerlink" href="#play" title="Permanent link">&para;</a></h2>
+<p><strong>Play</strong> (F5) runs the game inside the editor. The editor keeps a snapshot of the world, replaces its session with the game's (the same <code>ScriptSession</code> the runtime makes: packages, mods and scripts, physics, audio,
+the UI) over a copy of the scene, loaded before the scripts run, and shows the game in the viewport through the world's main camera (or the editor's camera when it has none, or when <em>Game camera</em> is off). The game gets
+the pointer and the input actions while the viewport is hovered or focused; keys and typed text also go to the game's own UI (its text fields) while the viewport has the keyboard; the pointer reaches it through the panel, in the panel's coordinates. <em>Pause</em> and <em>Step</em> freeze and advance the world. <strong>Stop</strong> makes an editing
+session again and puts the world back as it was <em>under the same entity ids</em>, so the selection and the undo history still point at the same entities. A game whose scripts fail does not start: the editor says why and
+stays in editing. Only one session exists at a time (the UI library and others hold process-wide state), which is why Play and Stop replace it. <em>Debug</em> toggles the physics shapes and RmlUi's debugger while playing, and opens the <a href="#engine-objects">Engine objects</a> window, which works in both modes.</p>
+<p>Editing is off while playing: the panels show the game's world, read-only.</p>
+<h2 id="what-is-not-here">What is not here<a class="headerlink" href="#what-is-not-here" title="Permanent link">&para;</a></h2>
+<p>An import settings editor and an import dialog (files are <a href="#bringing-files-in">dropped in</a>; their settings are the <code>.wimp</code> next to them, see <a href="../../content/import/">Asset import</a>), materials, animations, an Export dialog (a game is exported with <a href="../export/"><code>./build.sh export</code></a>), material and logic graph editors (imnodes is ready for them), multi-viewport windows, and a physics ray cast for picking (an editing session has no physics bodies).
+Sound plays in play mode through OpenAL Soft (<a href="../../audio/">Audio</a>), which ships beside the editor like any other library.</p>
+<h2 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
+<p><code>Tests/Weft.Editor.Tests</code>: the field codec for every <code>FieldKind</code> (a rotation as angles, integers clamped), the editor camera, picking (rays, boxes, spheres, the ground, and the selection box with what is behind the
+camera left out), the selection model (toggle, ranges in the visible order, top level, dead entities, the active entity, the multi-select requests), copy, cut, paste and duplicate through a memory clipboard (the same tree under new ids as one step, next to the active entity or under it, unique names, references inside the copy followed and outside ones dropped, models by path, undo of a cut, text that is not a scene, duplicating several, playing), the group transforms (the pivots, moving at ten million metres, rotating and scaling about the centre or in place, local axes, a member under a turned, non-uniformly scaled or mirrored parent, a selected child not moved twice, exactness of a move with a turned pivot, ten million metres out, the scale caveat and its 45 degree value, and the life of a drag: dropped when cut short, sealed, blocked until the button is let go), the keymap (chords parsed and printed for each platform, the defaults and their menu text, conflicts in a context or against an <em>Anywhere</em> shortcut, exact modifiers, contexts, no shortcut while typing, held keys, and this page's table equal to the real one), the preferences in a temporary editor folder (values surviving a reopen and only differences written, the debounce with a fake clock, recent projects most recent first without duplicates and with missing ones dropped and a bound of ten, the last scene per project, key bindings saved as a difference and read back with unknown actions kept, collisions and bad chords reported on load, a corrupt file or a newer one set aside with a copy and never overwritten, in-memory preferences that never write), the rebinding logic with a fake keyboard (capturing the next chord with its modifiers, a modifier alone, Escape giving up, shortcuts off while a key is awaited, a colliding chord accepted and warned about, clear and reset), the file dialogs through a scripted fake (an OS path becoming a game path only inside the game folder; Save as writing the chosen file, adding the extension, refusing a path outside the game; Open scene opening it, refusing other paths, files that are not scenes and missing ones; a cancel doing nothing and an error asking for the built-in entry; a second dialog refused; a result that arrives after the project changed dropped; a scene that fails to load leaving the editor exactly as it was and the next Save writing the old scene; a failing save reported with the scene still modified; a name the game cannot use; a result while playing; a second dialog using the built-in entry; only game folders opened; the dialog gate with a fake clock: refusing a second dialog, free again after an exception or a lost dialog, a late answer dropped; paths of a symlinked and a root-level game folder), switching projects (the old project disposed first, the events in order, a missing folder keeping the open project, a game that fails to start reported and the previous project reopened), the project (creating, naming, reparenting,
+duplicating and deleting, one or several, through the history; the modified mark clearing when undo returns to the saved scene; a scene saved to a file and opened again with the model's path; Play running the game's
+scripts over the scene and Stop restoring the world under the same ids with the selection and history intact; a failing game), dropping files from the system (the plan: where files land, numbering, <code>Replace</code> and <code>Skip</code>, a glTF's buffers and images, uris that climb out and absolute ones, folders and their limits, read-only roots, refused kinds, names, links and sizes; the import job: copied and imported on another thread, the reloader catching up without importing again and not polling while the importer is held, cancelling between files, Play and a second import refused, nothing overwritten that appeared after the plan, <code>Replace</code> keeping the UID, a copied sidecar's UID made new, a model with its buffer, a failed import leaving the file, closing the project waiting for the worker; the flow: an entity at the dropped point as one undo step, the asset browser only importing, every refusal, the question about names, the routing by panel rectangle; the real SDL drop event needs a display and a person and is tested through its synthetic events in <code>Tests/Weft.Platform.Tests</code>), the inspector through a fake UI with no ImGui (the lookup order of the drawer table, numbers drawn as before, enum combos with an unknown value and flags checkboxes with unnamed bits kept, colours outside 0 to 1, entity references, hidden, read-only and playing fields, an edit of several entities changing only that field as one step per drag, mixed values, the shared components, add, remove and reset with defaults), the asset fields (the file name with its path and uid, none, mixed, a pick as one undo step and its undo, a drop of the wrong kind refused, a pick that gives no handle left alone with its message, a file not imported yet, clear, several entities, a reference that did not load shown in red and its text dropped by clear or a pick and brought back by undo, a deleted file, a handle made in code, show in assets, a pick saved with its path and uid), the asset catalog on temporary folders (kinds with their uids, the import cache, hidden names and sidecars left out, package roots after <code>res://</code> and listed once, extensions in any case, name matches before path matches, the limits, the listing made on a worker and repeated when invalidated or old with a fake clock, found, moved and missing references, the picker's filter and notices), and, on a GPU (skipped without one), the object inspector over test classes (every kind of property read and written through <code>Value</code> and undone, read-only and hidden properties, base classes first and categories grouped, cycles and the depth limit, text of one line or several and text too long to edit, enums and flags, lists added to, removed from, moved and typed in, a list of 1000 items drawn in pages and one too big to edit, lists of objects with one destroyed, a getter that throws, a setter that refuses a value and keeps the property and shows why, an object destroyed while inspected, a value that changes by itself every frame, a drag as one step, missing values, class drawers with their fall back) and the engine objects window's model (the session's objects listed, live edits that leave the scene's history and its modified mark alone, its own undo, an object held by another, edits while playing and the history ending with the session), and, on a GPU (skipped without one), a frame of the viewport with no validation errors whose render graph lays out as nodes. <code>Tests/Weft.Host.Tests</code> covers the history and
+its commands (setting a registered property with undo, merges and an object that is gone, a drag over several entities is one step, composites of the same targets merging, the component defaults, the asset kinds and the command that forgets a broken reference's text); <code>Tests/Weft.Ecs.Tests</code> covers reading and forgetting that text.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../devtools/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dev tools">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Dev tools
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../export/" class="md-footer__link md-footer__link--next" aria-label="Next: Exporting a game">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Exporting a game
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Weft Engine 0.2.0-alpha
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "toc.follow", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

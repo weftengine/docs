@@ -1,0 +1,3706 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free, open-source C# 3D engine made for crunching numbers.">
+      
+      
+      
+        <link rel="canonical" href="https://weftengine.github.io/docs/manual/graphics/rendering/">
+      
+      
+        <link rel="prev" href="../graphics/">
+      
+      
+        <link rel="next" href="../tone-mapping/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Rendering - Weft Engine</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rendering" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Weft Engine" class="md-header__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Weft Engine
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Rendering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../about/introduction/" class="md-tabs__link">
+          
+  
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/building/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../core/core/" class="md-tabs__link">
+          
+  
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../api/" class="md-tabs__link">
+          
+  
+  
+  API reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Weft Engine" class="md-nav__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Weft Engine
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Samples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Samples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manual
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manual
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/crashes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logs and crash reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math and the world
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/ecs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiling and SIMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Native code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/bindings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native bindings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/native-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platform
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/input/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graphics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graphics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rendering
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-render-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The render graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-shaders-come-from-shaderlibrary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where shaders come from: ShaderLibrary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Where shaders come from: ShaderLibrary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rebuilding-pipelines-when-a-shader-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebuilding pipelines when a shader changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forward+
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawing-a-world-of-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Drawing a world of entities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-drawing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug drawing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tone-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exposure and tone mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/physics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/vehicles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vehicles and hitches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/steam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tasks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tasks and game time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tweens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tweens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime and Luau tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Content
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/defs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions and schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages and mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/game-manifest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game manifest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset import
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/scenes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/prefabs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prefabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/hot-reload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hot reload
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/devtools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting a game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C#
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    C#
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Luau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enums
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/help-wanted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help wanted
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/continuous-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuous integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/writing-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-render-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The render graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-shaders-come-from-shaderlibrary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where shaders come from: ShaderLibrary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Where shaders come from: ShaderLibrary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rebuilding-pipelines-when-a-shader-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebuilding pipelines when a shader changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forward+
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawing-a-world-of-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Drawing a world of entities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-drawing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug drawing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/weftengine/weft/edit/main/Docs/manual/graphics/rendering.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="rendering">Rendering<a class="headerlink" href="#rendering" title="Permanent link">&para;</a></h1>
+<p>The renderer is built on <a href="../graphics/">Graphics</a>: a render graph, the Forward+ lighting pipeline and the dev overlay.</p>
+<h2 id="the-render-graph">The render graph<a class="headerlink" href="#the-render-graph" title="Permanent link">&para;</a></h2>
+<p>A frame's rendering is a graph of <strong>passes</strong> over <strong>images and buffers</strong>. A pass says how it uses each resource; the graph works out what
+runs, where the memory comes from, and every barrier. You build a new graph every frame (it is cheap); the memory persists in a pool.</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TransientPool</span><span class="p">(</span><span class="n">device</span><span class="p">);</span><span class="w">                       </span><span class="c1">// lives as long as the renderer</span>
+
+<span class="k">void</span><span class="w"> </span><span class="nf">RenderFrame</span><span class="p">(</span><span class="n">Frame</span><span class="w"> </span><span class="n">frame</span><span class="p">,</span><span class="w"> </span><span class="n">Backbuffer</span><span class="w"> </span><span class="n">back</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RenderGraph</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">pool</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ImageHandle</span><span class="w"> </span><span class="n">backbuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="p">.</span><span class="n">ImportBackbuffer</span><span class="p">(</span><span class="n">back</span><span class="p">);</span><span class="w">        </span><span class="c1">// starts undefined, ends ready to present</span>
+<span class="w">    </span><span class="n">ImageHandle</span><span class="w"> </span><span class="n">hdr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="p">.</span><span class="n">CreateImage</span><span class="p">(</span><span class="s">"HDR color"</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ImageDescription</span><span class="p">(</span><span class="n">PixelFormat</span><span class="p">.</span><span class="n">R16G16B16A16Sfloat</span><span class="p">,</span><span class="w"> </span><span class="n">back</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span><span class="w"> </span><span class="n">back</span><span class="p">.</span><span class="n">Height</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ImageUsage</span><span class="p">.</span><span class="n">ColorAttachment</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ImageUsage</span><span class="p">.</span><span class="n">Sampled</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">graph</span><span class="p">.</span><span class="n">AddPass</span><span class="p">(</span><span class="s">"Scene"</span><span class="p">,</span><span class="w"> </span><span class="n">PassType</span><span class="p">.</span><span class="n">Graphics</span><span class="p">,</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">WriteColor</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span><span class="w"> </span><span class="n">clear</span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w">     </span><span class="c1">// the graph begins and ends the rendering</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">ctx</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">DrawScene</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">Recorder</span><span class="p">));</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="n">graph</span><span class="p">.</span><span class="n">AddPass</span><span class="p">(</span><span class="s">"Tonemap"</span><span class="p">,</span><span class="w"> </span><span class="n">PassType</span><span class="p">.</span><span class="n">Graphics</span><span class="p">,</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">ReadSampled</span><span class="p">(</span><span class="n">hdr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">WriteColor</span><span class="p">(</span><span class="n">backbuffer</span><span class="p">,</span><span class="w"> </span><span class="n">clear</span><span class="p">:</span><span class="w"> </span><span class="n">Vector4</span><span class="p">.</span><span class="n">Zero</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">ctx</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Tonemap</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">Recorder</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Image</span><span class="p">(</span><span class="n">hdr</span><span class="p">).</span><span class="n">SampledIndex</span><span class="p">));</span><span class="w">    </span><span class="c1">// the bindless index to read it by</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="n">graph</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Declaring.</strong> <code>AddPass(name, type, setup)</code> runs <code>setup</code> immediately; it declares uses on the <code>PassBuilder</code> and sets the callback that records
+the commands (<code>pass.Execute</code>). Images: <code>ReadSampled</code>, <code>WriteColor</code>, <code>WriteDepth</code>, <code>ReadDepth</code>, <code>WriteStorage</code>, <code>ReadWriteStorage</code>, <code>CopyFrom</code>,
+<code>CopyTo</code>. Buffers: <code>Read</code>, <code>Write</code>, <code>ReadWrite</code>, <code>ReadIndirect</code> (the arguments of an indirect dispatch or draw), <code>CopyFrom</code>, <code>CopyTo</code>. The difference between <em>write</em> and <em>read-write</em> matters: a write
+replaces everything (so whatever wrote it earlier is no longer needed, and a fresh transient can be written first), a read-write needs the
+previous contents. Attachments are begun and ended by the graph for graphics passes, with clear (give a value) or load (give none); depth is
+reverse-Z, so its default clear is 0. A pass the graph cannot see the effect of calls <code>NoCull()</code>.</p>
+<p><strong>Mips and layers.</strong> Every image method takes an optional <code>SubresourceRange</code> (<code>SubresourceRange.Mip(2)</code>, <code>Layer(3)</code>, <code>Of(mip, layer)</code>, <code>Mips(1)</code>, <code>Layers(0, 2)</code>; a count of <code>uint.MaxValue</code> means all that remain). Without one a
+pass uses the whole image; with one, only that part, and the graph keeps a state for each mip level and layer. So one pass can read level <em>n</em> while it writes level <em>n+1</em> of the same image, a mip chain or a
+cube map is built a level or a face at a time, and the barrier in front of a pass moves only the parts it uses (a whole image in one state is still one barrier). A transient may have several mips and layers
+(<code>ImageDescription.MipLevels</code>, <code>ArrayLayers</code>, <code>Cube</code>; not multisampling); an attachment is one mip level, so a range is required for an image with several.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ImageHandle</span><span class="w"> </span><span class="n">chain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="p">.</span><span class="n">CreateImage</span><span class="p">(</span><span class="s">"Bloom"</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ImageDescription</span><span class="p">(</span><span class="n">PixelFormat</span><span class="p">.</span><span class="n">R16G16B16A16Sfloat</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">ImageUsage</span><span class="p">.</span><span class="n">Storage</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ImageUsage</span><span class="p">.</span><span class="n">Sampled</span><span class="p">,</span><span class="w"> </span><span class="n">MipLevels</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">));</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint</span><span class="w"> </span><span class="n">mip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">mip</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"> </span><span class="n">mip</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mip</span><span class="p">;</span>
+<span class="w">    </span><span class="n">graph</span><span class="p">.</span><span class="n">AddPass</span><span class="p">(</span><span class="s">$"Down {level}"</span><span class="p">,</span><span class="w"> </span><span class="n">PassType</span><span class="p">.</span><span class="n">Compute</span><span class="p">,</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">ReadSampled</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span><span class="w"> </span><span class="n">SubresourceRange</span><span class="p">.</span><span class="n">Mip</span><span class="p">(</span><span class="n">level</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">WriteStorage</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span><span class="w"> </span><span class="n">SubresourceRange</span><span class="p">.</span><span class="n">Mip</span><span class="p">(</span><span class="n">level</span><span class="p">));</span>
+<span class="w">        </span><span class="n">pass</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">ctx</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ResolvedImage</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Image</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span><span class="w"> </span><span class="n">SubresourceRange</span><span class="p">.</span><span class="n">Mip</span><span class="p">(</span><span class="n">level</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w">      </span><span class="c1">// a view of that level alone</span>
+<span class="w">            </span><span class="n">ResolvedImage</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Image</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span><span class="w"> </span><span class="n">SubresourceRange</span><span class="p">.</span><span class="n">Mip</span><span class="p">(</span><span class="n">level</span><span class="p">));</span>
+<span class="w">            </span><span class="n">Downsample</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">Recorder</span><span class="p">,</span><span class="w"> </span><span class="n">source</span><span class="p">.</span><span class="n">SampledIndex</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="n">StorageIndex</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="n">Height</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Compiling</strong> (<code>graph.Compile()</code>, done by <code>Execute</code> if you did not) is pure and needs no GPU:</p>
+<ol>
+<li><em>Culling.</em> Walking back from the outputs (the backbuffer, and imports marked <code>output: true</code>), a pass runs only if it writes something that
+   is needed; what it reads becomes needed. A pass that overwrites a resource completely (all its mips and layers) makes earlier writers of it unneeded; one that writes a part of it does not.</li>
+<li><em>Validation.</em> A read of something no earlier pass wrote is a <code>RenderGraphException</code> (for an image, every mip and layer the read covers must have been written), as are one part of a resource used two ways in a pass,
+   a range outside the image, attachments of different sizes (an attachment is the size of its mip level), and attachments in a compute pass.</li>
+<li><em>Memory.</em> Transients whose lifetimes do not overlap and whose descriptions are equal share one image (buffers: equal size and usage).</li>
+<li><em>Barriers.</em> In front of each pass, one batched barrier brings each resource from its last state to the one the pass declared. Reading a
+   resource again in the same state needs none; anything after a write does, even in the same state. Imported resources leave in the state
+   you gave (<code>Present</code> for the backbuffer). <code>graph.Plan</code> describes the result (<code>ToString()</code> prints it for the dev overlay); <code>PassPlan.ImageBarriers</code> lists the image rectangles (mips and layers, before and after) of each pass.</li>
+</ol>
+<p><strong>Executing.</strong> Each live pass runs inside <code>frame.Scope(name)</code>, so it is a RenderDoc label and a GPU timer. <code>PassContext</code> resolves handles:
+<code>ctx.Image(h)</code> gives the <code>VkImage</code>, view, size and, for transients created with <code>Sampled</code> / <code>Storage</code> usage, the <strong>bindless index</strong> to read or
+write it by; <code>ctx.Image(h, range)</code> gives the same for a part of the image: a view of just those mips and layers, the bindless indices for that view, and the size of its first mip (the indices exist when the image has the
+<code>Sampled</code> / <code>Storage</code> usage, and a storage view is a 2D view, which <code>RWTexture2D</code> in <code>common.slang</code> reads: see <a href="../graphics/#the-bindless-heap">the bindless heap</a>). <code>ctx.Buffer(h)</code> gives the <code>GpuBuffer</code> (use <code>.Address</code> in push constants).</p>
+<p><strong>Transients</strong> come from <code>TransientPool</code>, one set per frame in flight, so a steady-state frame allocates nothing; resources unused for eight
+frames are freed. A transient image with <code>Sampled</code> or <code>Storage</code> usage keeps its bindless slot for as long as it lives, and so do the
+views of its parts that passes asked for (made the first time and kept with the image). The views of a part of an <em>imported</em> image are made per frame and destroyed when the same frame slot next starts a graph, after the GPU
+has finished with them. Limits: transients have no multisampling, a storage view of a cube or array is read as <code>RWTexture2D</code> (one face or layer at a time), and everything runs on the one queue.</p>
+<p><code>new RenderGraph()</code> without a device can only be compiled, which is how the planner is unit tested.</p>
+<h2 id="where-shaders-come-from-shaderlibrary">Where shaders come from: <code>ShaderLibrary</code><a class="headerlink" href="#where-shaders-come-from-shaderlibrary" title="Permanent link">&para;</a></h2>
+<p>Renderers get their shaders from a <code>ShaderLibrary</code> (<code>SceneRenderer(device, shaders)</code>; the default is <code>ShaderLibrary.Standard(cacheDirectory)</code>, the <code>Shaders</code> folder next to the
+program mounted as <code>shaders://</code>). <code>Load("shaders://forward.slang")</code> takes the compiled artifact when the folder was imported (<code>imported/forward.slang.wshd</code>, made by
+<code>Weft.Runtime --import</code>, which <code>./build.sh aot</code> runs on the published programs) and never touches the Slang compiler. A module without an artifact is compiled (development), if the
+compiler library is there; if it is not, the error says to import the folder. A mod's shaders are loaded the same way from <code>mod://id/…</code> and its own <code>imported/</code>.</p>
+<h3 id="rebuilding-pipelines-when-a-shader-changes">Rebuilding pipelines when a shader changes<a class="headerlink" href="#rebuilding-pipelines-when-a-shader-changes" title="Permanent link">&para;</a></h3>
+<p><code>ShaderLibrary.NotifyChanged(paths)</code> takes the virtual paths of changed files (<code>HotReloader.ShadersChanged</code> reports them, or a <code>VfsWatcher</code> over the shaders' folders) and raises <code>ModulesChanged</code> with the modules it
+had loaded that are one of those files or were made from one (the files a compile read are in <code>CompiledShader.Dependencies</code>, the artifact's in the index), so an edit to <code>common.slang</code> reaches every shader that imports it.
+<code>SceneRenderer</code> and <code>ImGuiRenderer</code> keep their pipelines in <code>ReloadablePipelines&lt;T&gt;</code> groups, one per shader module (the two cluster shaders are one group), and only the groups that use a changed module are rebuilt:</p>
+<ol>
+<li><strong>Off the render thread.</strong> The change starts a build on another thread: the module is compiled through the library and the pipelines are made (pipeline creation needs no external synchronization). The frame is not
+   held up; the renderer keeps drawing with the pipelines it has. Changes that arrive during a build start one more right after it.</li>
+<li><strong>Swapped at a frame boundary.</strong> <code>Render</code> (or <code>AddPasses</code>) calls <code>Apply(frame)</code> first: if a build has finished, its pipelines become the current ones there, so a frame never mixes old and new.</li>
+<li><strong>Destroyed when the GPU is done.</strong> The old pipelines go through <code>frame.Defer</code>, which frees them when that frame's slot comes round again, after the frames that used them have completed. The tests record several frames
+   without waiting, rebuild in the middle, and the validation layer must stay silent (it does not when the old pipelines are destroyed at once).</li>
+<li><strong>A shader that does not compile changes nothing.</strong> The old pipelines stay, the error (file, line, message) is logged and held in <code>ShaderLibrary.Errors</code> for the dev overlay, and the next edit that compiles clears it.
+   Pipelines that are made lazily per target format are made again for the formats already seen, in the same build.</li>
+</ol>
+<p>The runtime's <code>--watch</code> mounts the shaders' source folders when it runs from the repository, and the viewer's <code>--watch</code> does the same, so saving a <code>.slang</code> file changes the picture of the running program.</p>
+<h2 id="forward">Forward+<a class="headerlink" href="#forward" title="Permanent link">&para;</a></h2>
+<p><code>SceneRenderer</code> draws a <code>RenderScene</code> (a <code>ModelData</code> on the GPU) with a <code>Camera</code>, using a render graph it builds every frame.</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">renderer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SceneRenderer</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">cacheDirectory</span><span class="p">:</span><span class="w"> </span><span class="n">shaderCache</span><span class="p">);</span><span class="w">     </span><span class="c1">// loads the shaders in &lt;program&gt;/Shaders (compiled ahead of time, else compiled now)</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">RenderScene</span><span class="w"> </span><span class="n">scene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">renderer</span><span class="p">.</span><span class="n">CreateScene</span><span class="p">(</span><span class="n">GltfLoader</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">"Sponza.gltf"</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">));</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Camera</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">LookAt</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Zero</span><span class="p">);</span>
+
+<span class="n">Frame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loop</span><span class="p">.</span><span class="n">BeginFrame</span><span class="p">()</span><span class="o">!</span><span class="p">;</span>
+<span class="n">renderer</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="w"> </span><span class="n">scene</span><span class="p">,</span><span class="w"> </span><span class="n">camera</span><span class="p">,</span><span class="w"> </span><span class="n">RenderTarget</span><span class="p">.</span><span class="n">Window</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">Backbuffer</span><span class="o">!</span><span class="p">.</span><span class="n">Value</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RenderSettings</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Tonemapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tonemapper</span><span class="p">.</span><span class="n">Gt7</span><span class="p">,</span><span class="w"> </span><span class="n">ExposureMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ExposureMode</span><span class="p">.</span><span class="n">Auto</span><span class="w"> </span><span class="p">});</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">EndFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>The frame.</strong> <em>Depth prepass</em> (opaque and alpha-masked geometry into a reverse-Z D32 image) → <em>Build clusters</em> (only when the projection changed)
+→ <em>Cull lights</em> → <em>Forward</em> (PBR into an RGBA16F image, opaque and masked, then blended surfaces far to near, depth-tested against the
+prepass; the camera's exposure is applied here) → <em>Luminance histogram</em> and <em>Resolve exposure</em> (auto-exposure only) → <em>Tonemap</em> (the GT7 or the Khronos PBR Neutral tone mapper, and the sRGB transfer function,
+into the target). The units of the lights, the exposure and the tone mappers are in <a href="../tone-mapping/">Exposure and tone mapping</a>. <code>renderer.LastPlan</code> is
+the graph and <code>LastStats</code> the draw, light and cluster counts.</p>
+<p><strong>Clusters.</strong> The view is cut into 16 x 9 cells over the screen and 24 slices in depth, spaced exponentially between the camera's <code>Near</code> and
+<code>ClusterFar</code> (a slice is thin close to the camera and long far away, so every cell holds a similar amount of space as seen from the eye).
+A compute shader builds each cluster's view-space box; another tests every light's sphere against every box and keeps at most 64 lights
+per cluster in a fixed-size list, so there are no atomics and nothing to clear. The forward shader finds the pixel's cluster from its screen
+position and depth and loops over only those lights. <code>ClusterGrid</code> has the same arithmetic on the CPU. A cluster's bounds are per
+frame-in-flight and are rebuilt only when the projection changes. Spot lights are culled by their bounding sphere (the cone is applied when shading).</p>
+<p><strong>Lighting.</strong> glTF metallic-roughness materials with Cook-Torrance GGX: Smith visibility, Schlick Fresnel, Lambert diffuse, base color,
+metallic-roughness, normal, occlusion and emissive textures with <code>KHR_texture_transform</code>, alpha mask and blend, double-sided, and unlit.
+Lights are point and spot (<code>RenderScene.Lights</code>, editable every frame; light is photometric, see <a href="../tone-mapping/">Exposure and tone mapping</a>; intensity is candela, falling off as the inverse square and reaching
+zero exactly at the light's radius, which is its glTF <code>range</code> or where it fades below a faint threshold) plus one directional sun
+(<code>SunDirection</code>, <code>SunColor</code>, in lux) and a two-colour ambient. No shadows and no image-based lighting yet, so a smooth metal reflects only the lights.
+<code>RenderSettings.Debug = DebugView.ClusterLights</code> tints each pixel by its cluster's light count (dark: none; blue to red: one to eight or more).</p>
+<p><strong>Conventions.</strong> Right-handed, +Y up, a camera looking down -Z at yaw 0. Reverse-Z with an infinite far plane: depth 1 at the near plane, 0
+at infinity, compare greater-or-equal. The projection flips y (Vulkan's normalized y points down), which keeps the image and so the winding:
+front faces are counter-clockwise, as in glTF. Matrices are row-major and used with row vectors, as in <code>System.Numerics</code>.</p>
+<p><strong>Culling.</strong> Before the passes are recorded, every draw's bounds (the mesh's box carried to the camera's axes, written each frame into six float arrays together with the instance) are tested against the camera's view volume
+(<code>Frustum</code>: left, right, bottom, top and the near plane; the far plane is at infinity) with SIMD, and only the draws inside go into the depth and forward passes. It is exact for the planes, so
+it never drops a draw that touches the view and may keep one near a corner that is not visible. <code>LastStats.Culled</code> counts what was left out, <code>RenderSettings.CullDraws = false</code> turns it off to compare
+(<code>CullingTests</code> requires the same picture either way, and that a camera turned away culls everything). The measurements and the instruction set shipped games are built for are in <a href="../../core/profiling/">Profiling and SIMD</a>.
+The per-pass lists of draws are reused from frame to frame instead of allocated.</p>
+<p><strong>A double-precision world, rendered camera-relative.</strong> <code>Camera.Position</code> and <code>RenderScene.Origin</code> are <code>Double3</code> (see <a href="../../core/math/">Math</a>): <code>renderer.CreateScene(model, at: new Double3(5_000_000, 0, 2_000_000))</code>
+puts a model 5 000 km out, and the model's own coordinates (instances, lights, bounds) stay relative to that origin. Nothing on the GPU is in world coordinates. Each frame:</p>
+<ul>
+<li><code>Camera.View</code> has the camera at the origin (rotation only; <code>camera.WorldToView(point)</code> takes a world point there, subtracting in double first);</li>
+<li>the renderer writes the frame slot's instance records with their translation <code>(placement position - camera.Position) + offset</code>, subtracted in <code>double</code> and then narrowed, so a scene
+  10 000 km away is as precise as one at the origin (the instance buffer is per frame in flight, like the cluster buffers, and grows when a frame needs more; the matrices' linear part is stored once at load);</li>
+<li>lights and the blend sort are moved the same way, and <code>GpuFrameData.CameraPosition</code> is zero, which the shaders (that subtract it from a surface position) need no change for.</li>
+</ul>
+<p><code>ForwardPlusTests.TheSceneLooksTheSameFarFromTheWorldsOrigin</code> renders the golden scene at the origin, at 100 km and at 10 000 km and requires the same picture.</p>
+<p><strong>Data for the shaders.</strong> One <code>GpuFrameData</code> per frame (in the frame's upload arena) holds the matrices, the screen, the sun, and the
+addresses of the instance (rewritten every frame), light and cluster buffers; a draw pushes the frame's address, the instance number and the addresses of the vertices and materials of its model (a model has buffers of its own). <code>Shaders/common.slang</code>
+is the Slang side of <code>GpuStructs.cs</code>; the structs use only 16-byte aligned members (and the vertex is twelve explicit floats) so that every
+layout rule agrees, and tests pin the sizes and offsets.</p>
+<p><strong>Tests.</strong> The planner and the math run without a GPU. On a GPU: a GPU-vs-CPU comparison of the light lists of all 3456 clusters (every
+light that is inside by a margin must be listed, every listed light inside by a margin), the sky tone-mapped exactly like the CPU twin,
+lights brighten what they should and nothing beyond their radius, spot cones, the sun, alpha mask and blend, double-sided surfaces, the
+heatmap, the 64-light cap, 600 lights, and a golden image rendered by the software rasterizer (<code>Golden/forward_plus.png</code>;
+<code>WEFT_UPDATE_GOLDEN=1</code> rewrites it). The discrete GPU matches it to a mean of 0.02 out of 255.</p>
+<h2 id="drawing-a-world-of-entities">Drawing a world of entities<a class="headerlink" href="#drawing-a-world-of-entities" title="Permanent link">&para;</a></h2>
+<p>A <code>RenderScene</code> is one model with its own lights. A game draws <em>entities</em>: any number of models, each placed by an entity, lit by light entities, seen through a camera entity. The pieces:</p>
+<ul>
+<li><strong><code>GpuModel</code></strong> is a <code>ModelData</code> on the GPU: its vertex, index and material buffers, its textures in the bindless heap, and a record per mesh instance (<code>ModelNode</code>: its matrices without the translation, its box,
+  its first index). It is placed any number of times at no cost but one instance record per mesh. <code>renderer.CreateModel(data)</code> makes one; a <code>RenderScene</code> is a <code>GpuModel</code> plus an origin, a sun and lights.</li>
+<li><strong><code>ModelLibrary</code></strong> gives models ids: <code>Load(path)</code> returns the same id for the same path, however many entities show it, and reads the model through the virtual file system (imported <code>.wmdl</code> when there is one).
+  Ids exist before there is a GPU, because a game's scripts run before the renderer is made: the model is read and uploaded the first time a frame needs it (<code>Attach(renderer, caps)</code> says where), a file that does not
+  load is logged once and draws nothing, and <code>Reload(path)</code> swaps a changed file in under the same id (the runtime does it for the <code>--watch</code> run, after the importer). <code>Detach()</code> frees the GPU side before the device goes.
+  Scripts see the library as the global <code>models</code>: <code>models:load("res://packages/car/car.glb")</code> (or <code>models:load("uid://…")</code>, see <a href="../../content/assets/#from-luau">asset identity</a>). It reads any mounted path, as <code>audio</code> does: the engine's classes do not know which mod called them.</li>
+<li><strong>Components</strong> (<code>Components.cs</code>, all visible to scripts and, later, the editor): <code>ModelRenderer { Model }</code> draws the model at the entity's <code>WorldTransform</code> (position, rotation and scale place every mesh);
+  <code>Light { Color, Intensity, Range, InnerCone, OuterCone, Kind }</code> is a point, spot or (kind 0) directional light shining along the entity's -Z, and the first directional one is the sun;
+  <code>CameraComponent { FovDegrees, Near, ClusterFar }</code> is a lens, and the entity that also has the <code>MainCamera</code> tag is the eye. The lights a model came with move with its entity.</li>
+<li><strong><code>RenderWorld(world, models)</code></strong> reads those entities when a frame is rendered (queries over <code>WorldTransform</code>, so what the systems moved this frame is what is drawn; nothing is copied or kept in sync) and
+  <code>SceneRenderer.Render(frame, renderWorld, camera, target)</code> draws it. <code>renderWorld.TryGetMainCamera(camera)</code> fills a <code>Camera</code> from the main camera entity (roll is ignored: yaw, then pitch).
+  <code>DefaultSunDirection</code>, <code>DefaultSunColor</code> and the ambient colours are what a world without a directional light uses.</li>
+</ul>
+<p>Both kinds of scene go through one renderer core. It gathers <em>placements</em> (a model, a double-precision position, a rotation, a scale) and lights, writes one <code>GpuInstance</code> per mesh instance with the placement's rotation and scale
+composed in (normals take <code>S^-1 * R</code>, so non-uniform scale lights correctly) and its translation relative to the camera, builds the boxes from the same numbers, culls, and draws by pass. A draw binds its model's index buffer when
+the model changes and pushes the model's vertex and material addresses, so many models share one frame without sharing buffers.</p>
+<p><strong>In the runtime.</strong> <code>--game</code> and <code>--run</code> draw the world through its main camera when it has one, with the ImGui frame over it; the scene renderer is not even made (and its shaders not compiled) until then, so a script that
+only has panels keeps drawing them over the plain background, exactly as before. Without a GPU (<code>--headless</code> without <code>--screenshot</code>) ids and entities exist and nothing is drawn.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Transform</span><span class="p">,</span><span class="w"> </span><span class="nv">ModelRenderer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">world</span><span class="p">:</span><span class="nf">component</span><span class="p">(</span><span class="s2">"Transform"</span><span class="p">),</span><span class="w"> </span><span class="nv">world</span><span class="p">:</span><span class="nf">component</span><span class="p">(</span><span class="s2">"ModelRenderer"</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">CameraComponent</span><span class="p">,</span><span class="w"> </span><span class="nv">MainCamera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">world</span><span class="p">:</span><span class="nf">component</span><span class="p">(</span><span class="s2">"CameraComponent"</span><span class="p">),</span><span class="w"> </span><span class="nv">world</span><span class="p">:</span><span class="nf">component</span><span class="p">(</span><span class="s2">"MainCamera"</span><span class="p">)</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">models</span><span class="p">:</span><span class="nf">load</span><span class="p">(</span><span class="s2">"res://packages/garage/car.glb"</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">world</span><span class="p">:</span><span class="nf">create_entity</span><span class="p">(</span><span class="s2">"car"</span><span class="p">)</span>
+<span class="nv">world</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="nv">e</span><span class="p">,</span><span class="w"> </span><span class="nv">Transform</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nv">Rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Quat</span><span class="p">.</span><span class="py">identity</span><span class="p">,</span><span class="w"> </span><span class="nv">Scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<span class="nv">world</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="nv">e</span><span class="p">,</span><span class="w"> </span><span class="nv">ModelRenderer</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">car</span><span class="w"> </span><span class="p">})</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">eye</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">world</span><span class="p">:</span><span class="nf">create_entity</span><span class="p">(</span><span class="s2">"eye"</span><span class="p">)</span>
+<span class="nv">world</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="nv">eye</span><span class="p">,</span><span class="w"> </span><span class="nv">Transform</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">),</span><span class="w"> </span><span class="nv">Rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Quat</span><span class="p">.</span><span class="py">identity</span><span class="p">,</span><span class="w"> </span><span class="nv">Scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<span class="nv">world</span><span class="p">:</span><span class="nf">set</span><span class="p">(</span><span class="nv">eye</span><span class="p">,</span><span class="w"> </span><span class="nv">CameraComponent</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">FovDegrees</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="nv">Near</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="nv">ClusterFar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">})</span>
+<span class="nv">world</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="nv">eye</span><span class="p">,</span><span class="w"> </span><span class="nv">MainCamera</span><span class="p">)</span>
+</code></pre></div>
+<p><code>RenderWorldTests</code> check, on a GPU, that an entity draws what a scene of the same model draws, that five entities share one model (draw counts), that scale and rotation place the model, that lights and the sun
+light the world, that an unknown or removed id draws nothing, that a model 3 000 km out looks the same as at the origin, that the main camera entity drives the camera, and that models load once per path and reload in place;
+<code>WorldRenderingTests</code> run a game folder with a model, a light and a camera through <code>--headless --screenshot</code>.</p>
+<h2 id="debug-drawing">Debug drawing<a class="headerlink" href="#debug-drawing" title="Permanent link">&para;</a></h2>
+<p><code>DebugDraw</code> (in <code>Weft.Core</code>, so anything can add to it without knowing about rendering) is immediate mode: lines and triangles in double-precision world positions that live for one frame.
+<code>Line</code>, <code>Triangle</code>, <code>Box</code> (turned, or from two corners), <code>Circle</code>, <code>Sphere</code>, <code>Arrow</code> and <code>Axes</code> add them; colors are bytes <code>r, g, b, a</code> as a <code>uint</code> (<code>DebugColor.Rgba</code>, <code>DebugColor.Red</code>, ...). It keeps at most <code>Capacity</code>
+(a million) lines and as many triangles and counts the rest in <code>Dropped</code>, so a loop that draws too much costs detail, not memory. Physics adds to it with <code>PhysicsWorld.DrawDebug</code> (<a href="../../physics/physics/#debug-drawing">physics</a>);
+scripts use the <code>debug_draw</code> library (<code>debug_draw.line(from, to, color)</code>, <code>box</code>, <code>sphere</code>, <code>arrow</code>, <code>axes</code>; a color is a vector of red, green and blue from 0 to 1, white without one), called every frame for as long as the picture should stay.</p>
+<p><code>RenderSettings.DebugDraw</code> is the instance to draw; the renderer reads it and does not clear it (whoever fills it clears it: the runtime does after every frame). When it is not empty a pass, <em>Debug draw</em>,
+is added between the forward pass and tone mapping: it loads the HDR image, depth-tests against the scene's depth without writing it, and so draws over the lit picture before the tone mapper, as display-referred colors (the exposure does not change them; <code>debug_draw.slang</code> takes the colors as sRGB). The
+tone mapper then treats them like any other color: with <code>Tonemapper.PbrNeutral</code> they come out as they went in, with GT7 the brightest and most saturated ones are pulled a little towards white.</p>
+<ul>
+<li><strong>Lines</strong> are quads of two triangles, widened to <code>RenderSettings.DebugLineWidth</code> pixels (1.5 by default) in the vertex shader: hardware line width is not portable (Metal has none). A quad cannot be left to the clipper, so the
+  shader cuts a line at the near plane itself, and a line wholly behind the camera is not drawn. The part of a line that is behind something is drawn again without the depth test, at <code>DebugHiddenAlpha</code> (0.25; 0 hides it).</li>
+<li><strong>Triangles</strong> are drawn solid with flat shading from a light at the eye, so a face looking at the camera is bright and one seen edge-on is dim.</li>
+<li><strong>Camera-relative</strong>, like the scene: <code>DebugDrawRenderer</code> writes the positions as offsets from the camera, subtracting in double first, so a line 3 000 km out lands on the same pixels as one at the origin
+  (<code>DebugDrawRenderingTests</code> render both). The buffers are per frame in flight and grow when a frame needs more.</li>
+</ul>
+<p><code>DebugDrawRenderingTests</code> read pixels back: a line is a stripe of its color and a wider one covers more, hidden parts follow <code>DebugHiddenAlpha</code>, a line behind the camera changes nothing and one crossing the near plane is cut there,
+triangles are shaded, and an empty <code>DebugDraw</code> adds no pass.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../graphics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Graphics">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Graphics
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tone-mapping/" class="md-footer__link md-footer__link--next" aria-label="Next: Exposure and tone mapping">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Exposure and tone mapping
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Weft Engine 0.2.0-alpha
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "toc.follow", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

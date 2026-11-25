@@ -1,0 +1,3966 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free, open-source C# 3D engine made for crunching numbers.">
+      
+      
+      
+        <link rel="canonical" href="https://weftengine.github.io/docs/manual/tools/export/">
+      
+      
+        <link rel="prev" href="../editor/">
+      
+      
+        <link rel="next" href="../../../api/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Exporting a game - Weft Engine</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exporting-a-game" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Weft Engine" class="md-header__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Weft Engine
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Exporting a game
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../about/introduction/" class="md-tabs__link">
+          
+  
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/building/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../core/core/" class="md-tabs__link">
+          
+  
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../api/" class="md-tabs__link">
+          
+  
+  
+  API reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Weft Engine" class="md-nav__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Weft Engine
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Samples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Samples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manual
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manual
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/crashes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logs and crash reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math and the world
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/ecs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiling and SIMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Native code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/bindings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native bindings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/native-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platform
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/input/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graphics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/graphics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/rendering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/tone-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exposure and tone mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/physics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/vehicles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vehicles and hitches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/steam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tasks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tasks and game time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tweens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tweens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime and Luau tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Content
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/defs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions and schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages and mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/game-manifest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game manifest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset import
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/scenes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/prefabs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prefabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../content/hot-reload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hot reload
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devtools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting a game
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting a game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-runtime-for-a-platform-comes-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the runtime for a platform comes from
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-pack-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The pack key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arguments-a-shipped-game-ignores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arguments a shipped game ignores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        macOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="macOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-code-signature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The code signature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gatekeeper-signing-and-notarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gatekeeper, signing and notarization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-an-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing an export
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C#
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    C#
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Luau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enums
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/help-wanted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help wanted
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/continuous-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuous integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/writing-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-runtime-for-a-platform-comes-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the runtime for a platform comes from
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-pack-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The pack key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arguments-a-shipped-game-ignores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arguments a shipped game ignores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        macOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="macOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-code-signature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The code signature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gatekeeper-signing-and-notarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gatekeeper, signing and notarization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-an-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing an export
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/weftengine/weft/edit/main/Docs/manual/tools/export.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="exporting-a-game">Exporting a game<a class="headerlink" href="#exporting-a-game" title="Permanent link">&para;</a></h1>
+<p>An export turns a game folder into a folder that runs on its own: the runtime built for a platform, renamed to the game's executable name, its native libraries and compiled shaders, the game's files in
+<code>data/game.wpak</code>, and the game's <code>game.wgam</code>. It is made from the command line (<code>Weft.Runtime --export</code>, wrapped by <code>./build.sh export</code>) or from code (<code>GameExporter</code> in <code>Source/Weft.Export</code>). The editor
+has no Export dialog yet.</p>
+<div class="highlight"><pre><span></span><code>./build.sh<span class="w"> </span>aot<span class="w">                                                          </span><span class="c1"># publish the runtime for this machine: Bin/publish/runtime</span>
+./build.sh<span class="w"> </span><span class="nb">export</span><span class="w"> </span>Tests/Fixtures/ShippedGame<span class="w"> </span>Bin/export/linux<span class="w"> </span>--target<span class="w"> </span>linux-x64<span class="w"> </span>--cooked
+Bin/export/linux/FixtureGame<span class="w">                                           </span><span class="c1"># runs from anywhere, with no environment variable</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Weft.Runtime --export &lt;game folder&gt; &lt;out folder&gt; --target &lt;rid&gt; [--cooked] [--runtime &lt;dir&gt;] [--console]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;game folder&gt;</code></td>
+<td>the game: a folder with a <a href="../../content/game-manifest/"><code>game.wgam</code></a>. It is never written to.</td>
+</tr>
+<tr>
+<td><code>&lt;out folder&gt;</code></td>
+<td>where the export goes: it does not exist, is empty, or is an earlier export (it holds a file <code>.weft-export</code>), which is then replaced. Anything else is an error, so that nothing of yours is deleted. It cannot be inside the game folder, nor contain it.</td>
+</tr>
+<tr>
+<td><code>--target &lt;rid&gt;</code></td>
+<td>the platform: <code>linux-x64</code>, <code>win-x64</code>, <code>osx-arm64</code> or <code>osx-x64</code> (the platforms the engine has complete native libraries for). Anything else is an error that lists these.</td>
+</tr>
+<tr>
+<td><code>--cooked</code></td>
+<td>pack the <a href="../../content/import/">imported</a> artifacts and the <a href="../../content/packs/#making-one">cooked</a> documents instead of the sources they replace (the game is imported first, in a copy).</td>
+</tr>
+<tr>
+<td><code>--runtime &lt;dir&gt;</code></td>
+<td>the folder the runtime for the target was published to. Default: the folder of the running program when it is the NativeAOT runtime, else the <code>Bin/publish/runtime</code> above the program or the current folder.</td>
+</tr>
+<tr>
+<td><code>--console</code></td>
+<td>Windows only: keep the console subsystem, so that the game opens a console window (to read its log). Without it the program is a windowed one, see <a href="#windows">Windows</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Exit codes: 0 fine, 1 bad arguments (an unknown target, a bad <code>WEFT_PACK_KEY</code>), 2 the export failed (the message says why). Warnings are printed to stderr, for example that no key is set.</p>
+<h2 id="where-the-runtime-for-a-platform-comes-from">Where the runtime for a platform comes from<a class="headerlink" href="#where-the-runtime-for-a-platform-comes-from" title="Permanent link">&para;</a></h2>
+<p>The runtime is a NativeAOT program, so it can only be built on its own operating system (<code>./build.sh aot</code>), and the folder that command publishes already holds every native library of that platform. An
+export copies from such a folder. It reads the header of the program in it (PE, ELF or Mach-O, with its processor) and refuses a folder of another platform with what to do:</p>
+<div class="highlight"><pre><span></span><code>/path/runtime holds a linux-x64 runtime; --target win-x64 needs one published for win-x64 (./build.sh aot on that operating system, or the CI artifact weft-win-x64), passed with --runtime &lt;dir&gt;.
+</code></pre></div>
+<p>So exporting for the machine you are on needs nothing but <code>./build.sh aot</code>; exporting for another platform needs a runtime published there (or downloaded from CI) and <code>--runtime</code>. A macOS runtime has to
+be a thin binary for one processor, not a universal one. Left out of the copy: debug files (<code>*.pdb</code>, <code>*.dbg</code>, <code>*.dSYM</code>), import libraries (<code>*.lib</code>, <code>*.exp</code>), the Slang compiler's libraries and the shader
+sources and their import settings (<code>Shaders/*.slang</code> and <code>Shaders/*.slang.wimp</code>; the compiled <code>Shaders/imported</code> stays: a shipped game never loads the compiler), <code>steam_appid.txt</code>, and the runtime folder's own <code>game.wgam</code> and <code>data/</code>.</p>
+<p>The continuous integration publishes the runtime of each platform it builds (<code>weft-linux-x64</code>, <code>weft-win-x64</code>, <code>weft-osx-arm64</code>, <code>weft-osx-x64</code>) as a workflow artifact for 14 days: download one,
+unzip it (an archive does not keep the executable bit; the export sets it on the program it writes), and pass the folder with <code>--runtime</code>. This is how to export for Windows or macOS without a computer of that kind.</p>
+<h2 id="the-layout">The layout<a class="headerlink" href="#the-layout" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Linux and Windows</th>
+<th>macOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>executable and native libraries, <code>Shaders/</code></td>
+<td><code>&lt;out&gt;/</code></td>
+<td><code>&lt;out&gt;/&lt;Name&gt;.app/Contents/MacOS/</code></td>
+</tr>
+<tr>
+<td><code>game.wgam</code>, <code>data/game.wpak</code></td>
+<td><code>&lt;out&gt;/</code></td>
+<td><code>&lt;out&gt;/&lt;Name&gt;.app/Contents/Resources/</code></td>
+</tr>
+<tr>
+<td>executable name</td>
+<td><code>&lt;executable&gt;</code> (<code>.exe</code> on Windows), from <code>game.wgam</code></td>
+<td>the same; the bundle is <code>&lt;name&gt;.app</code></td>
+</tr>
+</tbody>
+</table>
+<p>The folder that holds <code>game.wgam</code> and <code>data/</code> is the game's <strong>root</strong>: the runtime finds it next to its executable, or in <code>../Resources</code> from a bundle's <code>MacOS</code> folder (see
+<a href="../../content/game-manifest/#how-the-runtime-finds-it">how the runtime finds it</a>), and mounts only <code>data/*.wpak</code> as <code>res://</code>. A game that is exported does not read the files of the folder it
+came from, only its pack.</p>
+<p><code>data/game.wpak</code> holds the game folder as <a href="../../content/packs/#from-code-gamepacker"><code>GamePacker</code></a> packs it (a very big game continues in <code>game_001.wpak</code>…), less what a shipped game does not have:
+<code>data/</code> (the packs of the development folder), <code>dev_mods/</code> (a shipped game has no development mods), <code>game.wgam</code> (it is written beside the pack), the icon file, <code>steam_appid.txt</code> (the Steam app id
+comes from <code>game.wgam</code>), and names that start with a dot. A cooked export imports a <strong>copy</strong> of the game folder (the existing <code>imported/</code> is reused, so only what changed is imported again), so the game
+folder gets no <code>imported/</code> and no changed file.</p>
+<p>The exported <code>game.wgam</code> is the game's, with the icon changed: the icon is in the executable or the bundle on Windows and macOS, and a file <code>icon.png</code> beside <code>game.wgam</code> on Linux, which the platform steps below write.</p>
+<h2 id="the-pack-key">The pack key<a class="headerlink" href="#the-pack-key" title="Permanent link">&para;</a></h2>
+<p>If <code>WEFT_PACK_KEY</code> is set (64 hexadecimal digits, in the environment or in the <code>.env</code> file that the <code>./build.sh</code> wrapper loads), the export encrypts the pack with it, and writes the key into the
+executable, so that the game opens its own pack without the variable. Without a key the packs are plain, and the export warns about it. See <a href="../../content/packs/#encryption-and-the-key">Encryption and the key</a>.</p>
+<p>The key goes into a reserved <strong>slot</strong> of the runtime (<code>PackKeySlot</code>): the executable holds 68 bytes in its read-only data, which start with a 16-byte magic that appears nowhere else, and the export
+patches the copy: it finds every copy of the whole slot (at least one, else it is not this engine's runtime and the export fails; a magic that is not followed by the rest of a slot is other data and is left
+alone, and a file that ends inside a slot is refused), and writes the same key, masked with one random salt, into each. A compiler may emit the slot's data more than once (the NativeAOT executable for
+macOS on Apple silicon has two copies), and the game reads whichever copy its code refers to, so all of them are patched; the export log says how many places it wrote when there is more than one. The
+running game reads the key back before it looks at the environment. No recompiling is needed, which is why an export can be made for any platform.</p>
+<div class="admonition warning">
+<p class="admonition-title">Obfuscation, not protection</p>
+<p>The key is in the file, one XOR away from anyone who reads this page and the source, and in the memory of the running game. The slot keeps it out of <code>strings</code>, out of a quick look in a hex
+editor, and away from the pack. It does not stop a determined person from reading your game's files. Do not put a key in an export that you cannot afford to have extracted, and use a key only for
+this game.</p>
+</div>
+<h2 id="arguments-a-shipped-game-ignores">Arguments a shipped game ignores<a class="headerlink" href="#arguments-a-shipped-game-ignores" title="Permanent link">&para;</a></h2>
+<p>A game started with no command takes the runtime's <a href="../../scripting/runtime/#running-a-shipped-game">options</a> (<code>--user</code>, <code>--headless</code>, <code>--frames</code>, <code>--size</code>...) and logs and ignores any other argument,
+because Steam appends <code>+connect_lobby &lt;id&gt;</code> when a player accepts an invitation. Every runtime command stays in the shipped program (there are no feature toggles).</p>
+<h2 id="platform-steps">Platform steps<a class="headerlink" href="#platform-steps" title="Permanent link">&para;</a></h2>
+<p>The last step of an export depends on the operating system (<code>IPlatformPackaging</code>): the executable's icon and version information on Windows, the <code>.app</code> bundle on macOS, the icon file and desktop
+entry on Linux. The Windows, Linux and macOS steps are described below. Code signing with a certificate (Authenticode, Developer ID) and notarization are outside the export: sign the result.</p>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<p>The export copies the runtime built for <code>win-x64</code>, renames it <code>&lt;executable&gt;.exe</code>, and then changes the file in place with the export's own PE writer (<code>Source/Weft.Export/Windows</code>). It reads and
+writes the executable's headers and resource section itself, with no Windows API, <code>rc.exe</code> or <code>rcedit</code>, so a Windows export can be made on Linux or macOS from a runtime published on Windows
+(<code>--runtime</code>). Three things change:</p>
+<ul>
+<li><strong>The icon.</strong> The game's <code>Icon</code> (a square PNG, 256x256 or more advised) is written as an icon group with seven images: 16, 24, 32, 48, 64 and 128 pixels as 32-bit images with an alpha channel
+  (what every Windows version reads), and 256 pixels as a PNG (Windows Vista and later), each scaled from your image with a box filter. Explorer picks the size it needs; the window and the task bar take
+  the first group, which is number 1. A smaller image is scaled up for the sizes above it and the export warns. A game without an icon keeps the runtime's.</li>
+<li><strong>The version information</strong> (the Details tab of the file's properties, the name task managers show) is made from <code>game.wgam</code>: <code>CompanyName</code> is the organization, <code>FileDescription</code> the description (the
+  name when there is none), <code>FileVersion</code> and <code>ProductVersion</code> the version as <code>major.minor.patch.0</code>, <code>InternalName</code> the executable's name, <code>OriginalFilename</code> the executable's file name,
+  <code>LegalCopyright</code> the copyright, <code>ProductName</code> the name, <code>EngineVersion</code> the version of the engine the executable is made of (<code>0.2.0-alpha</code>, see <a href="../../core/versions/">Versions</a>); language English (United States), code page Unicode. Each part of the version must be at most 65535. Any version or icon resource the runtime
+  had is replaced; its other resources (the application manifest above all) are kept as they are.</li>
+<li><strong>The subsystem.</strong> The runtime is a console program; a game started by a double-click would open a console window beside its own. The export makes it a windowed program (<code>IMAGE_SUBSYSTEM_WINDOWS_GUI</code>).
+  A windowed program has no standard output: run the game from a terminal and nothing is printed. <code>--console</code> keeps the console subsystem for when you want to read the log.</li>
+</ul>
+<p>How the file is changed: the resource section is rewritten where it is when it is the last section of the file and nothing else points into it; otherwise (linkers put the relocations last) a new <code>.rsrc</code> section is added after the
+last one, and the old one is renamed <code>.rsrc0</code> and left in the file as unused data. No existing section moves, so the code, the pack key and everything that points into the program stay where they
+are, and the key is written before this step so that the checksum in the header, which is written last, covers the final file. Adding a section header needs 40 free bytes between the section table and
+the first section's data; a linker leaves hundreds, but an executable made some other way may not, and the export then stops with an error saying so. It also stops if the declared image size is larger than where the last section ends. The export refuses an executable that has other data after
+its sections (an installer, an attached archive), and one that is damaged: the message says what is wrong.</p>
+<ul>
+<li><strong>Signing.</strong> Signing the game (Authenticode, <code>signtool sign</code>) is outside the export: sign <code>&lt;executable&gt;.exe</code>, and
+  the DLLs if you like, after the export. An unsigned program from the internet is held by Windows SmartScreen until enough people have run it, or until it is signed with a certificate that has a reputation;
+  a game on Steam is not affected by that.</li>
+<li><strong>Version suffixes.</strong> The version in <code>game.wgam</code> is <code>major.minor.patch</code> and nothing else: a suffix such as <code>-beta</code> or <code>+build</code> is an error when the manifest is read. The file version, the product version and the
+  strings <code>FileVersion</code> and <code>ProductVersion</code> all say <code>1.2.3.0</code>. Put a label such as "beta" in the <code>description</code> if players should see it.</li>
+<li><strong>Signed runtimes.</strong> A signed runtime loses its signature (the changes invalidate it) and the export warns. A runtime with <code>IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY</code>, which Windows loads only when signed,
+  is refused instead, because the unsigned result could not start.</li>
+</ul>
+<p>What the tests prove, and what they do not. The unit tests write executables with the PE writer and read them back with <code>System.Reflection.PortableExecutable</code>, with their own parser of the resource
+tree and version block, and with an independent sum for the checksum: the sections are contiguous and aligned, <code>SizeOfImage</code> is where the last one ends, every resource directory is ordered (names first,
+then numbers) with the entry counts it declares, the checksum is right. They do this on small executables made by the tests, on the engine's vendored MSVC-linked <code>SDL3.dll</code> and on the signed
+<code>steam_api64.dll</code> (a signature to strip, a resource type with a name), where the original sections, the import, exception, relocation, debug and load-configuration tables and the other resources must come out
+byte for byte. They also damage the headers (truncations, every field set to the edge values, random bytes) and expect an <code>ExportException</code> every time. They cannot show that the Windows loader accepts the
+file: <strong>nothing in the project's tests runs an exported program on Windows</strong>, and <code>PEReader</code> is more lenient than the loader. On Windows one test asks <code>FileVersionInfo</code> for the version information.</p>
+<p>To look at an export with a second, independent implementation of the format, on Linux or macOS with LLVM installed (one test does this when <code>llvm-readobj</code> is on the <code>PATH</code>):</p>
+<div class="highlight"><pre><span></span><code>llvm-readobj<span class="w"> </span>--file-headers<span class="w"> </span>--sections<span class="w"> </span>--coff-resources<span class="w"> </span>Bin/export/win/FixtureGame.exe
+</code></pre></div>
+<p>Expected: <code>Subsystem: IMAGE_SUBSYSTEM_WINDOWS_GUI (0x2)</code> (without <code>--console</code>), a non-zero <code>CheckSum</code>, a section <code>.rsrc</code> that is the last one and, usually, <code>.rsrc0</code> before it (the old resources, now unused), and
+under <code>.rsrc</code> the types <code>ICON (ID 3)</code> with 7 entries, <code>GROUP_ICON (ID 14)</code>, <code>VERSIONINFO (ID 16)</code> and <code>MANIFEST (ID 24)</code>. That Explorer shows the icon and the Details tab, and that a double-click opens no
+console, is checked by hand on a Windows computer.</p>
+<h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
+<p>An export for <code>linux-x64</code> is a folder that runs from anywhere:</p>
+<div class="highlight"><pre><span></span><code>FixtureGame                      the program (mode 755), the game's executable name
+lib*.so, libSDL3.so.0 ...        the native libraries, beside it
+Shaders/imported/                compiled shaders
+game.wgam, data/game.wpak        the game
+icon.png                         the icon, 256x256
+org.weft.fixturegame.desktop     the desktop entry
+</code></pre></div>
+<ul>
+<li><strong>The executable bit.</strong> The step sets the executable's mode to <code>rwxr-xr-x</code> (<code>File.SetUnixFileMode</code>). On a Windows computer there are no Unix modes, so the export warns that the bit is not set: set it
+  (<code>chmod +x</code>) when the folder is unpacked on Linux, or export Linux from Linux or WSL, where the bit is kept (an archive made on Windows loses it again).</li>
+<li><strong>The icon.</strong> The game's <code>Icon</code> is written as <code>icon.png</code>, scaled to 256x256 (a smaller icon is made bigger and the export warns, as it does for an icon below 256 pixels), and the exported <code>game.wgam</code>
+  names it (<code>&lt;Icon path="icon.png"/&gt;</code>), which is the file the runtime draws the window's icon from. A game without an icon gets no <code>icon.png</code> and no <code>Icon</code> line.</li>
+<li><strong>The desktop entry</strong>, <code>&lt;identifier&gt;.desktop</code>, follows the <a href="https://specifications.freedesktop.org/desktop-entry-spec/latest/">Desktop Entry Specification</a>: <code>Type</code>, <code>Name</code> and <code>Comment</code> (from
+  <code>game.wgam</code>'s <code>name</code> and <code>description</code>), <code>Exec=&lt;executable&gt;</code>, <code>Icon=&lt;identifier&gt;</code>, <code>Categories=Game;</code> and <code>StartupWMClass=&lt;identifier&gt;</code>, which is the application id the runtime gives its window, so
+  that a desktop matches the window to the entry. Values are escaped as the specification says (a backslash, a line break and a leading space). It is a <strong>template for whoever packages the game</strong>
+  (a distribution package, a Flatpak, an AppImage, an installer): <code>Exec</code> is the program's name as found on the <code>PATH</code> and <code>Icon</code> is the name of an icon in a theme, which is where an installer puts
+  <code>icon.png</code>. Nothing in the export reads it, and a game run through Steam does not use it.</li>
+</ul>
+<p><strong>It does not depend on the working directory.</strong> The runtime finds the game (<code>game.wgam</code>, <code>data/</code>), the compiled shaders and the native libraries from the folder of the executable, not from where it was
+started (<code>AppContext.BaseDirectory</code>), and the libraries that load other libraries (for example <code>libcimgui.so</code>, <code>librmlui.so</code>, <code>libktx.so</code>) have the run path <code>$ORIGIN</code>, so they find them beside
+themselves. No <code>LD_LIBRARY_PATH</code> is needed: <code>cd /tmp &amp;&amp; /path/to/export/FixtureGame</code> works. The player's files are written under <code>~/.local/share/&lt;organization&gt;/&lt;user folder&gt;</code> (or <code>--user &lt;dir&gt;</code>), never in the
+game's folder.</p>
+<p><strong>What the player's system provides.</strong> The native libraries are shipped; these are not:</p>
+<ul>
+<li><strong>The C and C++ libraries</strong>: glibc, and libstdc++ (<code>libstdc++.so.6</code>) for the libraries that use it. How new a glibc and libstdc++ the export needs is decided by where its parts were built. SDL, OpenAL
+  Soft and GameNetworkingSockets are the prebuilt libraries in <code>ThirdParty</code>, built in Valve's Steam Runtime "sniper" and needing glibc 2.31 at most (<code>ThirdParty/README.md</code>). The NativeAOT program and the
+  libraries built by <code>./build.sh native</code> (Flecs, Luau, Jolt, ...) need the glibc and libstdc++ of the computer that built them: a runtime published on a current rolling distribution needs a current
+  glibc (one published on Arch Linux in November 2026 needed 2.44) and will not start on an older one. Publish the runtime (<code>./build.sh aot</code>) on the oldest distribution you want to support, or in a container of it, and
+  export from that. Steam's "sniper" runtime is the baseline to aim for for a game on Steam.</li>
+<li><strong>Vulkan</strong>: the Vulkan loader (<code>libvulkan.so.1</code>) and a driver for the graphics card. The engine does not ship them (<code>ThirdParty/README.md</code>, "Not vendored").</li>
+<li><strong>OpenSSL</strong> (<code>libssl</code>): the packs are encrypted with AES-GCM, which .NET takes from the system's OpenSSL on Linux. A game with encrypted packs needs it; a plain one does not.</li>
+<li><strong>Audio and windowing</strong>: SDL and OpenAL Soft load the desktop's backends at run time (X11 or Wayland; PipeWire, PulseAudio or ALSA), so whatever the player's desktop has is used.</li>
+</ul>
+<p>The unit tests export from a synthesized runtime folder, so they check the step's files, not that a real export starts on a given distribution.</p>
+<h3 id="macos">macOS<a class="headerlink" href="#macos" title="Permanent link">&para;</a></h3>
+<p>An export for <code>osx-arm64</code> or <code>osx-x64</code> is an application bundle. The runtime for the target must be a thin (single processor) one, see above.</p>
+<div class="highlight"><pre><span></span><code>Fixture Game.app/                      the bundle, named after the game's name
+  Contents/
+    Info.plist                         generated from game.wgam
+    PkgInfo                            APPL????
+    MacOS/
+      FixtureGame                      the program (mode 755), the game's executable name
+      lib*.dylib                       the native libraries, beside it
+      Shaders/imported/                compiled shaders
+    Resources/
+      game.wgam, data/game.wpak        the game: its root, see "The layout"
+      game.icns                        the icon
+</code></pre></div>
+<ul>
+<li><strong><code>Info.plist</code></strong> is written as an XML property list (the text of <code>game.wgam</code> is escaped, so a name with <code>&amp;</code> or <code>&lt;</code> is fine). It holds <code>CFBundleName</code> and <code>CFBundleDisplayName</code> (the game's name),
+  <code>CFBundleIdentifier</code> (its <code>identifier</code>), <code>CFBundleExecutable</code>, <code>CFBundleVersion</code> and <code>CFBundleShortVersionString</code> (its version, <code>major.minor.patch</code>: <code>game.wgam</code> accepts no suffix such as <code>-beta</code>, which <code>CFBundleVersion</code> could not hold, since it takes only integers separated by dots), <code>CFBundlePackageType</code> <code>APPL</code>, <code>CFBundleIconFile</code> <code>game.icns</code> (when the
+  game has an icon), <code>CFBundleInfoDictionaryVersion</code> <code>6.0</code>, <code>LSMinimumSystemVersion</code>, <code>NSHighResolutionCapable</code>, <code>LSApplicationCategoryType</code> <code>public.app-category.games</code>, <code>WeftEngineVersion</code> (the version of the engine the bundle is made of, <code>0.2.0-alpha</code>) and
+  <code>NSHumanReadableCopyright</code> (its copyright, when it has one). <code>LSMinimumSystemVersion</code> is the newest minimum system version (<code>LC_BUILD_VERSION</code>) among the program and the <code>.dylib</code> files beside it, for
+  the target's processor, and never below 11.0, the first macOS for Apple silicon (also what it is when none of them says).</li>
+<li><strong>The icon</strong> is made into <code>game.icns</code>, with PNG images at 16, 32, 64, 128, 256, 512 and 1024 pixels and the <code>@2x</code> images of 16 to 256 (the sizes Finder and the Dock use). A size above the game's icon is left
+  out, not enlarged: macOS then scales the biggest image there is. <strong>1024x1024 is advised</strong>; below that the export warns that the 512 and 1024 pixel images are missing. The window's icon is the application's
+  icon, so the exported <code>game.wgam</code> names no <code>Icon</code>.</li>
+<li><strong>The executable bit</strong> is set as on Linux (<code>rwxr-xr-x</code>); a Windows computer has no Unix modes, so the export warns that it must be set where the bundle is unpacked, and an archive made on Windows loses
+  it again. Archive a bundle on a Mac with <code>ditto -c -k --keepParent "Fixture Game.app" Game.zip</code>.</li>
+</ul>
+<h4 id="the-code-signature">The code signature<a class="headerlink" href="#the-code-signature" title="Permanent link">&para;</a></h4>
+<p>An Apple-silicon Mac only runs a program that is signed, and the NativeAOT runtime comes with an <em>ad-hoc</em> signature: the linker signs it with no certificate, only hashes (<code>codesign -s -</code> makes the same kind, with an empty signature slot, and is accepted too). The signature is a table at the end of the
+file (the CodeDirectory) with the hash of every 16 KiB page of the program; the kernel checks a page's hash when it is loaded and kills the program if it does not match (<code>Killed: 9</code>). The export
+changes a page of the program, for it writes the <a href="#the-pack-key">pack key</a> into it (into each copy of the slot), so it has to make the hashes right again. <code>MachOSignature.Rehash</code> does that once, after the key is
+written everywhere and as the last change to the program:</p>
+<ol>
+<li>It reads the Mach-O header and finds the <code>LC_CODE_SIGNATURE</code> load command, which says where the signature is.</li>
+<li>It reads the signature's SuperBlob and finds every CodeDirectory in it (a program can have an alternate one with another hash function).</li>
+<li>For each, it hashes every page of the program, from the start of the file up to where the signature begins, with that CodeDirectory's own hash function (SHA-1, SHA-256, SHA-256 cut to 20 bytes, or
+   SHA-384) and page size, and writes the hashes over the old ones in place.</li>
+</ol>
+<p>Nothing else is touched: not the length of the file, the header, the position of the signature, the identifier, or the other blobs. All of it is checked first: a file that is not a thin 64-bit Mach-O, or whose lengths
+and offsets do not fit it (or whose CodeDirectory is shorter than its version needs, or uses a scatter vector, or does not have every copy of the pack key slot inside the hashed code), fails the export and is not written (the program is untrusted input to this code, so every length is checked against the file with 64-bit arithmetic, and nothing is allocated or looped over by what the file
+claims).</p>
+<p>What it does <strong>not</strong> do:</p>
+<ul>
+<li><strong>It does not sign.</strong> A program without a signature (an x86-64 build the linker did not sign) is left as it is, which macOS runs; for an arm64 one the export warns that it will not run until it is signed
+  (<code>codesign --force --sign - &lt;executable&gt;</code>, on a Mac).</li>
+<li><strong>It does not repair a signature made with a certificate.</strong> Such a signature (a CodeDirectory without the ad-hoc flag, or a signature slot with a CMS message in it; an <em>empty</em> slot is what <code>codesign -s -</code>
+  writes) also signs the CodeDirectory, so changing the CodeDirectory breaks it, and only the private key can make it again. The export stops with that message: publish the runtime unsigned, and sign the
+  bundle after the export.</li>
+<li><strong>There is no Developer ID signing and no notarization.</strong> The bundle is not <em>sealed</em> either: no signature covers <code>Info.plist</code> or the files in <code>Resources</code>; only the program (and each library, by the signature it
+  came with) is signed.</li>
+</ul>
+<h4 id="gatekeeper-signing-and-notarization">Gatekeeper, signing and notarization<a class="headerlink" href="#gatekeeper-signing-and-notarization" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Downloaded builds</strong> (a browser, a message, a mail attachment) get the quarantine attribute, and Gatekeeper refuses to open an application that is not notarized: the player has to open it with Control-click
+  and <em>Open</em>, or allow it in System Settings, Privacy &amp; Security, or remove the attribute (<code>xattr -dr com.apple.quarantine "Fixture Game.app"</code>). Files that Steam installs are not quarantined, so a game
+  distributed through Steam opens without any of this.</li>
+<li><strong>Developer ID signing and notarization</strong> are outside the export, and an exported bundle is <strong>not ready for them</strong>: the compiled shaders are data files in <code>Contents/MacOS</code>, which is for code only, and
+  <code>codesign --strict</code> and notarization reject data there. The engine looks for them next to the program (<code>AppContext.BaseDirectory</code>), so moving them to <code>Contents/Resources</code> is a change to the engine's shader
+  loading that has not been made. When it has, signing is done after the export, with Apple's tools and your own certificate, from the inside out as Apple advises (<code>--deep</code> is discouraged): sign each
+  <code>.dylib</code>, then the executable with <code>--options runtime</code>, then the bundle, and then submit it (<code>xcrun notarytool submit</code>) and staple the ticket (<code>xcrun stapler staple</code>). Signing again replaces the ad-hoc
+  signature this step repairs, so it comes after the export, never before.</li>
+<li><strong>Checking an export on a Mac.</strong> <code>codesign</code> judges an executable inside a bundle as part of the bundle, which is not sealed and may fail <code>--strict</code> for reasons that have nothing to do with the program. To
+  check only the program's own signature, copy it out of the bundle: <code>cp "Fixture Game.app/Contents/MacOS/FixtureGame" /tmp/exe &amp;&amp; codesign --verify --strict --verbose=4 /tmp/exe</code> (exit status 0), and
+  <code>codesign -dvvv /tmp/exe</code> shows its flags (<code>adhoc</code>) and CDHash. <code>codesign --verify --strict --verbose=4 "Fixture Game.app"</code> is informational. <code>plutil -lint "Fixture Game.app/Contents/Info.plist"</code> checks the
+  plist, and starting the game with its encrypted pack and no key in the environment is a check of the page that holds the key slot, since the game reads it. The unit tests cannot run these tools; the macOS job
+  of the continuous integration is to.</li>
+<li><strong>Metal.</strong> Whether an exported game draws on a Mac depends on the engine's Metal backend, which is written but not tested yet (see <a href="../../../contributing/help-wanted/">help wanted</a>), not on the export.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Not run on a Mac</p>
+<p>The bundle step was written and tested without a Mac. The tests build Mach-O programs and signatures by hand and check the hashes against an independent computation (the SHA-1 and SHA-256 of each
+page), and they rehash the real signatures of the libraries in <code>ThirdParty</code> to see that the result is byte for byte what the linker and <code>codesign -s -</code> made; <code>codesign --verify</code> and <code>plutil -lint</code> have not been run on an
+export. The macOS job of the continuous integration is where they will be.</p>
+</div>
+<h2 id="testing-an-export">Testing an export<a class="headerlink" href="#testing-an-export" title="Permanent link">&para;</a></h2>
+<p>The three <code>aot</code> jobs of the continuous integration (<code>.github/workflows/*_builds.yml</code>) export <code>Tests/Fixtures/ShippedGame</code> for their own platform with the runtime they just published, <code>--cooked</code>, and then
+check and run the result:</p>
+<ol>
+<li>The export step sets <code>WEFT_PACK_KEY</code> to a fixed test key, <code>000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f</code>, on that step only. <strong>The key is public and worthless</strong>: it is made
+   up, nothing is protected by it, and an exported game carries its key anyway. Never ship a game with it.</li>
+<li>The result is checked: the pack does not start with the plain magic (it is encrypted), no debug file, Slang library, shader source or <code>steam_appid.txt</code> was copied, and the game folder in the
+   repository has no changed or new file. On Windows the version information says <code>Fixture Game</code>; on macOS the program's signature is verified (<code>codesign --verify --strict --verbose=4</code> on a copy
+   outside the bundle, then <code>codesign -dvvv</code>) and <code>Info.plist</code> and <code>game.icns</code> are read by <code>plutil -lint</code> and <code>iconutil</code>.</li>
+<li>The exported game is run headless <strong>from another folder</strong>, with <code>WEFT_PACK_KEY</code> not in the environment (so the key can only come out of the executable's slot), a player's mod copied to the user
+   folder, and <code>+connect_lobby 1</code> on the command line, which a shipped game ignores. The files that the fixture leaves in the user folder (<code>ran.txt</code>, <code>scene.txt</code>, <code>def.txt</code>, <code>prefab.txt</code>, <code>document.txt</code> and the mod's
+   <code>moddata/patcher/ran.txt</code>) must exist. On Linux it is run once more, rendered, on the software rasterizer.</li>
+<li>The export is uploaded as the artifact <code>export-&lt;rid&gt;</code>.</li>
+</ol>
+<p>This is the test that runs an export on each operating system: the unit tests build the files for all platforms from any computer, but only these jobs start the result.</p>
+<h2 id="from-code">From code<a class="headerlink" href="#from-code" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">ExportResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GameExporter</span><span class="p">.</span><span class="n">Export</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ExportOptions</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">GameFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Game"</span><span class="p">,</span>
+<span class="w">        </span><span class="n">OutputFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bin/export"</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExportTarget</span><span class="p">(</span><span class="s">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s">"x64"</span><span class="p">),</span>
+<span class="w">        </span><span class="n">RuntimeDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">                 </span><span class="c1">// look for a published runtime</span>
+<span class="w">        </span><span class="n">Cooked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PackKey</span><span class="p">.</span><span class="n">FromEnvironment</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">Importers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ScriptSession</span><span class="p">.</span><span class="n">Importers</span><span class="p">,</span><span class="w">     </span><span class="c1">// the importers of the game (models, images, shaders); null: models and images</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">);</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">warning</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">Warnings</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><code>ExportResult</code> has the executable, the game's root and the files written. <code>ExportException</code> is the one error an export throws. <code>IconImages.Load(png)</code> makes the sizes the platform steps need from the
+game's icon (<code>Rgba(size)</code>, <code>Png(size)</code>: a box filter down, with a warning for an icon below 256 pixels or a size above the image).</p>
+<h2 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
+<p><code>Tests/Weft.Export.Tests</code>: the targets, reading the platform from an executable header, what is left out of a runtime folder, the key slot (written into every copy of the slot and read back, a magic without the rest of the template left alone, no slot, a slot cut by the end of the file and too many copies an
+error, the key is not in the file in the clear), the icon sizes, the PE writer (the resource tree, the section that is rewritten or added, header room, signatures and overlays, the subsystem, the checksum, files that are damaged or hostile, the engine's vendored Windows libraries, damaged and hostile files), the Windows step (the version information and the icon images read back, every copy of the key kept), the Linux step (the executable bit, <code>icon.png</code> and the manifest's icon, the escaping of the desktop entry), the macOS step (the plist and its escaping, the <code>icns</code> structure and sizes, the bundle layout, the minimum system version, and the Mach-O signature: page hashes of every hash type and page size checked against an independent computation, real signatures from <code>ThirdParty</code> reproduced, and hostile lengths and offsets, truncation and random damage all ending in an <code>ExportException</code>), and exports for all four targets from any host with a synthesized runtime folder (layout, renamed executable, what is packed, the game
+folder untouched, encrypted packs, the output folder rules). <code>Tests/Weft.Runtime.Tests</code> runs an exported game from its folder, headless, on its encrypted pack.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../editor/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Editor">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Editor
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../api/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Weft Engine 0.2.0-alpha
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "toc.follow", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

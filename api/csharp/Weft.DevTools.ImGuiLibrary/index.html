@@ -1,0 +1,5651 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free, open-source C# 3D engine made for crunching numbers.">
+      
+      
+      
+        <link rel="canonical" href="https://weftengine.github.io/docs/api/csharp/Weft.DevTools.ImGuiLibrary/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Class ImGuiLibrary - Weft Engine</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#class-imguilibrary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Weft Engine" class="md-header__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Weft Engine
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Class ImGuiLibrary
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../about/introduction/" class="md-tabs__link">
+          
+  
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/building/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../manual/core/core/" class="md-tabs__link">
+          
+  
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  API reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Weft Engine" class="md-nav__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Weft Engine
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Samples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Samples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manual
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manual
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/crashes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logs and crash reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math and the world
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/ecs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiling and SIMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/core/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Native code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/native/bindings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native bindings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/native/native-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platform
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/platform/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/platform/input/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/platform/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graphics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/graphics/graphics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/graphics/rendering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/graphics/tone-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exposure and tone mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/graphics/metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/physics/physics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/physics/vehicles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vehicles and hitches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/audio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/network/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/network/steam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/scripting/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/scripting/tasks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tasks and game time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/scripting/tweens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tweens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/scripting/runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime and Luau tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Content
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/defs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions and schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages and mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/game-manifest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game manifest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset import
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/scenes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/prefabs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prefabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/content/hot-reload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hot reload
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/tools/devtools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/tools/editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../manual/tools/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting a game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C#
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    C#
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Luau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../luau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../luau/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../luau/enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enums
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/help-wanted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help wanted
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/continuous-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuous integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/writing-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inherited-members" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inherited Members
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beginchildstring-float-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginChild(string, float, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginChild(string, float, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#begindisabledbool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginDisabled(bool)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginDisabled(bool)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beginmainmenubar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginMainMenuBar()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginMainMenuBar()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beginmenustring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginMenu(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginMenu(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beginpopupstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginPopup(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginPopup(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beginpopupmodalstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginPopupModal(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginPopupModal(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#begintabbarstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginTabBar(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginTabBar(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#begintabitemstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginTabItem(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginTabItem(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#begintablestring-int-imguitableflags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginTable(string, int, ImGuiTableFlags)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginTable(string, int, ImGuiTableFlags)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beginwindowstring-value-imguiwindowflags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BeginWindow(string, Value, ImGuiWindowFlags)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BeginWindow(string, Value, ImGuiWindowFlags)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buttonstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Button(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Button(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkboxstring-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkbox(string, bool)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checkbox(string, bool)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closecurrentpopup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CloseCurrentPopup()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collapsingheaderstring-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CollapsingHeader(string, bool)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CollapsingHeader(string, bool)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coloreditstring-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ColorEdit(string, float[])
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ColorEdit(string, float[])">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combostring-int-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combo(string, int, string[])
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combo(string, int, string[])">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contentregionavail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ContentRegionAvail()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ContentRegionAvail()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#displaysize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DisplaySize()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DisplaySize()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dragfloatstring-float-float-float-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DragFloat(string, float, float, float, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DragFloat(string, float, float, float, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dragfloat3string-vector3-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DragFloat3(string, Vector3, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DragFloat3(string, Vector3, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dummyfloat-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dummy(float, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dummy(float, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endchild" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndChild()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enddisabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndDisabled()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endmainmenubar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndMainMenuBar()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endmenu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndMenu()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpopup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndPopup()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endtabbar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndTabBar()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endtabitem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndTabItem()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endtable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndTable()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endwindow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EndWindow()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indentfloat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indent(float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Indent(float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputfloatstring-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InputFloat(string, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="InputFloat(string, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputintstring-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InputInt(string, int)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="InputInt(string, int)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputtextstring-string-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InputText(string, string, int)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="InputText(string, string, int)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isitemclicked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IsItemClicked()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IsItemClicked()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isitemhovered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IsItemHovered()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IsItemHovered()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menuitemstring-string-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MenuItem(string, string?, bool)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MenuItem(string, string?, bool)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openpopupstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenPopup(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenPopup(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotlinesstring-float-float-float-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PlotLines(string, float[], float, float, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PlotLines(string, float[], float, float, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#popid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PopId()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#popstylecolorint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PopStyleColor(int)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PopStyleColor(int)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#popstylevarint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PopStyleVar(int)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PopStyleVar(int)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressbarfloat-float-float-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ProgressBar(float, float, float, string?)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ProgressBar(float, float, float, string?)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushidstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PushId(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PushId(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushidnumberint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PushIdNumber(int)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PushIdNumber(int)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushstylecolorimguicol-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PushStyleColor(ImGuiCol, float[])
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PushStyleColor(ImGuiCol, float[])">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushstylevarimguistylevar-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PushStyleVar(ImGuiStyleVar, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PushStyleVar(ImGuiStyleVar, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sameline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SameLine()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectablestring-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selectable(string, bool)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selectable(string, bool)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separator()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setnextitemwidthfloat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SetNextItemWidth(float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SetNextItemWidth(float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setnextwindowposfloat-float-imguicond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SetNextWindowPos(float, float, ImGuiCond)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SetNextWindowPos(float, float, ImGuiCond)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setnextwindowsizefloat-float-imguicond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SetNextWindowSize(float, float, ImGuiCond)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SetNextWindowSize(float, float, ImGuiCond)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settooltipstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SetTooltip(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SetTooltip(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#showdemowindow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ShowDemoWindow()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sliderfloatstring-float-float-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SliderFloat(string, float, float, float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SliderFloat(string, float, float, float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sliderintstring-int-int-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SliderInt(string, int, int, int)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SliderInt(string, int, int, int)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spacing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spacing()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tableheadersrow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TableHeadersRow()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablenextcolumn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TableNextColumn()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TableNextColumn()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablenextrow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TableNextRow()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablesetupcolumnstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TableSetupColumn(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TableSetupColumn(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Text(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textcoloredfloat-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TextColored(float[], string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TextColored(float[], string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textdisabledstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TextDisabled(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TextDisabled(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textwrappedstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TextWrapped(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TextWrapped(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#treenodestring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TreeNode(string)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TreeNode(string)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#treepop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TreePop()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unindentfloat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unindent(float)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unindent(float)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wantcapturekeyboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WantCaptureKeyboard()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WantCaptureKeyboard()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wantcapturemouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WantCaptureMouse()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WantCaptureMouse()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Returns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/weftengine/weft/edit/main/Docs/api/csharp/Weft.DevTools.ImGuiLibrary.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="class-imguilibrary"><a id="Weft_DevTools_ImGuiLibrary"></a> Class ImGuiLibrary<a class="headerlink" href="#class-imguilibrary" title="Permanent link">&para;</a></h1>
+<p>Namespace: <a href="../Weft.DevTools/">Weft.DevTools</a><br />
+Assembly: Weft.DevTools.dll  </p>
+<p>Dear ImGui for Luau scripts, as the global table <code>imgui</code>: snake_case functions over the same calls the dev tools use. A widget returns
+<code>changed, value</code>; a window or tree that can be open returns whether it is; every begin has its end (ImGui recovers from a script that forgets,
+at the end of the frame). With no frame open every call does nothing and returns what it was given, so tool code can stay in a shipped game.
+Ids are the labels, with ImGui's <code>##</code> and <code>###</code> conventions.</p>
+<div class="highlight"><pre><span></span><code><span class="na">[ScriptLibrary("imgui")]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ImGuiLibrary</span>
+</code></pre></div>
+<h4 id="inheritance">Inheritance<a class="headerlink" href="#inheritance" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.object">object</a> ← 
+<a href="./">ImGuiLibrary</a></p>
+<h4 id="inherited-members">Inherited Members<a class="headerlink" href="#inherited-members" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object?)</a>, 
+<a href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object?, object?)</a>, 
+<a href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>, 
+<a href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>, 
+<a href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>, 
+<a href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object?, object?)</a>, 
+<a href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a></p>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="beginchildstring-float-float"><a id="Weft_DevTools_ImGuiLibrary_BeginChild_System_String_System_Single_System_Single_"></a> BeginChild(string, float, float)<a class="headerlink" href="#beginchildstring-float-float" title="Permanent link">&para;</a></h3>
+<p>A scrolling region inside a window. Always call <code>end_child</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginChild</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h4>
+<p><code>id</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>width</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>height</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h4 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="begindisabledbool"><a id="Weft_DevTools_ImGuiLibrary_BeginDisabled_System_Boolean_"></a> BeginDisabled(bool)<a class="headerlink" href="#begindisabledbool" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">BeginDisabled</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">&para;</a></h4>
+<p><code>disabled</code> <a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="beginmainmenubar"><a id="Weft_DevTools_ImGuiLibrary_BeginMainMenuBar"></a> BeginMainMenuBar()<a class="headerlink" href="#beginmainmenubar" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginMainMenuBar</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_1">Returns<a class="headerlink" href="#returns_1" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="beginmenustring"><a id="Weft_DevTools_ImGuiLibrary_BeginMenu_System_String_"></a> BeginMenu(string)<a class="headerlink" href="#beginmenustring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginMenu</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_2">Parameters<a class="headerlink" href="#parameters_2" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h4 id="returns_2">Returns<a class="headerlink" href="#returns_2" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="beginpopupstring"><a id="Weft_DevTools_ImGuiLibrary_BeginPopup_System_String_"></a> BeginPopup(string)<a class="headerlink" href="#beginpopupstring" title="Permanent link">&para;</a></h3>
+<p>A popup opened with <code>open_popup</code>; when it returns true, fill it and call <code>end_popup</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginPopup</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_3">Parameters<a class="headerlink" href="#parameters_3" title="Permanent link">&para;</a></h4>
+<p><code>id</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h4 id="returns_3">Returns<a class="headerlink" href="#returns_3" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="beginpopupmodalstring"><a id="Weft_DevTools_ImGuiLibrary_BeginPopupModal_System_String_"></a> BeginPopupModal(string)<a class="headerlink" href="#beginpopupmodalstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginPopupModal</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">title</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link">&para;</a></h4>
+<p><code>title</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h4 id="returns_4">Returns<a class="headerlink" href="#returns_4" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="begintabbarstring"><a id="Weft_DevTools_ImGuiLibrary_BeginTabBar_System_String_"></a> BeginTabBar(string)<a class="headerlink" href="#begintabbarstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginTabBar</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_5">Parameters<a class="headerlink" href="#parameters_5" title="Permanent link">&para;</a></h4>
+<p><code>id</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h4 id="returns_5">Returns<a class="headerlink" href="#returns_5" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="begintabitemstring"><a id="Weft_DevTools_ImGuiLibrary_BeginTabItem_System_String_"></a> BeginTabItem(string)<a class="headerlink" href="#begintabitemstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginTabItem</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_6">Parameters<a class="headerlink" href="#parameters_6" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h4 id="returns_6">Returns<a class="headerlink" href="#returns_6" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="begintablestring-int-imguitableflags"><a id="Weft_DevTools_ImGuiLibrary_BeginTable_System_String_System_Int32_Weft_Native_CImGui_ImGuiTableFlags_"></a> BeginTable(string, int, ImGuiTableFlags)<a class="headerlink" href="#begintablestring-int-imguitableflags" title="Permanent link">&para;</a></h3>
+<p>A table; when it returns true, fill it and call <code>end_table</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">BeginTable</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">columns</span><span class="p">,</span><span class="w"> </span><span class="n">ImGuiTableFlags</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImGuiTableFlags</span><span class="p">.</span><span class="n">RowBg</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ImGuiTableFlags</span><span class="p">.</span><span class="n">BordersInnerH</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ImGuiTableFlags</span><span class="p">.</span><span class="n">SizingStretchProp</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_7">Parameters<a class="headerlink" href="#parameters_7" title="Permanent link">&para;</a></h4>
+<p><code>id</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>columns</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<p><code>flags</code> ImGuiTableFlags</p>
+<h4 id="returns_7">Returns<a class="headerlink" href="#returns_7" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="beginwindowstring-value-imguiwindowflags"><a id="Weft_DevTools_ImGuiLibrary_BeginWindow_System_String_Weft_Reflection_Value_Weft_Native_CImGui_ImGuiWindowFlags_"></a> BeginWindow(string, Value, ImGuiWindowFlags)<a class="headerlink" href="#beginwindowstring-value-imguiwindowflags" title="Permanent link">&para;</a></h3>
+<p>Begins a window. Pass <code>true</code> for <code>open</code> to give it a close button; the second result is whether it is still open. Always call <code>end_window</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Visible</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">Open</span><span class="p">)</span><span class="w"> </span><span class="n">BeginWindow</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="n">open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">,</span><span class="w"> </span><span class="n">ImGuiWindowFlags</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImGuiWindowFlags</span><span class="p">.</span><span class="n">None</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_8">Parameters<a class="headerlink" href="#parameters_8" title="Permanent link">&para;</a></h4>
+<p><code>title</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>open</code> <a href="../Weft.Reflection.Value/">Value</a></p>
+<p><code>flags</code> ImGuiWindowFlags</p>
+<h4 id="returns_8">Returns<a class="headerlink" href="#returns_8" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.boolean-.visible">Visible</a>, <a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.boolean-.open">Open</a>)</p>
+<h3 id="buttonstring"><a id="Weft_DevTools_ImGuiLibrary_Button_System_String_"></a> Button(string)<a class="headerlink" href="#buttonstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Button</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_9">Parameters<a class="headerlink" href="#parameters_9" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h4 id="returns_9">Returns<a class="headerlink" href="#returns_9" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="checkboxstring-bool"><a id="Weft_DevTools_ImGuiLibrary_Checkbox_System_String_System_Boolean_"></a> Checkbox(string, bool)<a class="headerlink" href="#checkboxstring-bool" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">Checkbox</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">value</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_10">Parameters<a class="headerlink" href="#parameters_10" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h4 id="returns_10">Returns<a class="headerlink" href="#returns_10" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.boolean-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.boolean-.value">Value</a>)</p>
+<h3 id="closecurrentpopup"><a id="Weft_DevTools_ImGuiLibrary_CloseCurrentPopup"></a> CloseCurrentPopup()<a class="headerlink" href="#closecurrentpopup" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">CloseCurrentPopup</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="collapsingheaderstring-bool"><a id="Weft_DevTools_ImGuiLibrary_CollapsingHeader_System_String_System_Boolean_"></a> CollapsingHeader(string, bool)<a class="headerlink" href="#collapsingheaderstring-bool" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">CollapsingHeader</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">openByDefault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_11">Parameters<a class="headerlink" href="#parameters_11" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>openByDefault</code> <a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h4 id="returns_11">Returns<a class="headerlink" href="#returns_11" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="coloreditstring-float"><a id="Weft_DevTools_ImGuiLibrary_ColorEdit_System_String_System_Single___"></a> ColorEdit(string, float[])<a class="headerlink" href="#coloreditstring-float" title="Permanent link">&para;</a></h3>
+<p>A color editor: red, green, blue and alpha, from 0 to 1.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">[]</span><span class="w"> </span><span class="n">Color</span><span class="p">)</span><span class="w"> </span><span class="n">ColorEdit</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">[]</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_12">Parameters<a class="headerlink" href="#parameters_12" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>color</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a>[]</p>
+<h4 id="returns_12">Returns<a class="headerlink" href="#returns_12" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single[]-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a>[] <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single[]-.color">Color</a>)</p>
+<h3 id="combostring-int-string"><a id="Weft_DevTools_ImGuiLibrary_Combo_System_String_System_Int32_System_String___"></a> Combo(string, int, string[])<a class="headerlink" href="#combostring-int-string" title="Permanent link">&para;</a></h3>
+<p>A drop-down: <code>index</code> counts from 1, like a Luau list.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Index</span><span class="p">)</span><span class="w"> </span><span class="n">Combo</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_13">Parameters<a class="headerlink" href="#parameters_13" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>index</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<p><code>items</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</p>
+<h4 id="returns_13">Returns<a class="headerlink" href="#returns_13" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.int32-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.int32-.index">Index</a>)</p>
+<h3 id="contentregionavail"><a id="Weft_DevTools_ImGuiLibrary_ContentRegionAvail"></a> ContentRegionAvail()<a class="headerlink" href="#contentregionavail" title="Permanent link">&para;</a></h3>
+<p>The room left in the window: width and height.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">Width</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Height</span><span class="p">)</span><span class="w"> </span><span class="n">ContentRegionAvail</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_14">Returns<a class="headerlink" href="#returns_14" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.single">float</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.single,system.single-.width">Width</a>, <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.single,system.single-.height">Height</a>)</p>
+<h3 id="displaysize"><a id="Weft_DevTools_ImGuiLibrary_DisplaySize"></a> DisplaySize()<a class="headerlink" href="#displaysize" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">Width</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Height</span><span class="p">)</span><span class="w"> </span><span class="n">DisplaySize</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_15">Returns<a class="headerlink" href="#returns_15" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.single">float</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.single,system.single-.width">Width</a>, <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.single,system.single-.height">Height</a>)</p>
+<h3 id="dragfloatstring-float-float-float-float"><a id="Weft_DevTools_ImGuiLibrary_DragFloat_System_String_System_Single_System_Single_System_Single_System_Single_"></a> DragFloat(string, float, float, float, float)<a class="headerlink" href="#dragfloatstring-float-float-float-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">DragFloat</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_14">Parameters<a class="headerlink" href="#parameters_14" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>speed</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>min</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>max</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h4 id="returns_16">Returns<a class="headerlink" href="#returns_16" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single-.value">Value</a>)</p>
+<h3 id="dragfloat3string-vector3-float"><a id="Weft_DevTools_ImGuiLibrary_DragFloat3_System_String_System_Numerics_Vector3_System_Single_"></a> DragFloat3(string, Vector3, float)<a class="headerlink" href="#dragfloat3string-vector3-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">DragFloat3</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_15">Parameters<a class="headerlink" href="#parameters_15" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a></p>
+<p><code>speed</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h4 id="returns_17">Returns<a class="headerlink" href="#returns_17" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.numerics.vector3-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.numerics.vector3-.value">Value</a>)</p>
+<h3 id="dummyfloat-float"><a id="Weft_DevTools_ImGuiLibrary_Dummy_System_Single_System_Single_"></a> Dummy(float, float)<a class="headerlink" href="#dummyfloat-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Dummy</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">height</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_16">Parameters<a class="headerlink" href="#parameters_16" title="Permanent link">&para;</a></h4>
+<p><code>width</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>height</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h3 id="endchild"><a id="Weft_DevTools_ImGuiLibrary_EndChild"></a> EndChild()<a class="headerlink" href="#endchild" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndChild</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="enddisabled"><a id="Weft_DevTools_ImGuiLibrary_EndDisabled"></a> EndDisabled()<a class="headerlink" href="#enddisabled" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndDisabled</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="endmainmenubar"><a id="Weft_DevTools_ImGuiLibrary_EndMainMenuBar"></a> EndMainMenuBar()<a class="headerlink" href="#endmainmenubar" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndMainMenuBar</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="endmenu"><a id="Weft_DevTools_ImGuiLibrary_EndMenu"></a> EndMenu()<a class="headerlink" href="#endmenu" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndMenu</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="endpopup"><a id="Weft_DevTools_ImGuiLibrary_EndPopup"></a> EndPopup()<a class="headerlink" href="#endpopup" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndPopup</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="endtabbar"><a id="Weft_DevTools_ImGuiLibrary_EndTabBar"></a> EndTabBar()<a class="headerlink" href="#endtabbar" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndTabBar</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="endtabitem"><a id="Weft_DevTools_ImGuiLibrary_EndTabItem"></a> EndTabItem()<a class="headerlink" href="#endtabitem" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndTabItem</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="endtable"><a id="Weft_DevTools_ImGuiLibrary_EndTable"></a> EndTable()<a class="headerlink" href="#endtable" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndTable</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="endwindow"><a id="Weft_DevTools_ImGuiLibrary_EndWindow"></a> EndWindow()<a class="headerlink" href="#endwindow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EndWindow</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="indentfloat"><a id="Weft_DevTools_ImGuiLibrary_Indent_System_Single_"></a> Indent(float)<a class="headerlink" href="#indentfloat" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Indent</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_17">Parameters<a class="headerlink" href="#parameters_17" title="Permanent link">&para;</a></h4>
+<p><code>width</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h3 id="inputfloatstring-float"><a id="Weft_DevTools_ImGuiLibrary_InputFloat_System_String_System_Single_"></a> InputFloat(string, float)<a class="headerlink" href="#inputfloatstring-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">InputFloat</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="k">value</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_18">Parameters<a class="headerlink" href="#parameters_18" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h4 id="returns_18">Returns<a class="headerlink" href="#returns_18" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single-.value">Value</a>)</p>
+<h3 id="inputintstring-int"><a id="Weft_DevTools_ImGuiLibrary_InputInt_System_String_System_Int32_"></a> InputInt(string, int)<a class="headerlink" href="#inputintstring-int" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">InputInt</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">value</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_19">Parameters<a class="headerlink" href="#parameters_19" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<h4 id="returns_19">Returns<a class="headerlink" href="#returns_19" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.int32-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.int32-.value">Value</a>)</p>
+<h3 id="inputtextstring-string-int"><a id="Weft_DevTools_ImGuiLibrary_InputText_System_String_System_String_System_Int32_"></a> InputText(string, string, int)<a class="headerlink" href="#inputtextstring-string-int" title="Permanent link">&para;</a></h3>
+<p>A text field of at most <code>max_length</code> bytes.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">InputText</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_20">Parameters<a class="headerlink" href="#parameters_20" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>maxLength</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<h4 id="returns_20">Returns<a class="headerlink" href="#returns_20" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.string-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.string-.value">Value</a>)</p>
+<h3 id="isitemclicked"><a id="Weft_DevTools_ImGuiLibrary_IsItemClicked"></a> IsItemClicked()<a class="headerlink" href="#isitemclicked" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">IsItemClicked</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_21">Returns<a class="headerlink" href="#returns_21" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="isitemhovered"><a id="Weft_DevTools_ImGuiLibrary_IsItemHovered"></a> IsItemHovered()<a class="headerlink" href="#isitemhovered" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">IsItemHovered</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_22">Returns<a class="headerlink" href="#returns_22" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="menuitemstring-string-bool"><a id="Weft_DevTools_ImGuiLibrary_MenuItem_System_String_System_String_System_Boolean_"></a> MenuItem(string, string?, bool)<a class="headerlink" href="#menuitemstring-string-bool" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">MenuItem</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">string?</span><span class="w"> </span><span class="n">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_21">Parameters<a class="headerlink" href="#parameters_21" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>shortcut</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a>?</p>
+<p><code>selected</code> <a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h4 id="returns_23">Returns<a class="headerlink" href="#returns_23" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="openpopupstring"><a id="Weft_DevTools_ImGuiLibrary_OpenPopup_System_String_"></a> OpenPopup(string)<a class="headerlink" href="#openpopupstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OpenPopup</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_22">Parameters<a class="headerlink" href="#parameters_22" title="Permanent link">&para;</a></h4>
+<p><code>id</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="plotlinesstring-float-float-float-float"><a id="Weft_DevTools_ImGuiLibrary_PlotLines_System_String_System_Single___System_Single_System_Single_System_Single_"></a> PlotLines(string, float[], float, float, float)<a class="headerlink" href="#plotlinesstring-float-float-float-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PlotLines</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">[]</span><span class="w"> </span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_23">Parameters<a class="headerlink" href="#parameters_23" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>values</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a>[]</p>
+<p><code>min</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>max</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>height</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h3 id="popid"><a id="Weft_DevTools_ImGuiLibrary_PopId"></a> PopId()<a class="headerlink" href="#popid" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PopId</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="popstylecolorint"><a id="Weft_DevTools_ImGuiLibrary_PopStyleColor_System_Int32_"></a> PopStyleColor(int)<a class="headerlink" href="#popstylecolorint" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PopStyleColor</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_24">Parameters<a class="headerlink" href="#parameters_24" title="Permanent link">&para;</a></h4>
+<p><code>count</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<h3 id="popstylevarint"><a id="Weft_DevTools_ImGuiLibrary_PopStyleVar_System_Int32_"></a> PopStyleVar(int)<a class="headerlink" href="#popstylevarint" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PopStyleVar</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_25">Parameters<a class="headerlink" href="#parameters_25" title="Permanent link">&para;</a></h4>
+<p><code>count</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<h3 id="progressbarfloat-float-float-string"><a id="Weft_DevTools_ImGuiLibrary_ProgressBar_System_Single_System_Single_System_Single_System_String_"></a> ProgressBar(float, float, float, string?)<a class="headerlink" href="#progressbarfloat-float-float-string" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ProgressBar</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">fraction</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="kt">string?</span><span class="w"> </span><span class="n">overlay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_26">Parameters<a class="headerlink" href="#parameters_26" title="Permanent link">&para;</a></h4>
+<p><code>fraction</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>width</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>height</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>overlay</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a>?</p>
+<h3 id="pushidstring"><a id="Weft_DevTools_ImGuiLibrary_PushId_System_String_"></a> PushId(string)<a class="headerlink" href="#pushidstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PushId</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_27">Parameters<a class="headerlink" href="#parameters_27" title="Permanent link">&para;</a></h4>
+<p><code>id</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="pushidnumberint"><a id="Weft_DevTools_ImGuiLibrary_PushIdNumber_System_Int32_"></a> PushIdNumber(int)<a class="headerlink" href="#pushidnumberint" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PushIdNumber</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_28">Parameters<a class="headerlink" href="#parameters_28" title="Permanent link">&para;</a></h4>
+<p><code>id</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<h3 id="pushstylecolorimguicol-float"><a id="Weft_DevTools_ImGuiLibrary_PushStyleColor_Weft_Native_CImGui_ImGuiCol_System_Single___"></a> PushStyleColor(ImGuiCol, float[])<a class="headerlink" href="#pushstylecolorimguicol-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PushStyleColor</span><span class="p">(</span><span class="n">ImGuiCol</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">[]</span><span class="w"> </span><span class="k">value</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_29">Parameters<a class="headerlink" href="#parameters_29" title="Permanent link">&para;</a></h4>
+<p><code>color</code> ImGuiCol</p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a>[]</p>
+<h3 id="pushstylevarimguistylevar-float"><a id="Weft_DevTools_ImGuiLibrary_PushStyleVar_Weft_Native_CImGui_ImGuiStyleVar_System_Single_"></a> PushStyleVar(ImGuiStyleVar, float)<a class="headerlink" href="#pushstylevarimguistylevar-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PushStyleVar</span><span class="p">(</span><span class="n">ImGuiStyleVar</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="k">value</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_30">Parameters<a class="headerlink" href="#parameters_30" title="Permanent link">&para;</a></h4>
+<p><code>variable</code> ImGuiStyleVar</p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h3 id="sameline"><a id="Weft_DevTools_ImGuiLibrary_SameLine"></a> SameLine()<a class="headerlink" href="#sameline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SameLine</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="selectablestring-bool"><a id="Weft_DevTools_ImGuiLibrary_Selectable_System_String_System_Boolean_"></a> Selectable(string, bool)<a class="headerlink" href="#selectablestring-bool" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Selectable</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_31">Parameters<a class="headerlink" href="#parameters_31" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>selected</code> <a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h4 id="returns_24">Returns<a class="headerlink" href="#returns_24" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="separator"><a id="Weft_DevTools_ImGuiLibrary_Separator"></a> Separator()<a class="headerlink" href="#separator" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Separator</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="setnextitemwidthfloat"><a id="Weft_DevTools_ImGuiLibrary_SetNextItemWidth_System_Single_"></a> SetNextItemWidth(float)<a class="headerlink" href="#setnextitemwidthfloat" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetNextItemWidth</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">width</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_32">Parameters<a class="headerlink" href="#parameters_32" title="Permanent link">&para;</a></h4>
+<p><code>width</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h3 id="setnextwindowposfloat-float-imguicond"><a id="Weft_DevTools_ImGuiLibrary_SetNextWindowPos_System_Single_System_Single_Weft_Native_CImGui_ImGuiCond_"></a> SetNextWindowPos(float, float, ImGuiCond)<a class="headerlink" href="#setnextwindowposfloat-float-imguicond" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetNextWindowPos</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">ImGuiCond</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImGuiCond</span><span class="p">.</span><span class="n">FirstUseEver</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_33">Parameters<a class="headerlink" href="#parameters_33" title="Permanent link">&para;</a></h4>
+<p><code>x</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>y</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>condition</code> ImGuiCond</p>
+<h3 id="setnextwindowsizefloat-float-imguicond"><a id="Weft_DevTools_ImGuiLibrary_SetNextWindowSize_System_Single_System_Single_Weft_Native_CImGui_ImGuiCond_"></a> SetNextWindowSize(float, float, ImGuiCond)<a class="headerlink" href="#setnextwindowsizefloat-float-imguicond" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetNextWindowSize</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="n">ImGuiCond</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImGuiCond</span><span class="p">.</span><span class="n">FirstUseEver</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_34">Parameters<a class="headerlink" href="#parameters_34" title="Permanent link">&para;</a></h4>
+<p><code>width</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>height</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>condition</code> ImGuiCond</p>
+<h3 id="settooltipstring"><a id="Weft_DevTools_ImGuiLibrary_SetTooltip_System_String_"></a> SetTooltip(string)<a class="headerlink" href="#settooltipstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetTooltip</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_35">Parameters<a class="headerlink" href="#parameters_35" title="Permanent link">&para;</a></h4>
+<p><code>text</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="showdemowindow"><a id="Weft_DevTools_ImGuiLibrary_ShowDemoWindow"></a> ShowDemoWindow()<a class="headerlink" href="#showdemowindow" title="Permanent link">&para;</a></h3>
+<p>Dear ImGui's own demo window: every widget there is, for a look at what is possible.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ShowDemoWindow</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="sliderfloatstring-float-float-float"><a id="Weft_DevTools_ImGuiLibrary_SliderFloat_System_String_System_Single_System_Single_System_Single_"></a> SliderFloat(string, float, float, float)<a class="headerlink" href="#sliderfloatstring-float-float-float" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">SliderFloat</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">max</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_36">Parameters<a class="headerlink" href="#parameters_36" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>min</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<p><code>max</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h4 id="returns_25">Returns<a class="headerlink" href="#returns_25" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.single-.value">Value</a>)</p>
+<h3 id="sliderintstring-int-int-int"><a id="Weft_DevTools_ImGuiLibrary_SliderInt_System_String_System_Int32_System_Int32_System_Int32_"></a> SliderInt(string, int, int, int)<a class="headerlink" href="#sliderintstring-int-int-int" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="nf">static</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">Changed</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Value</span><span class="p">)</span><span class="w"> </span><span class="n">SliderInt</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_37">Parameters<a class="headerlink" href="#parameters_37" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<p><code>value</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<p><code>min</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<p><code>max</code> <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+<h4 id="returns_26">Returns<a class="headerlink" href="#returns_26" title="Permanent link">&para;</a></h4>
+<p>(<a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.int32-.changed">Changed</a>, <a href="https://learn.microsoft.com/dotnet/api/system.int32">int</a> <a href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,system.int32-.value">Value</a>)</p>
+<h3 id="spacing"><a id="Weft_DevTools_ImGuiLibrary_Spacing"></a> Spacing()<a class="headerlink" href="#spacing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Spacing</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="tableheadersrow"><a id="Weft_DevTools_ImGuiLibrary_TableHeadersRow"></a> TableHeadersRow()<a class="headerlink" href="#tableheadersrow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TableHeadersRow</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="tablenextcolumn"><a id="Weft_DevTools_ImGuiLibrary_TableNextColumn"></a> TableNextColumn()<a class="headerlink" href="#tablenextcolumn" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">TableNextColumn</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_27">Returns<a class="headerlink" href="#returns_27" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="tablenextrow"><a id="Weft_DevTools_ImGuiLibrary_TableNextRow"></a> TableNextRow()<a class="headerlink" href="#tablenextrow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TableNextRow</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="tablesetupcolumnstring"><a id="Weft_DevTools_ImGuiLibrary_TableSetupColumn_System_String_"></a> TableSetupColumn(string)<a class="headerlink" href="#tablesetupcolumnstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TableSetupColumn</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_38">Parameters<a class="headerlink" href="#parameters_38" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="textstring"><a id="Weft_DevTools_ImGuiLibrary_Text_System_String_"></a> Text(string)<a class="headerlink" href="#textstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Text</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_39">Parameters<a class="headerlink" href="#parameters_39" title="Permanent link">&para;</a></h4>
+<p><code>text</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="textcoloredfloat-string"><a id="Weft_DevTools_ImGuiLibrary_TextColored_System_Single___System_String_"></a> TextColored(float[], string)<a class="headerlink" href="#textcoloredfloat-string" title="Permanent link">&para;</a></h3>
+<p>Text in a color: a table of 3 or 4 numbers from 0 to 1.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TextColored</span><span class="p">(</span><span class="kt">float</span><span class="p">[]</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_40">Parameters<a class="headerlink" href="#parameters_40" title="Permanent link">&para;</a></h4>
+<p><code>color</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a>[]</p>
+<p><code>text</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="textdisabledstring"><a id="Weft_DevTools_ImGuiLibrary_TextDisabled_System_String_"></a> TextDisabled(string)<a class="headerlink" href="#textdisabledstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TextDisabled</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_41">Parameters<a class="headerlink" href="#parameters_41" title="Permanent link">&para;</a></h4>
+<p><code>text</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="textwrappedstring"><a id="Weft_DevTools_ImGuiLibrary_TextWrapped_System_String_"></a> TextWrapped(string)<a class="headerlink" href="#textwrappedstring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TextWrapped</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_42">Parameters<a class="headerlink" href="#parameters_42" title="Permanent link">&para;</a></h4>
+<p><code>text</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h3 id="treenodestring"><a id="Weft_DevTools_ImGuiLibrary_TreeNode_System_String_"></a> TreeNode(string)<a class="headerlink" href="#treenodestring" title="Permanent link">&para;</a></h3>
+<p>A tree node; when it returns true, call <code>tree_pop</code> after its content.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">TreeNode</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_43">Parameters<a class="headerlink" href="#parameters_43" title="Permanent link">&para;</a></h4>
+<p><code>label</code> <a href="https://learn.microsoft.com/dotnet/api/system.string">string</a></p>
+<h4 id="returns_28">Returns<a class="headerlink" href="#returns_28" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="treepop"><a id="Weft_DevTools_ImGuiLibrary_TreePop"></a> TreePop()<a class="headerlink" href="#treepop" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">TreePop</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="unindentfloat"><a id="Weft_DevTools_ImGuiLibrary_Unindent_System_Single_"></a> Unindent(float)<a class="headerlink" href="#unindentfloat" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Unindent</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="parameters_44">Parameters<a class="headerlink" href="#parameters_44" title="Permanent link">&para;</a></h4>
+<p><code>width</code> <a href="https://learn.microsoft.com/dotnet/api/system.single">float</a></p>
+<h3 id="wantcapturekeyboard"><a id="Weft_DevTools_ImGuiLibrary_WantCaptureKeyboard"></a> WantCaptureKeyboard()<a class="headerlink" href="#wantcapturekeyboard" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">WantCaptureKeyboard</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_29">Returns<a class="headerlink" href="#returns_29" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+<h3 id="wantcapturemouse"><a id="Weft_DevTools_ImGuiLibrary_WantCaptureMouse"></a> WantCaptureMouse()<a class="headerlink" href="#wantcapturemouse" title="Permanent link">&para;</a></h3>
+<p>True while ImGui wants the mouse: the pointer is over a window, so the game should not also react to a click.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">WantCaptureMouse</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="returns_30">Returns<a class="headerlink" href="#returns_30" title="Permanent link">&para;</a></h4>
+<p><a href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Weft Engine 0.2.0-alpha
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "toc.follow", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

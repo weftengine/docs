@@ -1,0 +1,5633 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free, open-source C# 3D engine made for crunching numbers.">
+      
+      
+      
+        <link rel="canonical" href="https://weftengine.github.io/docs/manual/content/formats/">
+      
+      
+        <link rel="prev" href="../import/">
+      
+      
+        <link rel="next" href="../assets/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>File formats - Weft Engine</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#file-formats" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Weft Engine" class="md-header__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Weft Engine
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              File formats
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../about/introduction/" class="md-tabs__link">
+          
+  
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/building/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../core/core/" class="md-tabs__link">
+          
+  
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../api/" class="md-tabs__link">
+          
+  
+  
+  API reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Weft Engine" class="md-nav__button md-logo" aria-label="Weft Engine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Weft Engine
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/weftengine/weft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    weftengine/weft
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Samples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Samples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/mods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/samples/ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manual
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manual
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/crashes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logs and crash reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math and the world
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/ecs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Profiling and SIMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../core/versions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Native code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/bindings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native bindings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../native/native-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platform
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/input/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platform/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graphics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/graphics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graphics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/rendering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/tone-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exposure and tone mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graphics/metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/physics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../physics/vehicles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vehicles and hitches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../network/steam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steam
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/scripting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tasks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tasks and game time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/tweens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tweens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripting/runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runtime and Luau tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Content
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Content
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../defs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions and schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages and mods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../game-manifest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game manifest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../import/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset import
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File formats
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecars-and-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidecars and artifacts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formats-the-engine-reads-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formats the engine reads today
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Formats the engine reads today">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wscn-scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wscn: scene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wprf-prefab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wprf: prefab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmat-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wmat: material
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wimp-import-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wimp: import settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wgam-game-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wgam: game manifest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmod-package-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wmod: package manifest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wpak-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wpak: pack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmdl-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wmdl: model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wshd-shader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wshd: shader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cooked-xml-wxmb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cooked XML (WXMB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ktx2-textures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ktx2 textures
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wtex-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wtex: texture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-common-binary-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The common binary container
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planned-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned formats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Planned formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wsnd-sound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsnd: sound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wdat-data-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wdat: data record
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wcur-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wcur: curve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wloc-string-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wloc: string table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wfnt-font-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wfnt: font family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wphy-physics-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wphy: physics material
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsfx-sound-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsfx: sound events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wgph-node-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wgph: node graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wcol-collision-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wcol: collision shapes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wanm-animation-clip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wanm: animation clip
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wagr-animation-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wagr: animation graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wfx-particle-effect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wfx: particle effect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wnav-navigation-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wnav: navigation mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wter-terrain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wter: terrain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsky-sky-and-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsky: sky and environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wpp-post-process-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wpp: post-process volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsav-save-slot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsav: save slot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wwld-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wwld: world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wbak-baked-lighting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wbak: baked lighting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-that-belong-to-no-asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files that belong to no asset
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Asset identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scenes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prefabs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prefabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hot-reload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hot reload
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/devtools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting a game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C#
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    C#
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/csharp/namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luau
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Luau
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/luau/enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enums
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/help-wanted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help wanted
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/continuous-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuous integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/writing-docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sidecars-and-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidecars and artifacts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formats-the-engine-reads-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formats the engine reads today
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Formats the engine reads today">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wscn-scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wscn: scene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wprf-prefab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wprf: prefab
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmat-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wmat: material
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wimp-import-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wimp: import settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wgam-game-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wgam: game manifest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmod-package-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wmod: package manifest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wpak-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wpak: pack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmdl-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wmdl: model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wshd-shader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wshd: shader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cooked-xml-wxmb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cooked XML (WXMB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ktx2-textures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ktx2 textures
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wtex-texture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wtex: texture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-common-binary-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The common binary container
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planned-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned formats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Planned formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wsnd-sound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsnd: sound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wdat-data-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wdat: data record
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wcur-curve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wcur: curve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wloc-string-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wloc: string table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wfnt-font-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wfnt: font family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wphy-physics-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wphy: physics material
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsfx-sound-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsfx: sound events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wgph-node-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wgph: node graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wcol-collision-shapes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wcol: collision shapes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wanm-animation-clip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wanm: animation clip
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wagr-animation-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wagr: animation graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wfx-particle-effect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wfx: particle effect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wnav-navigation-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wnav: navigation mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wter-terrain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wter: terrain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsky-sky-and-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsky: sky and environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wpp-post-process-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wpp: post-process volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsav-save-slot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wsav: save slot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wwld-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wwld: world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wbak-baked-lighting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wbak: baked lighting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-that-belong-to-no-asset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files that belong to no asset
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/weftengine/weft/edit/main/Docs/manual/content/formats.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="file-formats">File formats<a class="headerlink" href="#file-formats" title="Permanent link">&para;</a></h1>
+<p>Every file the engine makes or reads that is not a format everyone already knows has its own extension, and that extension starts with <code>w</code>: <code>.wscn</code>, <code>.wmdl</code>, <code>.wpak</code>… This page is the reference for all of
+them: what each holds, how it is laid out, which version it is and which versions a reader takes, and whether the engine reads it today. The formats everyone knows keep their names: <code>.luau</code>, <code>.slang</code>, <code>.rml</code>,
+<code>.rcss</code>, <code>.glb</code>, <code>.gltf</code>, <code>.png</code>, <code>.jpg</code>, <code>.ogg</code>, <code>.wav</code>, <code>.flac</code>, <code>.mp3</code>, <code>.ttf</code>, <code>.otf</code>, <code>.xsd</code>, and <code>.ktx2</code> (what an imported image is today).</p>
+<p>Two kinds of format exist, and the engine keeps them apart:</p>
+<ul>
+<li><strong>XML formats</strong> are what people and tools write and read: scenes, prefabs, manifests, import settings, and the formats planned below. They are UTF-8 text, they have an embedded <code>.xsd</code> where the engine reads
+  them today, and a version control system shows and merges them as text. XML is the only authored format: there is no other text format in the engine.</li>
+<li><strong>Binary formats</strong> are what the engine makes for itself: imported models and shaders, packs, and cooked XML. Every one starts with a four-letter magic (the extension in capitals, <code>WXMB</code> for cooked XML), is little-endian, and is
+  never edited by hand; it is made again from its source.</li>
+</ul>
+<p><strong>Status</strong> says whether the engine reads the format now. <em>Implemented</em> means the code reads and writes it as described here (this page was written from the code). <em>Planned: not read by the engine yet</em> is a
+design: the layout may still change when the format is built, and nothing in the engine opens such a file. A game or a tool must not depend on a planned format.</p>
+<h2 id="the-table">The table<a class="headerlink" href="#the-table" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>Holds</th>
+<th>Form</th>
+<th>Magic</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#wscn-scene"><code>.wscn</code></a></td>
+<td>a scene: entities, components, prefab instances</td>
+<td>XML; cooked XML in packs</td>
+<td><code>WXMB</code> when cooked</td>
+<td>implemented</td>
+</tr>
+<tr>
+<td><a href="#wprf-prefab"><code>.wprf</code></a></td>
+<td>a prefab</td>
+<td>XML; cooked XML in packs</td>
+<td><code>WXMB</code> when cooked</td>
+<td>implemented</td>
+</tr>
+<tr>
+<td><a href="#wimp-import-settings"><code>.wimp</code></a></td>
+<td>the import settings, the UID, the hash and the sub-asset UIDs of the source file it sits beside</td>
+<td>XML</td>
+<td>none</td>
+<td>implemented (version 2)</td>
+</tr>
+<tr>
+<td><a href="#wgam-game-manifest"><code>.wgam</code></a></td>
+<td>a game's manifest (<code>game.wgam</code>)</td>
+<td>XML</td>
+<td>none</td>
+<td>implemented</td>
+</tr>
+<tr>
+<td><a href="#wmod-package-manifest"><code>.wmod</code></a></td>
+<td>a package's or mod's manifest (<code>mod.wmod</code>)</td>
+<td>XML</td>
+<td>none</td>
+<td>implemented</td>
+</tr>
+<tr>
+<td><a href="#wpak-pack"><code>.wpak</code></a></td>
+<td>a pack: a game's files, compressed and optionally encrypted</td>
+<td>binary, own layout</td>
+<td><code>WPAK</code>, or a hash of the key</td>
+<td>implemented</td>
+</tr>
+<tr>
+<td><a href="#wmdl-model"><code>.wmdl</code></a></td>
+<td>an imported model</td>
+<td>binary, own layout</td>
+<td><code>WMDL</code></td>
+<td>implemented (version 1); version 2 planned</td>
+</tr>
+<tr>
+<td><a href="#wshd-shader"><code>.wshd</code></a></td>
+<td>a compiled shader module</td>
+<td>binary, own layout</td>
+<td><code>WSHD</code></td>
+<td>implemented (version 1); on the common container planned</td>
+</tr>
+<tr>
+<td><a href="#cooked-xml-wxmb">cooked XML</a></td>
+<td>any XML document of a cooked pack, as a tree</td>
+<td>binary, own layout</td>
+<td><code>WXMB</code></td>
+<td>implemented</td>
+</tr>
+<tr>
+<td><a href="#ktx2-textures"><code>.ktx2</code></a></td>
+<td>an imported image (a standard KTX 2 file)</td>
+<td>binary, Khronos format</td>
+<td>the KTX 2 identifier (<code>«KTX 20»</code>)</td>
+<td>implemented; <code>.wtex</code> takes its place as the imported form with the image import</td>
+</tr>
+<tr>
+<td><a href="#wtex-texture"><code>.wtex</code></a></td>
+<td>a texture, in a portable form and in a GPU form</td>
+<td>binary, common container</td>
+<td><code>WTEX</code></td>
+<td>implemented (version 1); image import does not write it yet</td>
+</tr>
+<tr>
+<td><a href="#wsnd-sound"><code>.wsnd</code></a></td>
+<td>an imported sound</td>
+<td>binary, common container</td>
+<td><code>WSND</code></td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wmat-material"><code>.wmat</code></a></td>
+<td>a material and its parameters</td>
+<td>XML; cooked XML in packs</td>
+<td><code>WXMB</code> when cooked</td>
+<td>implemented</td>
+</tr>
+<tr>
+<td><a href="#wdat-data-record"><code>.wdat</code></a></td>
+<td>one typed data record, referenced by an asset reference</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wcur-curve"><code>.wcur</code></a></td>
+<td>a curve: float or colour over time</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wloc-string-table"><code>.wloc</code></a></td>
+<td>the strings of one language</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wfnt-font-family"><code>.wfnt</code></a></td>
+<td>a font family: faces and fallbacks</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wphy-physics-material"><code>.wphy</code></a></td>
+<td>a physics material</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wsfx-sound-events"><code>.wsfx</code></a></td>
+<td>sound events (and, later, mixer snapshots)</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wgph-node-graph"><code>.wgph</code></a></td>
+<td>a generic node graph</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wcol-collision-shapes"><code>.wcol</code></a></td>
+<td>cooked collision shapes of a model</td>
+<td>binary, common container</td>
+<td><code>WCOL</code></td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wanm-animation-clip"><code>.wanm</code></a></td>
+<td>an animation clip</td>
+<td>binary, common container</td>
+<td><code>WANM</code></td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wagr-animation-graph"><code>.wagr</code></a></td>
+<td>an animation graph</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wfx-particle-effect"><code>.wfx</code></a></td>
+<td>a particle effect</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wnav-navigation-mesh"><code>.wnav</code></a></td>
+<td>navigation mesh tiles</td>
+<td>binary, common container</td>
+<td><code>WNAV</code></td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wter-terrain"><code>.wter</code></a></td>
+<td>terrain: an XML header and binary tile blocks</td>
+<td>mixed</td>
+<td>to be decided</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wsky-sky-and-environment"><code>.wsky</code></a></td>
+<td>a sky and its environment</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wpp-post-process-volume"><code>.wpp</code></a></td>
+<td>a post-process volume</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wsav-save-slot"><code>.wsav</code></a></td>
+<td>a save slot</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wwld-world"><code>.wwld</code></a></td>
+<td>a world made of streamed scene cells</td>
+<td>XML</td>
+<td>none</td>
+<td>planned</td>
+</tr>
+<tr>
+<td><a href="#wbak-baked-lighting"><code>.wbak</code></a></td>
+<td>baked lighting: lightmaps and probe volumes</td>
+<td>binary, common container</td>
+<td><code>WBAK</code></td>
+<td>planned</td>
+</tr>
+</tbody>
+</table>
+<p>Files that are not assets and are not in this table: <code>imported/index.xml</code> and <code>imported/assets.xml</code> (<a href="#files-that-belong-to-no-asset">below</a>), the player's <code>user://settings.xml</code>
+(<a href="../../platform/settings/">Settings</a>), the definitions in a package's <code>data/*.xml</code> with their <code>schemas/*.xsd</code> (<a href="../defs/">Definitions and schemas</a>), and the cache of compiled shaders under the user's folder (a
+private file, <code>WSHC2</code>, which nothing else reads).</p>
+<p><strong>The table is the source of truth.</strong> The extensions, the magics, the root elements and the versions of the formats the engine reads are one table in the code (<code>AssetFormats</code> in <code>Weft.Content</code>, see <a href="../assets/#kinds-of-files">Asset identity</a>), and the importers, the hot reload, the editor, the packer and the readers go by it. A format that is <em>planned</em> below has no row until the code that reads it lands.</p>
+<h2 id="conventions">Conventions<a class="headerlink" href="#conventions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Little-endian</strong>, everywhere. A magic is written as the four ASCII letters in this order: <code>WPAK</code> is the bytes <code>57 50 41 4B</code>. Tables below write offsets from the start of the file.</li>
+<li><strong>String</strong> (in the formats that are not a container): the length in bytes as a 7-bit encoded integer (one byte for under 128, as .NET's <code>BinaryWriter</code> writes it), then the UTF-8 bytes. <strong>Vector</strong> is its
+  <code>float32</code> components in turn (<code>Vector3</code> is 12 bytes), a <strong>matrix</strong> is 16 <code>float32</code> in row-major order (<code>M11</code>, <code>M12</code>… <code>M44</code>), and a <strong>bool</strong> is one byte.</li>
+<li><strong>UID</strong>: <code>uid://</code> and 13 characters of lower-case Crockford base32, <code>uid://[0-9a-hjkmnp-tv-z]{13}</code> (<a href="../assets/">Asset identity</a>). A UID is 64 random bits and never zero.</li>
+<li><strong>XML documents</strong> are UTF-8 (a byte order mark is allowed). Where a format has a <code>version</code> attribute, a reader refuses a version <strong>newer</strong> than the one it knows, and says so; a binary format says what
+  it takes in its own section, because some take only the version they were written with. A file that is wrong is a <code>ContentException</code> (or a <code>FormatException</code> for a scene or a prefab) that names the file and,
+  for XML, the line.</li>
+<li><strong>Names do not convert.</strong> A file that still has an extension these formats had before this naming is not read as any of them; see <a href="../content/#file-names">File names</a>.</li>
+</ul>
+<h2 id="sidecars-and-artifacts">Sidecars and artifacts<a class="headerlink" href="#sidecars-and-artifacts" title="Permanent link">&para;</a></h2>
+<p>One pattern holds for everything that is <em>imported</em> from a file made by other tools:</p>
+<div class="highlight"><pre><span></span><code>models/car.glb                       the source: kept, edited in the tool that made it
+models/car.glb.wimp                  the sidecar: XML, kept in version control, holds the UID and the import settings
+imported/models/car.glb.wmdl         the artifact: binary, made by --import, never edited
+</code></pre></div>
+<ul>
+<li>The <strong>source</strong> stays where it is and is what artists work on. Nothing in a game needs it once it is imported and cooked.</li>
+<li>The <strong>sidecar</strong> is the source's path plus <code>.wimp</code>. It is small, it is XML, and it belongs in version control: the identity (UID) and the settings of an asset are decisions, and a diff of them makes sense. It is
+  made on the first import (<a href="../import/#settings">Asset import</a>).</li>
+<li>The <strong>artifact</strong> is in the <code>imported/</code> folder at the root of the game or the package, at the path of the source with the extension of the artifact added: <code>imported/&lt;source path&gt;.&lt;extension&gt;</code>
+  (<code>imported/textures/ground.png.ktx2</code>, <code>imported/lit.slang.wshd</code>). There is <strong>no suffix</strong> to tell it from the source (nothing like a <code>_c</code>): the folder and the extension are enough. The artifact is a cache, so
+  it is made again from the source and the sidecar whenever its key changes (<a href="../import/#when-something-is-imported-again">Asset import</a>); a game decides for itself whether it keeps it in version control.</li>
+<li>A <strong>pack holds the same bytes</strong> as the folder. <code>--pack --cooked</code> puts each artifact at its path in the pack and leaves out the source and the sidecar (<a href="../packs/">Packs</a>); the UID list <code>imported/assets.xml</code> goes along, so a
+  UID still names its asset. The exceptions are documents: a scene, a prefab and the definitions of the base packages are stored as <a href="#cooked-xml-wxmb">cooked XML</a> at the path of their source.</li>
+<li><strong>Models</strong> are imported to a binary <code>.wmdl</code>. There is no authored XML model format: the source of a model is a glTF file, and a model that is described in XML instead is only an idea (see <a href="#wmdl-model">wmdl</a>).</li>
+<li>Authored documents (a scene, a prefab, the planned XML formats) are their own source: they have no sidecar and no artifact, and their UID is the <code>uid</code> attribute of the root element.</li>
+</ul>
+<h2 id="formats-the-engine-reads-today">Formats the engine reads today<a class="headerlink" href="#formats-the-engine-reads-today" title="Permanent link">&para;</a></h2>
+<h3 id="wscn-scene">wscn: scene<a class="headerlink" href="#wscn-scene" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> The entities of a world with their components, as an XML document. The editor saves and opens them, a game's entry scene is one, scripts and tools make and read them. Details and the C# and Luau API:
+<a href="../scenes/">Scenes</a>.</p>
+<p><strong>Layout.</strong> The root is <code>&lt;Scene&gt;</code>; the schema is <code>scene.xsd</code> (embedded in <code>Weft.Ecs</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;Scene version uid&gt;</code></td>
+<td><code>version</code> is required by the schema: 1, or 2 when the scene holds a prefab instance. <code>uid</code> is the file's identity, optional (text made by <code>SaveScene</code> has none; a saved file has one).</td>
+</tr>
+<tr>
+<td><code>&lt;Components&gt;</code></td>
+<td>optional; the components that scripts defined, each <code>&lt;Component name&gt;</code> with <code>&lt;Field name kind [assetType]&gt;</code> children. Components of the engine and the game are not listed.</td>
+</tr>
+<tr>
+<td><code>&lt;Entity id name [prefab]&gt;</code></td>
+<td>an entity, any number. <code>id</code> is its number in the file (from 1). Its children are its components (an element named after the component, one attribute per field, empty for a tag) and its child entities (more <code>&lt;Entity&gt;</code>).</td>
+</tr>
+<tr>
+<td><code>&lt;Entity prefab="path\|uid"&gt;</code></td>
+<td>an instance of a <a href="#wprf-prefab">prefab</a>: it holds only what the instance changes: component elements (changes to the root), <code>&lt;Entity&gt;</code> children (added below the root) and <code>&lt;Override entity name remove&gt;</code> elements (changes to any other entity of the instance).</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;Scene</span><span class="w"> </span><span class="na">version=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Components&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Component</span><span class="w"> </span><span class="na">name=</span><span class="s">"Ticker"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Field</span><span class="w"> </span><span class="na">name=</span><span class="s">"count"</span><span class="w"> </span><span class="na">kind=</span><span class="s">"Int32"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Field</span><span class="w"> </span><span class="na">name=</span><span class="s">"look"</span><span class="w"> </span><span class="na">kind=</span><span class="s">"AssetRef"</span><span class="w"> </span><span class="na">assetType=</span><span class="s">"model"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Component&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Components&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Entity</span><span class="w"> </span><span class="na">id=</span><span class="s">"1"</span><span class="w"> </span><span class="na">name=</span><span class="s">"ground"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Transform</span><span class="w"> </span><span class="na">Position=</span><span class="s">"0 -0.5 0"</span><span class="w"> </span><span class="na">Rotation=</span><span class="s">"0 0 0 1"</span><span class="w"> </span><span class="na">Scale=</span><span class="s">"1 1 1"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ModelRenderer</span><span class="w"> </span><span class="na">Model=</span><span class="s">"res://models/ground.glb|uid://8c1q0w3e5r7ty"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Entity</span><span class="w"> </span><span class="na">id=</span><span class="s">"2"</span><span class="w"> </span><span class="na">name=</span><span class="s">"crate"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Transform</span><span class="w"> </span><span class="na">Position=</span><span class="s">"1.25 0 0"</span><span class="w"> </span><span class="na">Rotation=</span><span class="s">"0 0 0 1"</span><span class="w"> </span><span class="na">Scale=</span><span class="s">"1 1 1"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Ticker</span><span class="w"> </span><span class="na">count=</span><span class="s">"3"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Entity&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Entity&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Entity</span><span class="w"> </span><span class="na">id=</span><span class="s">"3"</span><span class="w"> </span><span class="na">name=</span><span class="s">"camera"</span><span class="nt">&gt;&lt;Transform</span><span class="w"> </span><span class="na">Position=</span><span class="s">"0 2 -6"</span><span class="w"> </span><span class="na">Rotation=</span><span class="s">"0 0 0 1"</span><span class="w"> </span><span class="na">Scale=</span><span class="s">"1 1 1"</span><span class="nt">/&gt;&lt;MainCamera/&gt;&lt;/Entity&gt;</span>
+<span class="nt">&lt;/Scene&gt;</span>
+</code></pre></div>
+<p>Field text is the same in every culture: <code>true</code>/<code>false</code>, decimal integers, the shortest text that reads back as the same float, vectors and quaternions as numbers separated by spaces, an <code>Entity</code> field as an <code>id</code> of the
+file (<code>2/3</code> inside an instance), an <code>AssetRef</code> as <code>path|uid://…</code> (<a href="../scenes/#field-text">Field text</a>). Loading is forgiving (an unknown component or attribute is logged and skipped); what is an error is a document that is not
+XML, a root other than <code>&lt;Scene&gt;</code>, and a version newer than the engine's.</p>
+<p><strong>Versioning.</strong> The writer produces version 1, and version 2 for a scene that holds a prefab instance, so that an engine that does not know instances refuses the file instead of loading them empty. The reader accepts
+1 and 2 and refuses a larger number; a <code>version</code> attribute that is missing is accepted although the schema requires it. A new version is made when a change would make an older engine load a file wrongly.</p>
+<p><strong>In a pack.</strong> <code>--pack --cooked</code> stores the scene as <a href="#cooked-xml-wxmb">cooked XML</a> at the same path; every reader takes both forms (<a href="../scenes/#cooked-scenes">Cooked scenes</a>).</p>
+<p><strong>Status.</strong> Implemented. Owning page: <a href="../scenes/">Scenes</a>.</p>
+<h3 id="wprf-prefab">wprf: prefab<a class="headerlink" href="#wprf-prefab" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A piece of a scene that is made again and again: one entity with everything below it, saved as XML. A scene or another prefab holds an instance as one element that names the prefab and says only what it changes.
+Details: <a href="../prefabs/">Prefabs</a>.</p>
+<p><strong>Layout.</strong> The root is <code>&lt;Prefab&gt;</code>; the schema is <code>prefab.xsd</code> (embedded in <code>Weft.Ecs</code>). The entity elements and the field text are those of a <a href="#wscn-scene">scene</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;Prefab version uid nextId&gt;</code></td>
+<td><code>version</code> is required by the schema (1). <code>uid</code> is the file's identity. <code>nextId</code> is the id the next new entity takes: above every id in the file, never lowered.</td>
+</tr>
+<tr>
+<td><code>&lt;Components&gt;</code></td>
+<td>optional, as in a scene.</td>
+</tr>
+<tr>
+<td><code>&lt;Entity id name&gt;</code></td>
+<td><strong>exactly one</strong>, the root; everything else is below it. Unlike a scene's, an <code>id</code> does not change when the file is saved: scenes that instance the prefab name its entities by id.</td>
+</tr>
+<tr>
+<td><code>&lt;Entity prefab="…"&gt;</code>, <code>&lt;Override …&gt;</code></td>
+<td>a nested prefab instance, as in a scene.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;Prefab</span><span class="w"> </span><span class="na">version=</span><span class="s">"1"</span><span class="w"> </span><span class="na">uid=</span><span class="s">"uid://7h2k4m6p8q0rs"</span><span class="w"> </span><span class="na">nextId=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Entity</span><span class="w"> </span><span class="na">id=</span><span class="s">"1"</span><span class="w"> </span><span class="na">name=</span><span class="s">"Lamp"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Transform</span><span class="w"> </span><span class="na">Position=</span><span class="s">"0 0 0"</span><span class="w"> </span><span class="na">Rotation=</span><span class="s">"0 0 0 1"</span><span class="w"> </span><span class="na">Scale=</span><span class="s">"1 1 1"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Entity</span><span class="w"> </span><span class="na">id=</span><span class="s">"2"</span><span class="w"> </span><span class="na">name=</span><span class="s">"Bulb"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Transform</span><span class="w"> </span><span class="na">Position=</span><span class="s">"0 1.8 0"</span><span class="w"> </span><span class="na">Rotation=</span><span class="s">"0 0 0 1"</span><span class="w"> </span><span class="na">Scale=</span><span class="s">"1 1 1"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Light</span><span class="w"> </span><span class="na">Color=</span><span class="s">"1 0.9 0.7"</span><span class="w"> </span><span class="na">Intensity=</span><span class="s">"80"</span><span class="w"> </span><span class="na">Range=</span><span class="s">"12"</span><span class="w"> </span><span class="na">InnerCone=</span><span class="s">"0"</span><span class="w"> </span><span class="na">OuterCone=</span><span class="s">"0"</span><span class="w"> </span><span class="na">Kind=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Entity&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Entity</span><span class="w"> </span><span class="na">id=</span><span class="s">"3"</span><span class="w"> </span><span class="na">name=</span><span class="s">"Base"</span><span class="nt">&gt;&lt;Transform</span><span class="w"> </span><span class="na">Position=</span><span class="s">"0 0 0"</span><span class="w"> </span><span class="na">Rotation=</span><span class="s">"0 0 0 1"</span><span class="w"> </span><span class="na">Scale=</span><span class="s">"1 1 1"</span><span class="nt">/&gt;&lt;/Entity&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Entity&gt;</span>
+<span class="nt">&lt;/Prefab&gt;</span>
+</code></pre></div>
+<p><strong>Versioning.</strong> The version is 1. The reader refuses a larger number and accepts a missing <code>version</code>; a <code>nextId</code> that is missing or not above every id is worked out again, with a warning. A file with no root entity or with two
+is an error.</p>
+<p><strong>In a pack.</strong> Stored as <a href="#cooked-xml-wxmb">cooked XML</a> at the same path by <code>--pack --cooked</code> (<a href="../prefabs/#cooked-builds">Cooked builds</a>).</p>
+<p><strong>Status.</strong> Implemented. Owning page: <a href="../prefabs/">Prefabs</a>.</p>
+<h3 id="wmat-material">wmat: material<a class="headerlink" href="#wmat-material" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A material, or an instance of one: the shader template, typed parameters, texture asset references, a few switches, and a <code>parent</code> it overrides. A material says only what it sets, so a child lists
+only what it changes. The document is read and merged by <code>MaterialAsset</code> in <code>Weft.Content</code> (<code>Materials/</code>); the renderer does not use it yet (it draws the materials of a model as they are in its <code>.wmdl</code>), and a model
+import does not write <code>.wmat</code> files yet.</p>
+<p><strong>Layout.</strong> The root is <code>&lt;Material&gt;</code>; the schema is <code>material.xsd</code> (embedded in <code>Weft.Content</code>). The order of the children is free.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;Material version uid&gt;</code></td>
+<td><code>version</code> is 1. <code>uid</code> is the file's identity: the import adds it, and it stays when the file moves.</td>
+</tr>
+<tr>
+<td><code>shader</code></td>
+<td>the shader template, a <code>.slang</code> module, as an <a href="../assets/">asset reference</a>. Required unless there is a <code>parent</code>, which then supplies it.</td>
+</tr>
+<tr>
+<td><code>parent</code></td>
+<td>another <code>.wmat</code> as an asset reference: this material starts as a copy of it and changes what it names.</td>
+</tr>
+<tr>
+<td><code>alphaMode</code>, <code>alphaCutoff</code>, <code>doubleSided</code></td>
+<td><code>opaque</code> (the default), <code>mask</code> or <code>blend</code>; the alpha under which a <code>mask</code> pixel is not drawn, 0 to 1 (0.5 by default); and whether both faces of a triangle are drawn (false by default). Left out, a child has its parent's.</td>
+</tr>
+<tr>
+<td><code>&lt;Float name value&gt;</code></td>
+<td>a number.</td>
+</tr>
+<tr>
+<td><code>&lt;Vec2 …&gt;</code>, <code>&lt;Vec3 …&gt;</code>, <code>&lt;Vec4 …&gt;</code></td>
+<td>two, three or four numbers separated by spaces.</td>
+</tr>
+<tr>
+<td><code>&lt;Color …&gt;</code></td>
+<td>a linear color: red green blue, and alpha (1 when left out).</td>
+</tr>
+<tr>
+<td><code>&lt;Int …&gt;</code>, <code>&lt;Bool …&gt;</code></td>
+<td>a whole number (32 bits), <code>true</code> or <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;Texture name ref&gt;</code></td>
+<td>a texture the shader samples: an image (<code>.png</code>, <code>.jpg</code>), <code>.ktx2</code> or <code>.wtex</code>, as an asset reference.</td>
+</tr>
+</tbody>
+</table>
+<p>A name starts with a letter or <code>_</code> and has up to 64 letters, digits and <code>_</code>. It is the name the shader declares; the engine does not check it against the shader. A parameter name is used once, a texture name is
+used once, and a parameter and a texture may share a name. The names that mirror what a model's material has today are <code>baseColor</code> (color), <code>metallic</code>, <code>roughness</code>, <code>normalScale</code> and <code>occlusionStrength</code> (floats), <code>emissive</code> (a <code>Vec3</code>) and <code>unlit</code> (a bool), with the textures <code>baseColor</code>, <code>metallicRoughness</code>, <code>normal</code>, <code>occlusion</code> and <code>emissive</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Material</span><span class="w"> </span><span class="na">version=</span><span class="s">"1"</span><span class="w"> </span><span class="na">uid=</span><span class="s">"uid://4k2m9x7q1w3ze"</span><span class="w"> </span><span class="na">shader=</span><span class="s">"res://shaders/lit.slang"</span><span class="w"> </span><span class="na">parent=</span><span class="s">"res://materials/base.wmat"</span><span class="w"> </span><span class="na">alphaMode=</span><span class="s">"mask"</span><span class="w"> </span><span class="na">alphaCutoff=</span><span class="s">"0.35"</span><span class="w"> </span><span class="na">doubleSided=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Color</span><span class="w"> </span><span class="na">name=</span><span class="s">"baseColor"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0.8 0.2 0.1 1"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Float</span><span class="w"> </span><span class="na">name=</span><span class="s">"roughness"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0.4"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Float</span><span class="w"> </span><span class="na">name=</span><span class="s">"metallic"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Vec2</span><span class="w"> </span><span class="na">name=</span><span class="s">"uvScale"</span><span class="w"> </span><span class="na">value=</span><span class="s">"2 2"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Vec3</span><span class="w"> </span><span class="na">name=</span><span class="s">"emissive"</span><span class="w"> </span><span class="na">value=</span><span class="s">"0 0.5 1"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Vec4</span><span class="w"> </span><span class="na">name=</span><span class="s">"tint"</span><span class="w"> </span><span class="na">value=</span><span class="s">"1 1 1 0.5"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Int</span><span class="w"> </span><span class="na">name=</span><span class="s">"layers"</span><span class="w"> </span><span class="na">value=</span><span class="s">"3"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Bool</span><span class="w"> </span><span class="na">name=</span><span class="s">"receiveShadows"</span><span class="w"> </span><span class="na">value=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Texture</span><span class="w"> </span><span class="na">name=</span><span class="s">"baseColor"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"res://textures/brick.png"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Texture</span><span class="w"> </span><span class="na">name=</span><span class="s">"normal"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"res://textures/brick_n.ktx2|uid://4k2m9x7q1w3zf"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/Material&gt;</span>
+</code></pre></div>
+<p><strong>Parents.</strong> <code>MaterialAsset.Resolve(assets, path)</code> lays the chain over itself, from the top parent down: a parameter or texture of the same name is replaced where it stands, a new one is added after, and a switch the
+child leaves out is its parent's. The result (<code>ResolvedMaterial</code>) has a value for everything and lists the files it was made from. A child cannot change the type of a parameter (a <code>Float</code> that a parent defines
+cannot be a <code>Vec3</code> below it). A parent is found by its path, or by its UID when the file moved. The chain is refused when a parent does not exist or is not a valid material, when it comes back to a material it has
+been through (a cycle, named with the paths), or when it is more than 8 parents deep.</p>
+<p><strong>Moving files.</strong> Every attribute whose whole text is an asset reference is found and rewritten when its file is renamed or moved (<a href="../assets/#renaming-and-moving-assets-for-tools">Asset identity</a>): the <code>parent</code>, the <code>shader</code> and each
+<code>&lt;Texture ref&gt;</code>. A UID in a reference is never changed.</p>
+<p><strong>Limits.</strong> A document is at most 1 MiB, has at most 256 parameters (of all types together) and 64 textures, and its names are at most 64 characters. The reader refuses anything else the schema does not describe, a
+number that is not finite or too large for a float, and a document with no shader and no parent.</p>
+<p><strong>In a pack.</strong> Stored as <a href="#cooked-xml-wxmb">cooked XML</a> at the same path by <code>--pack --cooked</code>; <code>MaterialAsset.Load</code> and <code>Parse</code> read both forms.</p>
+<p><strong>Status.</strong> Implemented (version 1). Related page: <a href="../../graphics/rendering/">Rendering</a>.</p>
+<h3 id="wimp-import-settings">wimp: import settings<a class="headerlink" href="#wimp-import-settings" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> The sidecar of a source file: <code>car.glb.wimp</code> sits beside <code>car.glb</code>, holds the asset's UID, remembers what the importer made of it, and changes how it is imported. See <a href="#sidecars-and-artifacts">Sidecars and artifacts</a>.</p>
+<p><strong>Layout.</strong> The root is <code>&lt;Import&gt;</code>; the schema is <code>import.xsd</code> (embedded in <code>Weft.Content</code>). Every attribute is optional; the order of the child elements is free.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>For</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code> (1)</td>
+<td>any asset</td>
+<td>the version of this format: 2. A sidecar without it is version 1</td>
+</tr>
+<tr>
+<td><code>uid</code></td>
+<td>any asset</td>
+<td>the identity of the asset; written by the first import, never changed by hand. It is not part of the import key: minting or changing it imports nothing again.</td>
+</tr>
+<tr>
+<td><code>sourceHash</code></td>
+<td>any asset</td>
+<td>the SHA-256 of the source file as the last import read it, 64 lower-case hexadecimal digits; written by the importer, not part of the key</td>
+</tr>
+<tr>
+<td><code>srgb</code> (true)</td>
+<td>images</td>
+<td>colour maps are sRGB; normal maps, roughness and masks are linear</td>
+</tr>
+<tr>
+<td><code>normalMap</code> (false)</td>
+<td>images</td>
+<td>the image is a normal map: linear, and encoded for accuracy</td>
+</tr>
+<tr>
+<td><code>compression</code> (<code>uastc</code>)</td>
+<td>images, textures of models</td>
+<td><code>uastc</code> or <code>none</code> (8-bit RGBA)</td>
+</tr>
+<tr>
+<td><code>mips</code> (true)</td>
+<td>images</td>
+<td>build the mip chain</td>
+</tr>
+<tr>
+<td><code>optimize</code> (true)</td>
+<td>models</td>
+<td>merge duplicate vertices and reorder for the GPU's vertex cache</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>For</th>
+<th>Meaning</th>
+<th>Used by the engine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;Variant&gt;</code> with <code>&lt;Define name [value]&gt;</code> children</td>
+<td>shaders</td>
+<td>one more version of the shader to compile</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>&lt;SubAsset name uid/&gt;</code> (up to 4096)</td>
+<td>models</td>
+<td>a file the import makes from the asset (<code>material/paint</code>, <code>texture/albedo</code>) and the UID it was given; minted once per name, written by the importer, kept by name through every import</td>
+<td>yes: the model importer asks for one per material and texture; the files themselves are not written yet</td>
+</tr>
+<tr>
+<td><code>&lt;MaterialRemap slot ref/&gt;</code></td>
+<td>models</td>
+<td>use the material asset <code>ref</code> (path or <code>uid://</code>, a <code>.wmat</code>) for the model's material slot <code>slot</code></td>
+<td>read, not applied yet</td>
+</tr>
+<tr>
+<td><code>&lt;Socket name node position rotation/&gt;</code></td>
+<td>models</td>
+<td>a named attachment point on a node of the model (empty <code>node</code> is the root); <code>position</code> is <code>x y z</code> (default <code>0 0 0</code>), <code>rotation</code> a quaternion <code>x y z w</code> (default <code>0 0 0 1</code>)</td>
+<td>read (<code>ImportSettings.Sockets</code>), not written into the model yet</td>
+</tr>
+<tr>
+<td><code>&lt;Clip name loop start end/&gt;</code></td>
+<td>animation</td>
+<td>a named part of the source's animation, <code>start</code>/<code>end</code> in seconds</td>
+<td>kept, not read by anything</td>
+</tr>
+<tr>
+<td><code>&lt;Lod screenSize reduction/&gt;</code></td>
+<td>models</td>
+<td>a level of detail: from this share of the screen's height, this share of the triangles taken away</td>
+<td>kept, not read by anything</td>
+</tr>
+<tr>
+<td><code>&lt;Collision shape/&gt;</code></td>
+<td>models</td>
+<td><code>none</code>, <code>box</code>, <code>convex</code> or <code>mesh</code></td>
+<td>kept, not read by anything</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Import</span><span class="w"> </span><span class="na">version=</span><span class="s">"2"</span><span class="w"> </span><span class="na">uid=</span><span class="s">"uid://4k2m9x7q1w3ze"</span><span class="w"> </span><span class="na">sourceHash=</span><span class="s">"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"</span><span class="w"> </span><span class="na">srgb=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;SubAsset</span><span class="w"> </span><span class="na">name=</span><span class="s">"material/paint"</span><span class="w"> </span><span class="na">uid=</span><span class="s">"uid://0123456789abc"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;MaterialRemap</span><span class="w"> </span><span class="na">slot=</span><span class="s">"paint"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"materials/paint.wmat"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Socket</span><span class="w"> </span><span class="na">name=</span><span class="s">"hand"</span><span class="w"> </span><span class="na">node=</span><span class="s">"arm.R"</span><span class="w"> </span><span class="na">position=</span><span class="s">"0 0.1 0"</span><span class="w"> </span><span class="na">rotation=</span><span class="s">"0 0 0 1"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Clip</span><span class="w"> </span><span class="na">name=</span><span class="s">"walk"</span><span class="w"> </span><span class="na">loop=</span><span class="s">"true"</span><span class="w"> </span><span class="na">start=</span><span class="s">"0"</span><span class="w"> </span><span class="na">end=</span><span class="s">"1.5"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Collision</span><span class="w"> </span><span class="na">shape=</span><span class="s">"convex"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/Import&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Import&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Variant&gt;&lt;Define</span><span class="w"> </span><span class="na">name=</span><span class="s">"SHADOWS"</span><span class="nt">/&gt;&lt;Define</span><span class="w"> </span><span class="na">name=</span><span class="s">"QUALITY"</span><span class="w"> </span><span class="na">value=</span><span class="s">"3"</span><span class="nt">/&gt;&lt;/Variant&gt;</span>
+<span class="nt">&lt;/Import&gt;</span>
+</code></pre></div>
+<p><strong>Versioning.</strong> The reader accepts version 1 (no <code>version</code> attribute) and 2, and refuses a larger number ("written by a newer engine"). The next import of an asset rewrites its sidecar as version 2, in the same file: the
+engine edits the text (the root's attributes and the <code>&lt;SubAsset&gt;</code> elements), so comments, layout, quotes, line endings and every element it does not use stay character for character; there is no command and no other
+migration. The settings, minus the attributes and elements the importer writes (<code>uid</code>, <code>version</code>, <code>sourceHash</code>, <code>&lt;SubAsset&gt;</code>), are part of the import key, whose version is <code>AssetImporter.ImporterVersion</code> (4): when the
+importer changes what it writes, that number goes up and every artifact is made again.</p>
+<p><strong>Limits.</strong> A sidecar over 1 Mi characters, with more than 4096 sub-assets, a repeated UID or name, a UID that is not one, or an unknown element or attribute is refused with a message that names the file.</p>
+<p><strong>Status.</strong> Implemented (version 2): <code>uid</code>, <code>sourceHash</code>, <code>&lt;SubAsset&gt;</code>, <code>&lt;Variant&gt;</code> and the settings are written or read by the engine; <code>&lt;MaterialRemap&gt;</code> and <code>&lt;Socket&gt;</code> are read and available to the model importer and will be
+applied by the model steps that follow; <code>&lt;Clip&gt;</code>, <code>&lt;Lod&gt;</code> and <code>&lt;Collision&gt;</code> are validated and preserved and have no reader yet. Owning page: <a href="../import/#settings">Asset import</a>; the UID: <a href="../assets/#where-a-uid-lives">Asset identity</a>.</p>
+<h3 id="wgam-game-manifest">wgam: game manifest<a class="headerlink" href="#wgam-game-manifest" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> What a game is called, who made it, which version it is, where the player's files go, its Steam app id and what its window looks like. It is the file <code>game.wgam</code> at the root of a game folder.
+Details: <a href="../game-manifest/">The game manifest</a>.</p>
+<p><strong>Layout.</strong> The root is <code>&lt;Game&gt;</code>; the schema is <code>game.xsd</code> (embedded in <code>Weft.Content</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;Game name organization version [executable identifier userFolder steamAppId description copyright]&gt;</code></td>
+<td><code>name</code>, <code>organization</code> and <code>version</code> (<code>major.minor.patch</code>) are required</td>
+</tr>
+<tr>
+<td><code>&lt;EntryScene path/&gt;</code></td>
+<td>the scene loaded before the packages' scripts run</td>
+</tr>
+<tr>
+<td><code>&lt;Icon path/&gt;</code></td>
+<td>a square PNG, 256 pixels or more</td>
+</tr>
+<tr>
+<td><code>&lt;Window width height fullscreen resizable/&gt;</code></td>
+<td>the window the game opens with</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Game</span><span class="w"> </span><span class="na">name=</span><span class="s">"Fixture Game"</span><span class="w"> </span><span class="na">organization=</span><span class="s">"Weft"</span><span class="w"> </span><span class="na">version=</span><span class="s">"1.0.0"</span><span class="w"> </span><span class="na">executable=</span><span class="s">"FixtureGame"</span><span class="w"> </span><span class="na">identifier=</span><span class="s">"org.weft.fixturegame"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;EntryScene</span><span class="w"> </span><span class="na">path=</span><span class="s">"scenes/main.wscn"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Icon</span><span class="w"> </span><span class="na">path=</span><span class="s">"icon.png"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Window</span><span class="w"> </span><span class="na">width=</span><span class="s">"1280"</span><span class="w"> </span><span class="na">height=</span><span class="s">"720"</span><span class="w"> </span><span class="na">fullscreen=</span><span class="s">"false"</span><span class="w"> </span><span class="na">resizable=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/Game&gt;</span>
+</code></pre></div>
+<p><strong>Versioning.</strong> The file has no format version: the schema is the format, and a change that adds an optional attribute or element is compatible. The <code>version</code> attribute is the <em>game's</em> version, which the <code>gameVersion</code>
+ranges of mods are checked against. A <code>game.wgam</code> that does not match the schema, or breaks a rule it cannot say (a path with <code>..</code>, an icon that is not square), is an error of the game: it does not start.</p>
+<p><strong>Status.</strong> Implemented. Owning page: <a href="../game-manifest/">The game manifest</a>.</p>
+<h3 id="wmod-package-manifest">wmod: package manifest<a class="headerlink" href="#wmod-package-manifest" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> What a package is (the base game's, or a mod's), what it needs and what it brings. It is the file <code>mod.wmod</code> at the root of a package folder, of a <code>.zip</code>, or of a Workshop folder. Details:
+<a href="../packages/">Packages and mods</a>.</p>
+<p><strong>Layout.</strong> The root is <code>&lt;Mod&gt;</code>; the schema is <code>mod.xsd</code> (embedded in <code>Weft.Content</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;Mod id version [name author description apiVersion gameVersion]&gt;</code></td>
+<td><code>id</code> (lowercase letters, digits, <code>_</code>, up to 64) is the name of the package's folder; <code>version</code> is <code>major.minor.patch</code>; <code>apiVersion</code> (default 1) is the package API it was written for; <code>gameVersion</code> is a version range (default any)</td>
+</tr>
+<tr>
+<td><code>&lt;Dependency id [version]/&gt;</code></td>
+<td>a package that must be there, and a version range of it</td>
+</tr>
+<tr>
+<td><code>&lt;Script path/&gt;</code></td>
+<td>a <code>.luau</code> file run when the package loads, in the order written</td>
+</tr>
+<tr>
+<td><code>&lt;Content path/&gt;</code>, <code>&lt;Schema path/&gt;</code></td>
+<td>a folder of definitions (<code>.xml</code>), a folder of schemas (<code>.xsd</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Mod</span><span class="w"> </span><span class="na">id=</span><span class="s">"bigger_crates"</span><span class="w"> </span><span class="na">name=</span><span class="s">"Bigger Crates"</span><span class="w"> </span><span class="na">version=</span><span class="s">"1.2.0"</span><span class="w"> </span><span class="na">author=</span><span class="s">"Ada"</span><span class="w"> </span><span class="na">apiVersion=</span><span class="s">"1"</span><span class="w"> </span><span class="na">gameVersion=</span><span class="s">"&amp;gt;=1.0 &amp;lt;3"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Dependency</span><span class="w"> </span><span class="na">id=</span><span class="s">"base_game"</span><span class="w"> </span><span class="na">version=</span><span class="s">"^1.0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Script</span><span class="w"> </span><span class="na">path=</span><span class="s">"main.luau"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Content</span><span class="w"> </span><span class="na">path=</span><span class="s">"data"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Schema</span><span class="w"> </span><span class="na">path=</span><span class="s">"schemas"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/Mod&gt;</span>
+</code></pre></div>
+<p><strong>Versioning.</strong> The file has no format version. <code>apiVersion</code> is the version of the <em>package API</em> (what a script and a definition can rely on), not of this format: a package that needs a newer one than the engine
+has does not load, with a reason the game can show. A manifest is never cooked: it stays text so that players and tools can open it.</p>
+<p><strong>Status.</strong> Implemented. Owning page: <a href="../packages/">Packages and mods</a>.</p>
+<h3 id="wpak-pack">wpak: pack<a class="headerlink" href="#wpak-pack" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A game's files in one file or a few: each zstd-compressed when that pays, optionally sealed with AES-256-GCM, with an index of paths. A shipped game's <code>res://</code> is its packs. Details, the key and what
+encryption does and does not do: <a href="../packs/">Packs</a>.</p>
+<p><strong>Layout.</strong> One <em>part</em> is a file; a pack bigger than its limit goes on in <code>name_001.wpak</code>, <code>name_002.wpak</code>… (up to 1000 parts; a file is never split). Each part:</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Size</th>
+<th>Field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>4</td>
+<td>magic: <code>WPAK</code> without a key; with a key the first four bytes of <code>SHA-256("Weft pack magic" + key)</code> (changed if that is <code>WPAK</code> or 0), so that an encrypted pack has no signature</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>format version (<code>u32</code>): 1</td>
+</tr>
+<tr>
+<td>8</td>
+<td>4</td>
+<td>flags: 1 = the index is sealed, 2 = another part follows</td>
+</tr>
+<tr>
+<td>12</td>
+<td>4</td>
+<td>zero</td>
+</tr>
+<tr>
+<td>16</td>
+<td>8</td>
+<td>offset of the index</td>
+</tr>
+<tr>
+<td>24</td>
+<td>8</td>
+<td>stored length of the index</td>
+</tr>
+<tr>
+<td>32</td>
+<td>8</td>
+<td>raw length of the index</td>
+</tr>
+<tr>
+<td>40</td>
+<td>4</td>
+<td>number of files in this part</td>
+</tr>
+<tr>
+<td>44</td>
+<td>4</td>
+<td>zero</td>
+</tr>
+<tr>
+<td>48</td>
+<td>32</td>
+<td>random salt of the part</td>
+</tr>
+<tr>
+<td>80</td>
+<td>…</td>
+<td>the files' data, each aligned to 16 bytes, then the index</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>index</strong> is zstd-compressed (level 19) and, with a key, sealed. Raw, it is a <code>u32</code> count and, per file: the path (a string), <code>u8</code> flags (1 = compressed with zstd, 2 = sealed, 4 = removed: the path is taken away from
+the packs below this one, and has no data), <code>i64</code> offset, <code>i64</code> stored length, <code>i64</code> raw length and 16 bytes (the start of the SHA-256 of the raw file). A file is compressed when it has 64 bytes or more and that saves at
+least 10%; compression comes first and encryption after. A <strong>sealed</strong> blob is <code>nonce (12) | tag (16) | ciphertext</code> (AES-256-GCM), with the file's path as associated data so that it cannot be moved to another path; the key
+of a part is <code>HKDF-SHA256(pack key, salt)</code>. A later part overrides an earlier one, and a patch pack mounted over a base replaces, adds and removes.</p>
+<p><strong>Versioning.</strong> The version is 1 and the reader takes exactly that: any other number is refused with the version it found. A change of layout makes a new number.</p>
+<p><strong>Planned.</strong> A later version of the index may add a dependency table per file (which other files an asset needs), so that a loader can read what a scene needs before it asks for it. Nothing reads or writes it yet.</p>
+<p><strong>Status.</strong> Implemented. Owning page: <a href="../packs/">Packs</a>.</p>
+<h3 id="wmdl-model">wmdl: model<a class="headerlink" href="#wmdl-model" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A glTF model after import (<code>ModelData</code>): ready to load without a glTF parser or any image decoding. Vertex and index buffers use meshoptimizer's lossless codecs (the geometry comes back bit for bit),
+and the textures are embedded as KTX 2 files. It is made by <code>--import</code> as <code>imported/&lt;path&gt;.wmdl</code> (<a href="../import/#what-it-makes">Asset import</a>); <code>ContentLoader</code> loads it in place of the glTF.</p>
+<p><strong>Layout (version 1).</strong> <code>ModelFile</code>. A single stream, in this order; a count is <code>i32</code>, and a blob is an <code>i32</code> length and that many bytes.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>magic <code>WMDL</code> (<code>u32</code>), version (<code>u32</code>, 1), name (string), bounds minimum and maximum (two <code>Vector3</code>)</td>
+</tr>
+<tr>
+<td>Textures</td>
+<td>count; per texture: name (string), <code>srgb</code> (bool), filter (<code>u8</code>), mipmaps (bool), wrap U and wrap V (<code>u8</code> each), a blob holding a <a href="#ktx2-textures">KTX 2 file</a></td>
+</tr>
+<tr>
+<td>Materials</td>
+<td>count; per material: name, base colour factor (<code>Vector4</code>), base colour texture, metallic factor, roughness factor (<code>f32</code>), metallic-roughness texture, normal texture, normal scale, occlusion texture, occlusion strength, emissive factor (<code>Vector3</code>), emissive texture, alpha mode (<code>u8</code>), alpha cutoff (<code>f32</code>), double-sided (bool), unlit (bool)</td>
+</tr>
+<tr>
+<td>Meshes</td>
+<td>count; per mesh: name, material index (<code>i32</code>), bounds (two <code>Vector3</code>), vertex count, index count, a blob of vertices (meshoptimizer vertex codec, 48-byte vertices), a bool (the indices are a triangle list), a blob of indices (meshoptimizer index codec for a triangle list, raw <code>u32</code> otherwise)</td>
+</tr>
+<tr>
+<td>Instances</td>
+<td>count; per instance: mesh index (<code>i32</code>), world matrix</td>
+</tr>
+<tr>
+<td>Lights</td>
+<td>count; per light: name, kind (<code>u8</code>), colour (<code>Vector3</code>), intensity, range, inner cone, outer cone (<code>f32</code>), position, direction (<code>Vector3</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>A <em>texture reference</em> in a material is a bool (present), then the texture index (<code>i32</code>), the UV set (<code>i32</code>), offset and scale (<code>Vector2</code>) and rotation (<code>f32</code>). Counts and blob lengths are checked against the size of the
+file before anything is allocated for them: a damaged file is a <code>ContentException</code> that names it, never anything else.</p>
+<p><strong>Versioning.</strong> The version is 1 and the reader takes exactly that; any other is refused with "import it again". Importing is cheap to repeat, so no older version is kept readable.</p>
+<p><strong>Planned: version 2.</strong> A model on the <a href="#the-common-binary-container">common container</a>: a small <code>META</code> block (name, bounds, meshes and submeshes, material slots with their parameters and an optional <code>.wmat</code>
+remap, texture references by sub-asset UID, nodes, sockets, a table of levels of detail) and a pair of buffer blocks per mesh (<code>VTX&lt;n&gt;</code>, <code>IDX&lt;n&gt;</code>, with the same meshoptimizer codecs), deterministic, readable by
+<code>--dump</code>. The textures leave the file and become sub-assets, <code>imported/&lt;model path&gt;/&lt;n&gt;.wtex</code>, each with a UID kept in the model's sidecar. Version 1 would not be read: the model is imported again.
+An authored XML model format, to describe a model without a glTF file, is only an idea: no engine code reads one.</p>
+<p><strong>Status.</strong> Implemented (version 1). Owning page: <a href="../import/#what-it-makes">Asset import</a>.</p>
+<h3 id="wshd-shader">wshd: shader<a class="headerlink" href="#wshd-shader" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A Slang shader module compiled ahead of time, so that a shipped game never loads the compiler: <code>imported/&lt;path&gt;.wshd</code>. One file serves Vulkan and Metal. See
+<a href="../../graphics/graphics/#compiled-ahead-of-time-shaderbundle">Compiled ahead of time</a> and <a href="../import/#shaders">Asset import</a>.</p>
+<p><strong>Layout (format version 1).</strong> <code>ShaderBundle</code>. A single stream, strings and <code>i32</code> counts as in <code>wmdl</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>magic <code>WSHD</code> (<code>u32</code>), format version (<code>i32</code>, 1), shader ABI (<code>i32</code>, 2), module name (string), variant count</td>
+</tr>
+<tr>
+<td>Per variant</td>
+<td>the variant's name (its defines sorted by name as <code>A=1;B=2</code>; empty for the default one), the reflection (the compiler's description of the shader's parameters and entry points, as text), the compiler's warnings (string), the number of code blobs</td>
+</tr>
+<tr>
+<td>Per code blob</td>
+<td>backend (<code>u8</code>: 1 SPIR-V, 2 Metal shading language source, 3 DXIL, reserved: nothing writes it), entry point name (string), length (<code>i32</code>) and the code</td>
+</tr>
+</tbody>
+</table>
+<p>A reader takes the code of the backend it runs on and skips the others. The reflection is that of the first backend written (SPIR-V).</p>
+<p><strong>Versioning.</strong> Two numbers. The <em>format version</em> (1) is the layout above; the <em>shader ABI</em> (2) is what compiled code assumes about the engine (the bindless descriptor layout and the push constants every pipeline
+shares), and goes up whenever that changes. A reader takes exactly its own number of each: a bundle of another ABI is refused with "import it again", not left to crash the driver. (A cache of compiled shaders
+under the user's folder is a separate private file, <code>WSHC2</code>; it is not a format of the engine's content.)</p>
+<p><strong>Planned.</strong> The bundle on the common container: one block per target (SPIR-V, Metal) and one for the reflection, a bumped format version, and a dumper for <code>--dump</code>.</p>
+<p><strong>Status.</strong> Implemented. Owning pages: <a href="../import/#shaders">Asset import</a>, <a href="../../graphics/graphics/#compiled-ahead-of-time-shaderbundle">Graphics</a>.</p>
+<h3 id="cooked-xml-wxmb">Cooked XML (WXMB)<a class="headerlink" href="#cooked-xml-wxmb" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> The tree of any XML document in a binary encoding, so that a shipped game parses no text for its scenes, prefabs, definitions and UID list. <code>--pack --cooked</code> stores such a document in place of its source,
+at the same path. It is not typed by the reflection registry: it holds the <code>XmlNode</code> tree, so it does not depend on which components the engine had when the file was cooked. A tree is read back as it was written.
+See <a href="../import/#cooked-xml">Cooked XML</a>.</p>
+<p><strong>Layout (version 1).</strong> <code>XmlBinary</code>. Little-endian; a <em>varint</em> is an unsigned 32-bit LEB128 (7 bits per byte).</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header, 16 bytes</td>
+<td>magic <code>WXMB</code> (<code>u32</code>), version (<code>u16</code>, 1), flags (<code>u16</code>, none defined: 0), string count (<code>u32</code>), element count (<code>u32</code>)</td>
+</tr>
+<tr>
+<td>Strings</td>
+<td>per string: byte length (varint), UTF-8 bytes; in the order the writer first used them; string 0 is the empty string</td>
+</tr>
+<tr>
+<td>Elements</td>
+<td>in document order, root first: name (varint, a string index), line (varint), attribute count (varint), per attribute: name and value (varint string indexes), text (varint string index), child count (varint)</td>
+</tr>
+</tbody>
+</table>
+<p>The same tree always gives the same bytes. The origin of an element is not stored: the reader gives every element the path it was asked to read, so an error still names the file and the line. Every count is checked
+against the bytes left before the reader makes room for it, and nesting is limited as in the text parser.</p>
+<p><strong>Versioning.</strong> The reader takes every version from 1 up to the one it knows; a file from a newer engine, version 0, or a flag this engine does not know is refused with "cook again". A text XML file can never be mistaken for it: those begin with <code>&lt;</code>, a byte order mark or white space, and <code>XmlFile.Read</code> tells them apart by the magic.</p>
+<p><strong>Status.</strong> Implemented. Owning page: <a href="../import/#cooked-xml">Asset import</a>.</p>
+<h3 id="ktx2-textures">ktx2 textures<a class="headerlink" href="#ktx2-textures" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> An imported image today. A <code>.png</code> or <code>.jpg</code> is imported to <code>imported/&lt;path&gt;.ktx2</code>, a standard Khronos KTX 2 file with its whole mip chain: <strong>Basis Universal UASTC</strong> blocks (one file for every
+platform, transcoded at load to BC7, ASTC 4x4 or RGBA8, whichever the GPU samples), or 8-bit RGBA with <code>compression="none"</code>. Either way the levels are supercompressed with zstd. The textures embedded in a
+<a href="#wmdl-model"><code>.wmdl</code></a> are the same files. Because it is a standard container, any KTX 2 tool opens it.</p>
+<p><strong>Layout.</strong> As the KTX 2 specification: an identifier (<code>«KTX 20»</code>, then <code>\r\n\x1A\n</code>), a header, a level index (the smallest level first in the file), a data format descriptor that says what the bytes are (colour
+space included) and the levels. Details of what the importer writes and its settings: <a href="../import/#gpu-texture-compression">GPU texture compression</a>.</p>
+<p><strong>Versioning.</strong> KTX 2 is versioned by Khronos; libktx reads it. The engine's own part is the importer's fingerprint (the encoder settings), which is part of the import key.</p>
+<p><strong>Planned.</strong> <code>.wtex</code> replaces this form: <a href="#wtex-texture">wtex</a>, which reads and writes the same level bytes and converts to and from a <code>.ktx2</code>. A <code>.ktx2</code> would then be an importable <em>source</em>, not an artifact.</p>
+<p><strong>Status.</strong> Implemented. Owning page: <a href="../import/#gpu-texture-compression">Asset import</a>.</p>
+<h3 id="wtex-texture">wtex: texture<a class="headerlink" href="#wtex-texture" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> One container for every texture, in two forms: a <strong>portable</strong> form that import writes (UASTC blocks, transcoded at load as today) and a <strong>GPU</strong> form that export writes (blocks the GPU samples directly,
+so there is no transcoding at load).</p>
+<p>Why not stay with KTX 2: it already gives a level index with the smallest level first, per-level zstd, key/value data, the colour space in the descriptor, and it can hold BC7, BC5, BC6H and ASTC payloads. What an
+own container adds is: the same header, UID, import hash, <code>--dump</code> and reader as every other artifact; mips aligned to 4096 bytes (KTX 2 aligns levels to the block size), a <strong>resident tail</strong> (all mips of 64 KiB or less in
+one block at the front, so one read gives a usable texture) and typed engine fields instead of key/value strings; and a GPU form that is read without libktx, uploaded straight from the decompressed span into the
+staging buffer. The cost is that KTX tools cannot open a <code>.wtex</code>; the payload is the same bytes a KTX 2 level holds, so a <code>.wtex</code> and a <code>.ktx2</code> convert to each other by rewrapping (<code>--dump x.wtex --ktx2 out.ktx2</code>).</p>
+<p><strong>Layout.</strong> On the <a href="#the-common-binary-container">common container</a>, magic <code>WTEX</code>, format version 1 (<code>WtexFile</code> in <code>Weft.Content</code>). The header's flags are the texture's flags too, so that a tool that has read only
+the first 64 bytes knows whether the file is portable; a file where the two differ is refused.</p>
+<p><code>META</code> is 48 bytes, little-endian, the same size in every file of version 1 (a reader refuses any other size):</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Field</th>
+<th>Size</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>width</td>
+<td><code>u32</code></td>
+<td>of the first level, 1 to 16384</td>
+</tr>
+<tr>
+<td>4</td>
+<td>height</td>
+<td><code>u32</code></td>
+<td>of the first level, 1 to 16384</td>
+</tr>
+<tr>
+<td>8</td>
+<td>depth</td>
+<td><code>u32</code></td>
+<td>1 unless the texture is 3D, then 2 to 2048</td>
+</tr>
+<tr>
+<td>12</td>
+<td>layers</td>
+<td><code>u32</code></td>
+<td>1 unless the texture is an array (<code>Array</code>), then 1 to 2048</td>
+</tr>
+<tr>
+<td>16</td>
+<td>faces</td>
+<td><code>u32</code></td>
+<td>1, or 6 for a cube map (<code>Cube</code>)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>mip count</td>
+<td><code>u32</code></td>
+<td>1 to 15, and at most the length of the full chain of the largest of width, height and depth</td>
+</tr>
+<tr>
+<td>24</td>
+<td>flags</td>
+<td><code>u32</code></td>
+<td>see below</td>
+</tr>
+<tr>
+<td>28</td>
+<td>payload</td>
+<td><code>u8</code></td>
+<td>0 <code>Uastc</code>, 1 <code>Rgba8</code>, 2 <code>Bc7</code>, 3 <code>Bc5</code>, 4 <code>Bc4</code>, 5 <code>Bc6hU</code>, 6 <code>Rgba16f</code></td>
+</tr>
+<tr>
+<td>29</td>
+<td>texture group</td>
+<td><code>u8</code></td>
+<td>0 <code>World</code>, 1 <code>Character</code>, 2 <code>Ui</code>, 3 <code>Effects</code>, 4 <code>Lightmap</code>: a quality setting per group</td>
+</tr>
+<tr>
+<td>30</td>
+<td>LOD bias</td>
+<td><code>s8</code></td>
+<td>how many mip levels the quality setting drops more (positive) or fewer (negative) for this texture</td>
+</tr>
+<tr>
+<td>31</td>
+<td>tail mip</td>
+<td><code>u8</code></td>
+<td>the first mip level that is in <code>TAIL</code>, 0 to mip count minus 1</td>
+</tr>
+<tr>
+<td>32</td>
+<td>alpha cutoff</td>
+<td><code>f32</code></td>
+<td>the coverage reference for <code>AlphaCoverage</code>, 0 to 1 (0.5 unless the importer says otherwise)</td>
+</tr>
+<tr>
+<td>36</td>
+<td>filter</td>
+<td><code>u8</code></td>
+<td>0 nearest, 1 linear</td>
+</tr>
+<tr>
+<td>37</td>
+<td>mipmaps</td>
+<td><code>u8</code></td>
+<td>0 or 1: whether the mip levels are sampled</td>
+</tr>
+<tr>
+<td>38</td>
+<td>wrap U</td>
+<td><code>u8</code></td>
+<td>0 repeat, 1 mirrored repeat, 2 clamp to edge</td>
+</tr>
+<tr>
+<td>39</td>
+<td>wrap V</td>
+<td><code>u8</code></td>
+<td>the same</td>
+</tr>
+<tr>
+<td>40</td>
+<td>reserved</td>
+<td>8 bytes</td>
+<td>zero (a reader refuses anything else)</td>
+</tr>
+</tbody>
+</table>
+<p>The sampler fields are hints for a texture used by itself; a model's material slot may override them. Flags (in code <code>WtexTraits</code>: an analyzer does not allow a type to be named <code>…Flags</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Bit</th>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>Portable</code></td>
+<td>the file is an import form: a cooked game holds the GPU form of it instead</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>Srgb</code></td>
+<td>the colours are sRGB (the format the GPU samples is an sRGB one)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>NormalMapRG</code></td>
+<td>a normal map: the first two channels hold the normal</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>AlphaCoverage</code></td>
+<td>the alpha is a coverage that mips keep, against the alpha cutoff</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>Premultiplied</code></td>
+<td>the colour channels are multiplied by alpha</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>Hdr</code></td>
+<td>high dynamic range: set exactly when the payload is <code>Bc6hU</code> or <code>Rgba16f</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>Cube</code></td>
+<td>set exactly when there are six faces</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>Array</code></td>
+<td>the layers are separate images (without it there is one layer)</td>
+</tr>
+</tbody>
+</table>
+<p>Other combinations are refused: a bit this engine does not know; UASTC without <code>Portable</code> (UASTC is only the portable form; the other payloads may be either); <code>Srgb</code> for a payload that is not colour (<code>Bc5</code>, <code>Bc4</code>,
+<code>Bc6hU</code>, <code>Rgba16f</code>) or together with <code>NormalMapRG</code>; a cube map that is not square; a 3D texture that is an array or a cube map.</p>
+<p><strong>Levels.</strong> What each payload is, the same bytes a KTX 2 file holds:</p>
+<table>
+<thead>
+<tr>
+<th>Payload</th>
+<th>One block</th>
+<th>Vulkan format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Uastc</code></td>
+<td>4x4 texels in 16 bytes</td>
+<td>undefined (<code>0</code>): a KTX 2 file says UASTC in its descriptor</td>
+</tr>
+<tr>
+<td><code>Rgba8</code></td>
+<td>1 texel in 4 bytes</td>
+<td><code>R8G8B8A8_UNORM</code> (37), <code>_SRGB</code> (43)</td>
+</tr>
+<tr>
+<td><code>Bc7</code></td>
+<td>4x4 in 16 bytes</td>
+<td><code>BC7_UNORM_BLOCK</code> (145), <code>_SRGB_BLOCK</code> (146)</td>
+</tr>
+<tr>
+<td><code>Bc5</code></td>
+<td>4x4 in 16 bytes</td>
+<td><code>BC5_UNORM_BLOCK</code> (141)</td>
+</tr>
+<tr>
+<td><code>Bc4</code></td>
+<td>4x4 in 8 bytes</td>
+<td><code>BC4_UNORM_BLOCK</code> (139)</td>
+</tr>
+<tr>
+<td><code>Bc6hU</code></td>
+<td>4x4 in 16 bytes</td>
+<td><code>BC6H_UFLOAT_BLOCK</code> (143)</td>
+</tr>
+<tr>
+<td><code>Rgba16f</code></td>
+<td>1 texel in 8 bytes</td>
+<td><code>R16G16B16A16_SFLOAT</code> (97)</td>
+</tr>
+</tbody>
+</table>
+<p>Level <em>n</em> is the texture with width, height and depth halved <em>n</em> times (never under 1), and is <code>ceil(w/bw) * ceil(h/bh) * bytes * depth * layers * faces</code> bytes: no padding in a row, a level or between its images, which follow
+each other layer by layer, then face by face, then slice by slice (as a KTX 2 level does). A reader checks the size of every block against this before it allocates.</p>
+<p><strong>Blocks.</strong> <code>META</code>, then <code>TAIL</code>, then <code>MIP&lt;n&gt;</code> for each level below the tail from the largest of the tail's neighbours down to 0: <strong>exactly</strong> these, in this order, so a file read from its start is progressively usable
+(smallest first, as a streamer reads it). A reader refuses a file that has another set of blocks, another order, a codec that is not for pixels (only none and zstd are), flags in a block row, or a block aligned to less
+than 4096 bytes.</p>
+<ul>
+<li><code>TAIL</code> holds the levels from the tail mip on, the <strong>smallest first</strong>, one after the other with nothing between them, so that the offset of every level is a multiple of the size of its block (as a buffer offset for an
+  upload has to be). A writer puts into the tail every level of 64 KiB or less, and always the last level; so a small texture is only a tail, and a texture of one big level has a tail of that level. A reader takes any tail
+  index: the 64 KiB is the writer's rule. The tail is stored as it is (no codec): it is small, read at once, and can be mapped.</li>
+<li><code>MIP&lt;n&gt;</code> holds level <em>n</em> (all faces and layers) and is compressed with zstd (level 12 unless the writer is told another, or told 0 for none). The kind has room for one character after <code>MIP</code>, so <em>n</em> is written as a
+  hexadecimal digit: <code>MIP0</code> to <code>MIP9</code>, <code>MIPA</code> to <code>MIPE</code> (a texture has at most 15 levels).</li>
+<li>Every block but <code>META</code> is aligned to 4096 bytes and holds raw bytes whose CRC-32C is in the table; the CRC is checked every time a level is read.</li>
+</ul>
+<p><strong>Forms.</strong> Import writes the <strong>Portable</strong> form: UASTC, or RGBA8 for <code>compression="none"</code> and for textures under 4 pixels (and, later, BC6H or half-float RGBA for HDR). The development runtime, and mods (which are
+never cooked), transcode a portable texture at load, as a <code>.ktx2</code> is today. <code>--pack --cooked</code> and export rewrite every portable texture to the <strong>GPU form of the desktop profile</strong>: colour to BC7, normal maps
+(<code>NormalMapRG</code>) to BC5, single-channel masks to BC4. Every desktop Vulkan GPU, lavapipe and Apple's Macs have BC; a GPU form met by a GPU without it is a <code>ContentException</code> that says so. The result is cached by import
+hash (<code>imported/.cooked/&lt;hash&gt;.wtex</code>, an export cache, not kept in version control). The GPU form is 10 to 30 percent bigger on disk than RDO-compressed UASTC with zstd; that is accepted for no work at load.</p>
+<p><strong>KTX 2.</strong> <code>WtexFile.ToKtx2()</code> writes the texture as a KTX 2 file and <code>WtexFile.FromKtx2</code> and <code>ReadKtx2</code> read one; <code>Weft.Runtime --dump x.wtex --ktx2 out.ktx2</code> writes the file after the text dump.</p>
+<ul>
+<li><em>wtex to KTX 2</em> (<code>Ktx2Writer</code>): the levels are the same bytes, without supercompression, smallest first in the file, each at a multiple of the size of its block, with the Vulkan format of the table above, a type size of 2
+  for <code>Rgba16f</code> and 1 for the others, <code>pixelDepth</code> and <code>layerCount</code> 0 when the texture is neither 3D nor an array, and six faces for a cube map. The data format descriptor is the one libktx writes for the format (a
+  test compares the bytes), and for UASTC the one its encoder writes for a texture with alpha (the UASTC model, the RGBA channel, the sRGB or linear transfer function, the premultiplied bit; the encoder says RGB for an opaque texture, which a wtex does not remember, and the two transcode the same). What a KTX 2 file does not keep is the engine's own
+  fields: the group, LOD bias, alpha cutoff, sampler hints, <code>NormalMapRG</code> and <code>AlphaCoverage</code>.</li>
+<li><em>KTX 2 to wtex</em>: UASTC (with or without zstd supercompression: libktx inflates it, and the bytes after that are the level), RGBA8, BC7, BC5, BC4, BC6H and half-float RGBA in the formats above; 2D, 3D, cube map and array.
+  ETC1S (BasisLZ), zlib, 1D textures, a file that asks for its mips to be generated, and every other Vulkan format are refused. The flags that follow from the file are set: <code>Portable</code> for UASTC and RGBA8 (the forms a
+  cooked game rewrites), <code>Srgb</code> from the Vulkan format (from the transfer function of the descriptor for UASTC), <code>Premultiplied</code> from the descriptor, <code>Hdr</code>, <code>Cube</code> and <code>Array</code>; the caller adds the rest, and the group, bias,
+  cutoff and sampler (<code>WtexSettings</code>). The header and the level index are checked against the limits above and against the sizes of the levels <em>before</em> libktx reads the file, so that a hostile file cannot make it inflate
+  more than the texture needs.</li>
+</ul>
+<p><strong>Hostile input.</strong> The container's checks (sizes against the length of the file before allocation, blocks in order and not overlapping, a total of at most 4 GiB, a CRC for every block) and, on top of them: every number of
+<code>META</code> is judged against the limits above before any size is computed from it (no field is trusted: a width of four billion is a refused file, not an allocation), the sizes of the blocks must be exactly the ones the
+shape implies (a level over 1 GiB, or levels over 4 GiB together, are refused), and a damaged block is found when its level is read, not when the file is opened. Anything wrong is a <code>ContentException</code> that names the file.</p>
+<p><strong>Dump.</strong> <code>--dump</code> writes <code>width</code>, <code>height</code>, <code>depth</code>, <code>layers</code>, <code>faces</code>, <code>mips</code>, <code>payload</code>, <code>vk_format</code>, <code>form</code> (<code>portable</code> or <code>gpu</code>), <code>flags</code>, <code>group</code>, <code>lod_bias</code>, <code>alpha_cutoff</code>, <code>sampler</code>, <code>tail_mip</code> and one line per
+level (<code>level 3 = 128x128, 65536 bytes, in TAIL+0</code>, or in <code>MIP3</code>) after the container's block table. A texture whose <code>META</code> is not valid says <code>invalid =</code> and why; the table of blocks is still there.</p>
+<p><strong>Versioning.</strong> The format version in the container header; a reader takes the versions it knows (1) and refuses the others, with "Update the engine" for a newer one and "import it again" for an older one.</p>
+<p><strong>Status.</strong> Implemented: the reader, the writer, the conversion to and from KTX 2 and the dump. Image import still writes <code>.ktx2</code> and the loaders still read it; writing and loading <code>.wtex</code> comes with image import, and
+cooking to the GPU form with the packer. Related page today: <a href="../import/#gpu-texture-compression">Asset import</a>.</p>
+<h2 id="the-common-binary-container">The common binary container<a class="headerlink" href="#the-common-binary-container" title="Permanent link">&para;</a></h2>
+<p>Every binary artifact the engine makes, apart from packs and cooked XML, shares one container: <code>.wmdl</code>, <code>.wtex</code>, <code>.wsnd</code> and <code>.wshd</code>, and the planned <code>.wanm</code>, <code>.wcol</code>, <code>.wnav</code> and <code>.wbak</code>. One reader and writer
+(<code>BinaryAsset</code> and <code>BinaryAssetWriter</code> in <code>Weft.Content</code>), one place for the UID and the import hash, one <code>--dump</code>. <strong>The container is implemented, and <a href="#wtex-texture"><code>.wtex</code></a> is the first format on it</strong> (<code>.wmdl</code> and <code>.wshd</code> are still
+version 1 in their own layouts, and a version-1 file is not mistaken for a container: see below). The container has no extension and no row in the table of formats: each format on it has its own, and
+its magic is the one in the table.</p>
+<p><strong>Header</strong> (64 bytes, little-endian, offsets from the start of the file):</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Field</th>
+<th>Size</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>magic</td>
+<td><code>u32</code></td>
+<td>four printable ASCII characters: <code>WMDL</code>, <code>WTEX</code>, <code>WSND</code>, <code>WSHD</code>…</td>
+</tr>
+<tr>
+<td>4</td>
+<td>container version</td>
+<td><code>u16</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>format version</td>
+<td><code>u16</code></td>
+<td>the version of the format inside (of <code>.wmdl</code>, of <code>.wtex</code>…), at least 1</td>
+</tr>
+<tr>
+<td>8</td>
+<td>flags</td>
+<td><code>u32</code></td>
+<td>the format's: the container gives them no meaning</td>
+</tr>
+<tr>
+<td>12</td>
+<td>header size</td>
+<td><code>u32</code></td>
+<td>64</td>
+</tr>
+<tr>
+<td>16</td>
+<td>block count</td>
+<td><code>u32</code></td>
+<td>1 to 4096</td>
+</tr>
+<tr>
+<td>20</td>
+<td>block row size</td>
+<td><code>u32</code></td>
+<td>40</td>
+</tr>
+<tr>
+<td>24</td>
+<td>block table offset</td>
+<td><code>u64</code></td>
+<td>64: the table follows the header</td>
+</tr>
+<tr>
+<td>32</td>
+<td>UID</td>
+<td><code>u64</code></td>
+<td>the asset's UID, copied from the sidecar; 0 = none (the artifact then belongs to a sub-asset that has none, or to a file without a sidecar)</td>
+</tr>
+<tr>
+<td>40</td>
+<td>import hash</td>
+<td>16 bytes</td>
+<td>the first 16 bytes of the import key: the settings, the source hash and the importer's fingerprint; zero when there is none</td>
+</tr>
+<tr>
+<td>56</td>
+<td>header checksum</td>
+<td><code>u32</code></td>
+<td>the CRC-32C of bytes 0 to 55 of the header and the whole block table (so of the UID, the import hash, the flags and every row); a reader refuses a file where it does not hold</td>
+</tr>
+<tr>
+<td>60</td>
+<td>reserved</td>
+<td>4 bytes</td>
+<td>zero (a reader refuses anything else)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Block table.</strong> One row of 40 bytes per block, in the order of the file (each block starts at or after the end of the one before, and the first after the table):</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Field</th>
+<th>Size</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>kind</td>
+<td><code>u32</code></td>
+<td>four printable ASCII characters (<code>META</code>, <code>VTX0</code>, <code>IDX0</code>, <code>MIP3</code>…); no two blocks have the same</td>
+</tr>
+<tr>
+<td>4</td>
+<td>codec</td>
+<td><code>u8</code></td>
+<td>0 none, 1 zstd, 2 meshoptimizer vertex, 3 meshoptimizer index</td>
+</tr>
+<tr>
+<td>5</td>
+<td>flags</td>
+<td><code>u8</code></td>
+<td>the format's</td>
+</tr>
+<tr>
+<td>6</td>
+<td>alignment</td>
+<td><code>u8</code></td>
+<td>the block starts at a multiple of two to this power from the start of the file; at most 16</td>
+</tr>
+<tr>
+<td>7</td>
+<td>reserved</td>
+<td><code>u8</code></td>
+<td>zero</td>
+</tr>
+<tr>
+<td>8</td>
+<td>offset</td>
+<td><code>u64</code></td>
+<td>where the stored bytes start</td>
+</tr>
+<tr>
+<td>16</td>
+<td>stored size</td>
+<td><code>u64</code></td>
+<td>the bytes in the file</td>
+</tr>
+<tr>
+<td>24</td>
+<td>raw size</td>
+<td><code>u64</code></td>
+<td>the bytes after the codec is undone (the same as the stored size for codec 0)</td>
+</tr>
+<tr>
+<td>32</td>
+<td>CRC-32C</td>
+<td><code>u32</code></td>
+<td>of the <strong>raw</strong> bytes (Castagnoli, the check value of <code>123456789</code> is <code>0xE3069283</code>)</td>
+</tr>
+<tr>
+<td>36</td>
+<td>stride</td>
+<td><code>u32</code></td>
+<td>the mesh codecs: the size of one element in bytes (a multiple of 4 up to 256 for vertices, 2 or 4 for indices); 0 for the others</td>
+</tr>
+</tbody>
+</table>
+<p>Block 0 is always <code>META</code>: uncompressed, at most 16 MiB, read in one go, a versioned little-endian structure per format whose strings are in a string block. The other blocks (<code>VTX0</code>…, <code>IDX0</code>, <code>MIP3</code>…) are
+aligned to 4096 bytes by default so that a streamer can read or map them directly; a small block that nobody maps asks for less. A zstd block is one frame that states its size. The index codec may start a
+triangle at another of its corners (it is the same triangle with the same winding), so the raw bytes of such a block, and its CRC, are what the decoder gives back: the writer decodes once to make them.</p>
+<p><strong>Deterministic.</strong> A writer lays the blocks out in the order they were added (<code>META</code> first), each at the next offset its alignment allows, pads with zeros and stores no time stamp: the same input makes the
+same bytes. That holds for one version of the zstd and meshoptimizer libraries (an importer's fingerprint should include both); the writer asks meshoptimizer for its vertex codec version 1 at level 2 and
+its index codec version 1 itself, so nothing else that the process set changes the bytes. Block order is the format's to choose, since it is the order of the file: a texture puts its small mips first.</p>
+<p><strong>Hostile input.</strong> A file of a mod or a pack is not trusted. A reader checks the header and every row against the length of the file before it allocates anything, and refuses:</p>
+<ul>
+<li>a file shorter than its header or its table, more than 4096 blocks, a table that is not right after the header, and a header or table whose checksum does not hold (so a flipped bit in the UID, the import hash,
+  the flags or a row is found, whatever it is in);</li>
+<li>a block outside the file, an offset that is not aligned as the row says, a block that starts before the end of the one before it (so blocks never overlap the header, the table or each other, and the
+  table lists them in the order of the file), two blocks of one kind, a first block that is not <code>META</code>;</li>
+<li>a raw size over 1 GiB for one block (16 MiB for <code>META</code>), and over 4 GiB for all the blocks together: what a program that reads every block can be made to decode;</li>
+<li>a row that does not fit its codec: a stored size that is not the raw size without a codec; a stride that is wrong; a block stored in fewer bytes than the codec can ever make (zstd: 32768 to 1, so at most
+  1 GiB from 32 KiB; the vertex codec: a few hundred to one, a thousand for small strides, by its block structure; the index codec: a byte for each triangle and a 16-byte table);</li>
+<li>a zstd block that is not exactly one frame, or whose frame does not say the size the row says (checked before anything is allocated), and a block whose CRC does not match.</li>
+</ul>
+<p><code>META</code> and the header are checked when the file is read, a block when it is read, <strong>every time</strong> it is read. What a reader allocates for a block is its raw size, never more than 1 GiB, and only after the row
+passed these checks; a block that really is a gibibyte of zeros in 32 KiB does decode to a gibibyte, which is why the total is limited. The padding between blocks, and anything after the last block, are not
+checked (the writer writes zeros, and nothing reads them). A block of no bytes has the rules of any other: its offset is aligned, in the order of the file and inside it. Anything wrong is a
+<code>ContentException</code> that names the file. The reader keeps the memory it is given and does not copy it: <code>META</code> and the blocks without a codec are slices of it, so <strong>a file that is memory-mapped must be
+mapped read-only and private</strong> (or copied): a mapping that another process can write to can change after a block was checked.</p>
+<p><strong>Not on the container.</strong> A version-1 <code>.wmdl</code> has the magic <code>WMDL</code> and then a 32-bit version, which reads as container version 1 with format version 0: a reader refuses format version 0, so an old file is told to be
+imported again and never read as a container. A file with a newer container version is refused with the version it has.</p>
+<p><strong><code>--dump</code>.</strong> <code>Weft.Runtime --dump &lt;file&gt;</code> writes an artifact as text on the standard output: for a container the header, the UID, the import hash and one line per block (offset, sizes, CRC and whether it
+holds), then <code>META</code> as <code>name = value</code> lines by the dumper registered for the magic (<code>AssetDumpers.Register</code>, one per format, added with the format); a cooked XML file as XML text; a pack as its list of files.
+See <a href="../../scripting/runtime/#dumping-an-artifact">the runtime</a>. <code>--dump &lt;file.wtex&gt; --ktx2 &lt;out&gt;</code> writes a texture as a KTX 2 file as well: <a href="#wtex-texture">wtex</a>.</p>
+<p>Packs and cooked XML keep their own layouts (above); only their magics follow the naming.</p>
+<h2 id="planned-formats">Planned formats<a class="headerlink" href="#planned-formats" title="Permanent link">&para;</a></h2>
+<p>Everything from here on is <em>planned: not read by the engine yet</em>. The text says what each format is meant to hold; the names of elements and attributes are fixed when the format is built, with its schema and its tests.
+Authored formats are XML with a root <code>version</code>, a <code>uid</code> attribute on the root (the asset's identity), an embedded <code>.xsd</code>, and are cooked as <a href="#cooked-xml-wxmb">cooked XML</a> in a shipped pack.</p>
+<h3 id="wsnd-sound">wsnd: sound<a class="headerlink" href="#wsnd-sound" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> An imported sound: <code>imported/&lt;path&gt;.wsnd</code> for an <code>.ogg</code>, <code>.wav</code>, <code>.flac</code> or <code>.mp3</code>. The audio system reads those four formats from the source today; the artifact would add the sample rate,
+the channel count, the number of frames, loop points, a loudness gain and a stream flag.</p>
+<p><strong>Layout.</strong> On the <a href="#the-common-binary-container">common container</a>, magic <code>WSND</code>: <code>META</code> with those fields, and a payload block that is either the source's bytes unchanged or, for a sound that is preloaded,
+16-bit PCM.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../../audio/">Audio</a>.</p>
+<h3 id="wdat-data-record">wdat: data record<a class="headerlink" href="#wdat-data-record" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> One typed record that other assets refer to with an asset reference (an enemy's stats, a recipe). The root element names its type, and the type is checked against the package's schemas (<code>schemas/*.xsd</code>). It
+differs from a <a href="../defs/">definition</a>: definitions are merged tables with no identity, a <code>.wdat</code> is one asset with a UID. A script would load one as a table.</p>
+<p><strong>Layout.</strong> XML; the root element is the type's name.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../defs/">Definitions and schemas</a>.</p>
+<h3 id="wcur-curve">wcur: curve<a class="headerlink" href="#wcur-curve" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A curve of floats or colours over time: keys (time, value, in and out tangent, interpolation) and pre and post wrap modes. Interpolation is constant, linear or cubic Hermite. A tween could take one as its
+easing.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../../scripting/tweens/">Tweens</a>.</p>
+<h3 id="wloc-string-table">wloc: string table<a class="headerlink" href="#wloc-string-table" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> The strings of one language: keys, text, plural forms by CLDR category, and notes for translators. Tables merge in the order of the packages.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wfnt-font-family">wfnt: font family<a class="headerlink" href="#wfnt-font-family" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A font family: its faces (regular, bold, italic, each a reference to a <code>.ttf</code> or <code>.otf</code>), a fallback chain and a default size.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../../ui/">User interface</a>.</p>
+<h3 id="wphy-physics-material">wphy: physics material<a class="headerlink" href="#wphy-physics-material" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> Friction, restitution, density, and the sound and effect a surface plays, for a body to take by reference.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../../physics/physics/">Physics</a>.</p>
+<h3 id="wsfx-sound-events">wsfx: sound events<a class="headerlink" href="#wsfx-sound-events" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A bank of named sound events: each with clips and their weights, volume and pitch ranges, a bus, a 3D range and a cooldown. Later a second kind of root would hold mixer snapshots (bus levels).</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../../audio/">Audio</a>.</p>
+<h3 id="wgph-node-graph">wgph: node graph<a class="headerlink" href="#wgph-node-graph" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A generic graph: nodes (an id, a type, a position, properties), pins, links and comments, with a <code>kind</code> that says what the graph is for (a material graph is a <code>.wgph</code> of kind <code>material</code>). The layout is
+generic; what node types a kind has, and how pins are typed, is up to the feature that uses it.</p>
+<p><strong>Layout.</strong> XML. A reader checks that node ids are unique, that every link names an existing pin and that no link is repeated.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wcol-collision-shapes">wcol: collision shapes<a class="headerlink" href="#wcol-collision-shapes" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> The cooked collision shapes of a model: convex hulls, a mesh BVH, in the physics library's binary form. Today shapes are built when a body is made.</p>
+<p><strong>Layout.</strong> On the <a href="#the-common-binary-container">common container</a>, magic <code>WCOL</code>; kept apart from a physics material because an authored setting and a cooked result differ.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../../physics/physics/">Physics</a>.</p>
+<h3 id="wanm-animation-clip">wanm: animation clip<a class="headerlink" href="#wanm-animation-clip" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A clip: tracks (compressed with meshoptimizer), events and root motion.</p>
+<p><strong>Layout.</strong> On the <a href="#the-common-binary-container">common container</a>, magic <code>WANM</code>.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wagr-animation-graph">wagr: animation graph<a class="headerlink" href="#wagr-animation-graph" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> An animation graph: blend trees, state machines and parameters, laid out as a <a href="#wgph-node-graph"><code>.wgph</code></a> with states.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wfx-particle-effect">wfx: particle effect<a class="headerlink" href="#wfx-particle-effect" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A particle effect: emitters, modules and curves (references to <code>.wcur</code>).</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wnav-navigation-mesh">wnav: navigation mesh<a class="headerlink" href="#wnav-navigation-mesh" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> Navigation mesh tiles, as Recast and Detour make them.</p>
+<p><strong>Layout.</strong> On the <a href="#the-common-binary-container">common container</a>, magic <code>WNAV</code>.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wter-terrain">wter: terrain<a class="headerlink" href="#wter-terrain" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> Terrain: an XML header (size, layers, materials) and binary tile blocks (height, splat).</p>
+<p><strong>Layout.</strong> The one mixed format: how the header and the blocks are stored together is decided when it is built.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wsky-sky-and-environment">wsky: sky and environment<a class="headerlink" href="#wsky-sky-and-environment" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A sky: the atmosphere, the sun, a reference to an HDR cube map, fog and ambient light. The parameters are those of the exposure and tone-mapping work (<a href="../../graphics/tone-mapping/">Exposure and tone mapping</a>).</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wpp-post-process-volume">wpp: post-process volume<a class="headerlink" href="#wpp-post-process-volume" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A volume of post-processing: exposure, tone mapping, bloom and the like, with a blend shape and a priority. The parameter set is fixed with the renderer's post-processing, which is why the format waits.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. Related page today: <a href="../../graphics/tone-mapping/">Exposure and tone mapping</a>.</p>
+<h3 id="wsav-save-slot">wsav: save slot<a class="headerlink" href="#wsav-save-slot" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A save slot: its version, the game's version, migrations, the scene payload and the script data. It belongs to the library that saves games.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wwld-world">wwld: world<a class="headerlink" href="#wwld-world" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> A world made of cells that stream in: bounds and a <code>.wscn</code> per cell, and load distances.</p>
+<p><strong>Layout.</strong> XML.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h3 id="wbak-baked-lighting">wbak: baked lighting<a class="headerlink" href="#wbak-baked-lighting" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose.</strong> Baked lighting: lightmap atlases (references to <code>.wtex</code>) and probe or spherical-harmonics volumes.</p>
+<p><strong>Layout.</strong> On the <a href="#the-common-binary-container">common container</a>, magic <code>WBAK</code>.</p>
+<p><strong>Status.</strong> Planned. No page yet.</p>
+<h2 id="files-that-belong-to-no-asset">Files that belong to no asset<a class="headerlink" href="#files-that-belong-to-no-asset" title="Permanent link">&para;</a></h2>
+<p>These are caches and records that the tools write; they have no UID and no schema of their own in the table above.</p>
+<ul>
+<li><strong><code>imported/index.xml</code></strong>: which source each artifact came from and which files it was made from, so that only what changed is imported again. The root is <code>&lt;Imports version&gt;</code>, and <code>version</code> is
+  <code>AssetImporter.ImporterVersion</code> (4). The reader does not check it: the number is also part of every import key, so a new one makes every artifact stale. Each <code>&lt;Import source artifact key&gt;</code> has <code>&lt;Dependency path/&gt;</code>
+  children. A missing or damaged index is read as empty, and everything is imported again.</li>
+<li><strong><code>imported/assets.xml</code></strong>: the list of UIDs and paths of the imported assets, sorted by path: <code>&lt;Assets version="1"&gt;</code> with <code>&lt;Asset uid path/&gt;</code> children. It is a copy of what the sidecars and the authored documents
+  hold, to make lookups fast; a pack carries it as cooked XML, and in a cooked pack it is the only record of the imported assets' UIDs. A missing, damaged or newer list is read as empty.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Imports</span><span class="w"> </span><span class="na">version=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Import</span><span class="w"> </span><span class="na">source=</span><span class="s">"models/car.gltf"</span><span class="w"> </span><span class="na">artifact=</span><span class="s">"imported/models/car.gltf.wmdl"</span><span class="w"> </span><span class="na">key=</span><span class="s">"9c1e…"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Dependency</span><span class="w"> </span><span class="na">path=</span><span class="s">"models/car.bin"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/Import&gt;</span>
+<span class="nt">&lt;/Imports&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Assets</span><span class="w"> </span><span class="na">version=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Asset</span><span class="w"> </span><span class="na">uid=</span><span class="s">"uid://4k2m9x7q1w3ze"</span><span class="w"> </span><span class="na">path=</span><span class="s">"res://models/car.gltf"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/Assets&gt;</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../import/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Asset import">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Asset import
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../assets/" class="md-footer__link md-footer__link--next" aria-label="Next: Asset identity">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Asset identity
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Weft Engine 0.2.0-alpha
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "toc.follow", "content.code.copy", "content.action.edit"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
